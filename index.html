@@ -251,6 +251,24 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
 .tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 @media (max-width: 480px) { .tabs button { font-size: 1.05rem; padding: 10px 12px 8px; } }
+.bom { min-width: 900px; }
+.bom td.ck, .bom th.ck { width: 1%; white-space: nowrap; text-align: center; }
+.ckbox { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
+.ckbox input { width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer; margin: 0; }
+.ck-lab { font-size: .72rem; color: var(--muted); letter-spacing: .04em; }
+.bom tr:has(input.bud:not(:checked)) td:not(.ck) { color: var(--muted); }
+.bom tr:has(input.bud:not(:checked)) td.n:last-child { text-decoration: line-through; }
+.bom input.bud-q { width: 96px; font: 500 .92rem var(--body); padding: 6px 8px; border: 1px solid var(--line); border-radius: 3px; background: var(--bg); color: var(--ink); text-align: right; }
+.bom input.bud-q:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+.budget { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border: 1px solid var(--line); border-radius: 4px; overflow: hidden; }
+.budget > div { padding: 14px 16px; display: grid; gap: 4px; align-content: start; }
+.budget > div + div { border-left: 1px solid var(--line); }
+.budget span { font: 500 .72rem var(--body); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.budget b { font: 400 1.6rem/1.1 var(--display); font-variant-numeric: tabular-nums; }
+.budget .tot { background: var(--accent-soft); }
+.budget .tot b { color: var(--accent-ink); }
+@media (max-width: 760px) { .budget { grid-template-columns: repeat(2, minmax(0,1fr)); } .budget > div:nth-child(3) { border-left: 0; } .budget > div:nth-child(n+3) { border-top: 1px solid var(--line); } }
 </style>
 </head>
 <body>
@@ -306,7 +324,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
           <tr><td>Contratáis un servicio con el proveedor oficial <b>a través de CONTURSA</b> (por ejemplo, imprimir y colocar las gráficas o montar la pared almacén)</td><td class="n r">Su presupuesto, sin canon</td></tr>
           <tr><td>Contratáis a una <b>empresa externa</b>, o a un proveedor oficial directamente sin pasar por CONTURSA</td><td class="n r">Su presupuesto + canon de 80 € + IVA (96,80 €)</td></tr>
           <tr><td>Rótulo de la platabanda con más de 12 caracteres. «JUNCOSA ALTA» tiene 12, así que no se paga nada</td><td class="n r">1 € por carácter extra</td></tr>
-          <tr><td>Material del stand (detalle en la pestaña Diseño). Sin las gráficas ni la pared del almacén, que están pendientes de presupuesto</td><td class="n r">≈ 660–1.925 €</td></tr>
+          <tr><td>Material del stand (detalle en la pestaña Diseño). Sin las gráficas ni la pared del almacén, que están pendientes de presupuesto</td><td class="n r"><span class="b-mat-mirror">≈ 525–605 €</span><br><small class="muted">según lo marcado en Diseño</small></td></tr>
           <tr><td>Siniestro cubierto por el seguro</td><td class="n r">500 € de franquicia</td></tr>
         </tbody>
       </table>
@@ -688,66 +706,63 @@ Gracias.</pre>
     </div>
     <div class="tablewrap">
       <table class="bom">
-        <thead><tr><th>Material</th><th>Cantidad</th><th>Detalle</th><th>Dónde</th><th>Coste aprox.</th></tr></thead>
+        <thead><tr><th class="ck">Incluir</th><th>Material</th><th>Cantidad</th><th>Detalle</th><th>Dónde</th><th>Coste aprox.</th></tr></thead>
         <tbody>
-          <tr class="grp"><td colspan="5">Suelo y paredes</td></tr>
-          <tr><td>Suelo vinílico imitación parquet carrasca</td><td class="n">8 paquetes</td><td>Láminas de 1,40 × 1,50 m (2,1 m² por paquete): 16,8 m² para los 16 m² del stand</td><td>Leroy Merlin ref. 91909371</td><td class="n">≈ 85 €</td></tr>
-          <tr><td>Cinta de doble cara para suelo</td><td class="n">2 rollos de 25 m</td><td>Para fijar el vinilo por el perímetro y en las juntas, sobre todo si va encima de la moqueta</td><td>Ferretería</td><td class="n">≈ 20 €</td></tr>
-          <tr><td>Vinilo 3D de lamas marrón (zócalo)</td><td class="n">4 packs</td><td>2 rollos de 300 × 40 cm por pack (8 rollos, 24 m). Para el zócalo de 40 cm de alto</td><td>Leroy Merlin ref. 74460441</td><td class="n">≈ 133 €</td></tr>
-          <tr><td>Gráficas impresas de las paredes</td><td class="n">Por confirmar</td><td>Vinilo laminado mate, de 0,40 m hasta arriba en las tres paredes. Medidas pendientes de que CONTURSA confirme por correo la altura de los paneles</td><td>Proveedor oficial vía CONTURSA (sin canon)</td><td class="n">Presupuesto</td></tr>
-          <tr><td>Logotipo (según la opción elegida)</td><td class="n">1</td><td>Corpóreo: letras de metacrilato terracota de 2,20 m de ancho y 3 cm de grosor, con LED blanco detrás. Impreso: va en el vinilo de la pared de fondo</td><td>Rotulista / imprenta</td><td class="n">Corpóreo ≈ 300–600 €<br>Impreso 0 €</td></tr>
+          <tr class="grp"><td colspan="6">Suelo y paredes</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b1"><input type="checkbox" id="b1" class="bud" data-min="85" data-max="85" checked aria-label="Incluir Suelo vinílico imitación parquet carrasca"></label></td><td>Suelo vinílico imitación parquet carrasca</td><td class="n">8 paquetes</td><td>Láminas de 1,40 × 1,50 m (2,1 m² por paquete): 16,8 m² para los 16 m² del stand</td><td>Leroy Merlin ref. 91909371</td><td class="n">≈ 85 €</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b2"><input type="checkbox" id="b2" class="bud" data-min="20" data-max="20" checked aria-label="Incluir Cinta de doble cara para suelo"></label></td><td>Cinta de doble cara para suelo</td><td class="n">2 rollos de 25 m</td><td>Para fijar el vinilo por el perímetro y en las juntas, sobre todo si va encima de la moqueta</td><td>Ferretería</td><td class="n">≈ 20 €</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b3"><input type="checkbox" id="b3" class="bud" data-min="133" data-max="133" checked aria-label="Incluir Vinilo 3D de lamas marrón (zócalo)"></label></td><td>Vinilo 3D de lamas marrón (zócalo)</td><td class="n">4 packs</td><td>2 rollos de 300 × 40 cm por pack (8 rollos, 24 m). Para el zócalo de 40 cm de alto</td><td>Leroy Merlin ref. 74460441</td><td class="n">≈ 133 €</td></tr>
+          <tr><td class="ck"><span class="ck-lab">Presup.</span></td><td>Gráficas impresas de las paredes</td><td class="n">Por confirmar</td><td>Vinilo laminado mate, de 0,40 m hasta arriba en las tres paredes. Medidas pendientes de que CONTURSA confirme por correo la altura de los paneles</td><td>Proveedor oficial vía CONTURSA (sin canon)</td><td class="n"><label class="sr" for="b4">Presupuesto de gráficas en euros</label><input type="number" id="b4" class="bud-q" data-name="gráficas" min="0" step="10" placeholder="€" inputmode="numeric"></td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b5"><input type="checkbox" id="b5" class="bud" data-min="300" data-max="600" aria-label="Incluir Logotipo (según la opción elegida)"><span class="ck-lab">Corpóreo</span></label></td><td>Logotipo (según la opción elegida)</td><td class="n">1</td><td>Corpóreo: letras de metacrilato terracota de 2,20 m de ancho y 3 cm de grosor, con LED blanco detrás. Impreso: va en el vinilo de la pared de fondo</td><td>Rotulista / imprenta</td><td class="n">Corpóreo ≈ 300–600 €<br>Impreso 0 €</td></tr>
 
-          <tr class="grp"><td colspan="5">Pared almacén</td></tr>
-          <tr><td>Pared del almacén</td><td class="n">1</td><td>Pared a lo ancho del stand, a 60 cm de la del fondo. Medidas pendientes de confirmar con CONTURSA. Con refuerzo para colgar la pantalla (≈ 30 kg)</td><td>Montador o proveedor oficial</td><td class="n">Presupuesto</td></tr>
-          <tr><td>Puerta camuflada</td><td class="n">1</td><td>0,80 × 2,10 m, bisagras ocultas, apertura a presión y cerradura</td><td>Montador</td><td class="n">Incluida arriba</td></tr>
-          <tr><td>Baldas y ganchos</td><td class="n">3 baldas + 6 ganchos</td><td>Baldas estrechas de 1,80 × 0,20 m, colocadas a partir de 1,20 m de altura para dejar paso. Ganchos en la pared para abrigos y bolsos (una barra con perchas no cabe)</td><td>IKEA o ferretería</td><td class="n">≈ 30–50 €</td></tr>
-          <tr><td>Rejilla de ventilación</td><td class="n">2</td><td>Arriba y abajo, junto a la nevera</td><td>Ferretería</td><td class="n">≈ 10 €</td></tr>
+          <tr class="grp"><td colspan="6">Pared almacén</td></tr>
+          <tr><td class="ck"><span class="ck-lab">Presup.</span></td><td>Pared del almacén</td><td class="n">1</td><td>Pared a lo ancho del stand, a 60 cm de la del fondo. Medidas pendientes de confirmar con CONTURSA. Con refuerzo para colgar la pantalla (≈ 30 kg)</td><td>Montador o proveedor oficial</td><td class="n"><label class="sr" for="b6">Presupuesto de pared del almacén en euros</label><input type="number" id="b6" class="bud-q" data-name="pared del almacén" min="0" step="10" placeholder="€" inputmode="numeric"></td></tr>
+          <tr><td class="ck"></td><td>Puerta camuflada</td><td class="n">1</td><td>0,80 × 2,10 m, bisagras ocultas, apertura a presión y cerradura</td><td>Montador</td><td class="n">Incluida arriba</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b7"><input type="checkbox" id="b7" class="bud" data-min="30" data-max="50" checked aria-label="Incluir Baldas y ganchos"></label></td><td>Baldas y ganchos</td><td class="n">3 baldas + 6 ganchos</td><td>Baldas estrechas de 1,80 × 0,20 m, colocadas a partir de 1,20 m de altura para dejar paso. Ganchos en la pared para abrigos y bolsos (una barra con perchas no cabe)</td><td>IKEA o ferretería</td><td class="n">≈ 30–50 €</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b8"><input type="checkbox" id="b8" class="bud" data-min="10" data-max="10" checked aria-label="Incluir Rejilla de ventilación"></label></td><td>Rejilla de ventilación</td><td class="n">2</td><td>Arriba y abajo, junto a la nevera</td><td>Ferretería</td><td class="n">≈ 10 €</td></tr>
 
-          <tr class="grp"><td colspan="5">Mobiliario y decoración</td></tr>
-          <tr><td>Mesas altas IKEA RÖNNINGE negro</td><td class="n">2</td><td>75 × 75 × 105 cm, para 4 personas</td><td>Propio</td><td class="n">—</td></tr>
-          <tr><td>Taburetes altos negros cuadrados</td><td class="n">8</td><td>Cuatro por mesa</td><td>Propio</td><td class="n">—</td></tr>
-          <tr><td>Expositor de folletos de suelo</td><td class="n">1</td><td>Negro, 4 bolsillos A4 de metacrilato y tarjetero arriba. Unos 0,30 × 0,30 × 1,50 m</td><td>Material de oficina o de ferias</td><td class="n">≈ 60–120 €</td></tr>
-          <tr><td>Olivo con macetero negro mate</td><td class="n">1</td><td>Unos 2 m de alto. Natural o artificial</td><td>Vivero o alquiler</td><td class="n">≈ 80–200 €</td></tr>
+          <tr class="grp"><td colspan="6">Mobiliario y decoración</td></tr>
+          <tr><td class="ck"></td><td>Mesas altas IKEA RÖNNINGE negro</td><td class="n">2</td><td>75 × 75 × 105 cm, para 4 personas</td><td>Propio</td><td class="n">—</td></tr>
+          <tr><td class="ck"></td><td>Taburetes altos negros cuadrados</td><td class="n">8</td><td>Cuatro por mesa</td><td>Propio</td><td class="n">—</td></tr>
+          <tr><td class="ck"></td><td>Expositor de folletos de suelo</td><td class="n">1</td><td>Negro, 4 bolsillos A4 de metacrilato y tarjetero arriba. Unos 0,30 × 0,30 × 1,50 m</td><td>Propio</td><td class="n">—</td></tr>
+          <tr><td class="ck"></td><td>Olivo con macetero negro mate</td><td class="n">1</td><td>Unos 2 m de alto. Natural o artificial</td><td>Propio</td><td class="n">—</td></tr>
 
-          <tr class="grp"><td colspan="5">Electrónica y electrodomésticos</td></tr>
-          <tr><td>Pantalla de 65"</td><td class="n">1</td><td>Con soporte fijo de pared</td><td>Propia o alquiler</td><td class="n">Alquiler ≈ 150–250 €</td></tr>
-          <tr><td>Reproductor de vídeo</td><td class="n">1</td><td>Pendrive USB o stick HDMI con el vídeo en bucle</td><td>Propio</td><td class="n">—</td></tr>
-          <tr><td>Nevera de bebidas con puerta de cristal</td><td class="n">1</td><td>Unos 45 × 50 × 85 cm, como máximo 50 cm de fondo</td><td>Propia o alquiler</td><td class="n">Alquiler ≈ 80–150 €</td></tr>
-          <tr><td>Microondas</td><td class="n">1</td><td>En el almacén, en su propio enchufe</td><td>Propio</td><td class="n">—</td></tr>
-          <tr><td>Cafetera de cápsulas (opcional)</td><td class="n">1</td><td>En un enchufe distinto del microondas</td><td>Propia</td><td class="n">—</td></tr>
-          <tr><td>Regletas con interruptor y alargadores</td><td class="n">3 + 2</td><td>Regletas de 6 tomas y alargadores de 5 m</td><td>Ferretería</td><td class="n">≈ 40 €</td></tr>
+          <tr class="grp"><td colspan="6">Electrónica y electrodomésticos</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b9"><input type="checkbox" id="b9" class="bud" data-min="150" data-max="250" aria-label="Incluir Pantalla de 65""><span class="ck-lab">Alquilar</span></label></td><td>Pantalla de 65"</td><td class="n">1</td><td>Con soporte fijo de pared</td><td>Propia</td><td class="n">— (alquiler ≈ 150–250 €)</td></tr>
+          <tr><td class="ck"></td><td>Reproductor de vídeo</td><td class="n">1</td><td>Pendrive USB o stick HDMI con el vídeo en bucle</td><td>Propio</td><td class="n">—</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b10"><input type="checkbox" id="b10" class="bud" data-min="80" data-max="150" aria-label="Incluir Nevera de bebidas con puerta de cristal"><span class="ck-lab">Alquilar</span></label></td><td>Nevera de bebidas con puerta de cristal</td><td class="n">1</td><td>Unos 45 × 50 × 85 cm, como máximo 50 cm de fondo</td><td>Propia</td><td class="n">— (alquiler ≈ 80–150 €)</td></tr>
+          <tr><td class="ck"></td><td>Microondas</td><td class="n">1</td><td>En el almacén, en su propio enchufe</td><td>Propio</td><td class="n">—</td></tr>
+          <tr><td class="ck"></td><td>Cafetera de cápsulas (opcional)</td><td class="n">1</td><td>En un enchufe distinto del microondas</td><td>Propia</td><td class="n">—</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b11"><input type="checkbox" id="b11" class="bud" data-min="40" data-max="40" checked aria-label="Incluir Regletas con interruptor y alargadores"></label></td><td>Regletas con interruptor y alargadores</td><td class="n">3 + 2</td><td>Regletas de 6 tomas y alargadores de 5 m</td><td>Ferretería</td><td class="n">≈ 40 €</td></tr>
 
-          <tr class="grp"><td colspan="5">Iluminación</td></tr>
-          <tr><td>Focos en brazo</td><td class="n">4–5</td><td>Incluidos en el stand modular</td><td>CONTURSA</td><td class="n">0 €</td></tr>
-          <tr><td>Tira LED 24 V, 12 W/m, 3000 K, CRI ≥ 90</td><td class="n">3 rollos de 5 m</td><td>10,3 m de zócalo, con sobrante para cortes</td><td>Tienda de iluminación u online</td><td class="n">≈ 45–75 €</td></tr>
-          <tr><td>Perfil de aluminio con difusor opal</td><td class="n">6 de 2 m</td><td>Con tapas y clips de fijación</td><td>Tienda de iluminación u online</td><td class="n">≈ 60 €</td></tr>
-          <tr><td>Fuente 24 V 200 W + regulador</td><td class="n">1 + 1</td><td>Con cable y conectores para las tres tiras</td><td>Tienda de iluminación u online</td><td class="n">≈ 50 €</td></tr>
-          <tr><td>Regleta LED para el almacén</td><td class="n">1</td><td>Con interruptor</td><td>Ferretería</td><td class="n">≈ 15 €</td></tr>
+          <tr class="grp"><td colspan="6">Iluminación</td></tr>
+          <tr><td class="ck"></td><td>Focos en brazo</td><td class="n">4–5</td><td>Incluidos en el stand modular</td><td>CONTURSA</td><td class="n">0 €</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b12"><input type="checkbox" id="b12" class="bud" data-min="45" data-max="75" checked aria-label="Incluir Tira LED 24 V, 12 W/m, 3000 K, CRI ≥ 90"></label></td><td>Tira LED 24 V, 12 W/m, 3000 K, CRI ≥ 90</td><td class="n">3 rollos de 5 m</td><td>10,3 m de zócalo, con sobrante para cortes</td><td>Tienda de iluminación u online</td><td class="n">≈ 45–75 €</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b13"><input type="checkbox" id="b13" class="bud" data-min="60" data-max="60" checked aria-label="Incluir Perfil de aluminio con difusor opal"></label></td><td>Perfil de aluminio con difusor opal</td><td class="n">6 de 2 m</td><td>Con tapas y clips de fijación</td><td>Tienda de iluminación u online</td><td class="n">≈ 60 €</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b14"><input type="checkbox" id="b14" class="bud" data-min="50" data-max="50" checked aria-label="Incluir Fuente 24 V 200 W + regulador"></label></td><td>Fuente 24 V 200 W + regulador</td><td class="n">1 + 1</td><td>Con cable y conectores para las tres tiras</td><td>Tienda de iluminación u online</td><td class="n">≈ 50 €</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b15"><input type="checkbox" id="b15" class="bud" data-min="15" data-max="15" checked aria-label="Incluir Regleta LED para el almacén"></label></td><td>Regleta LED para el almacén</td><td class="n">1</td><td>Con interruptor</td><td>Ferretería</td><td class="n">≈ 15 €</td></tr>
 
-          <tr class="grp"><td colspan="5">Comunicación</td></tr>
-          <tr><td>Rótulo de la platabanda</td><td class="n">1</td><td>«JUNCOSA ALTA» tiene exactamente 12 caracteres contando el espacio, así que entra sin coste extra</td><td>Contrato, apartado 4.A</td><td class="n">0 €</td></tr>
-          <tr><td>Folletos o trípticos A4</td><td class="n">≈ 150</td><td>Contenido por definir</td><td>Imprenta</td><td class="n">≈ 25–50 €</td></tr>
-          <tr><td>Tarjetas de visita</td><td class="n">≈ 200</td><td>Para el tarjetero del expositor</td><td>Imprenta</td><td class="n">≈ 10–15 €</td></tr>
-          <tr><td>Vídeo en bucle</td><td class="n">1</td><td>De 2 a 3 minutos, sin sonido y con subtítulos. Contenido por definir</td><td>Propio</td><td class="n">—</td></tr>
+          <tr class="grp"><td colspan="6">Comunicación</td></tr>
+          <tr><td class="ck"></td><td>Rótulo de la platabanda</td><td class="n">1</td><td>«JUNCOSA ALTA» tiene exactamente 12 caracteres contando el espacio, así que entra sin coste extra</td><td>Contrato, apartado 4.A</td><td class="n">0 €</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b16"><input type="checkbox" id="b16" class="bud" data-min="25" data-max="50" checked aria-label="Incluir Folletos o trípticos A4"></label></td><td>Folletos o trípticos A4</td><td class="n">≈ 150</td><td>Contenido por definir</td><td>Imprenta</td><td class="n">≈ 25–50 €</td></tr>
+          <tr><td class="ck"><label class="ckbox" for="b17"><input type="checkbox" id="b17" class="bud" data-min="10" data-max="15" checked aria-label="Incluir Tarjetas de visita"></label></td><td>Tarjetas de visita</td><td class="n">≈ 200</td><td>Para el tarjetero del expositor</td><td>Imprenta</td><td class="n">≈ 10–15 €</td></tr>
+          <tr><td class="ck"></td><td>Vídeo en bucle</td><td class="n">1</td><td>De 2 a 3 minutos, sin sonido y con subtítulos. Contenido por definir</td><td>Propio</td><td class="n">—</td></tr>
 
-          <tr class="grp"><td colspan="5">Montaje</td></tr>
-                    <tr><td>Herramientas</td><td class="n">1 kit</td><td>Cúter, espátula para vinilo, metro, nivel, destornillador, bridas y cinta americana negra</td><td>Propio</td><td class="n">—</td></tr>
-          <tr><td>Limpieza y basura</td><td class="n">1 kit</td><td>Bayetas, limpiacristales para la pantalla y bolsas de basura</td><td>Propio</td><td class="n">—</td></tr>
+          <tr class="grp"><td colspan="6">Montaje</td></tr>
+                    <tr><td class="ck"></td><td>Herramientas</td><td class="n">1 kit</td><td>Cúter, espátula para vinilo, metro, nivel, destornillador, bridas y cinta americana negra</td><td>Propio</td><td class="n">—</td></tr>
+          <tr><td class="ck"></td><td>Limpieza y basura</td><td class="n">1 kit</td><td>Bayetas, limpiacristales para la pantalla y bolsas de basura</td><td>Propio</td><td class="n">—</td></tr>
+        <tr><td class="ck"><label class="ckbox" for="b-canon"><input type="checkbox" id="b-canon" class="bud" data-min="96.8" data-max="96.8" aria-label="Incluir canon de CONTURSA"></label></td><td>Canon de CONTURSA</td><td class="n">1</td><td>Solo si las gráficas o la pared las hace una empresa externa, o un proveedor oficial contratado sin pasar por CONTURSA</td><td>CONTURSA</td><td class="n">96,80 €</td></tr>
         </tbody>
       </table>
     </div>
-      <div class="tablewrap">
-      <table style="min-width:560px">
-        <thead><tr><th>Total aproximado de material</th><th class="r">Importe</th></tr></thead>
-        <tbody>
-          <tr><td>Lo básico: logotipo impreso, y pantalla y nevera propias</td><td class="n r">≈ 660–925 €</td></tr>
-          <tr><td>Con logotipo corpóreo retroiluminado</td><td class="n r">≈ 965–1.525 €</td></tr>
-          <tr><td>Con logotipo corpóreo y alquilando pantalla y nevera</td><td class="n r">≈ 1.195–1.925 €</td></tr>
-          <tr class="total"><td>Stand del contrato + material</td><td class="n r">≈ 3.825–5.100 €</td></tr>
-        </tbody>
-      </table>
+      <div class="budget" aria-live="polite">
+      <div><span>Material marcado</span><b id="b-mat">≈ 525–605 €</b></div>
+      <div><span>Presupuestos introducidos</span><b id="b-quotes">0 €</b></div>
+      <div><span>Stand del contrato</span><b>≈ 3.165–3.175 €</b></div>
+      <div class="tot"><span>Total aproximado</span><b id="b-total">≈ 3.690–3.780 €</b></div>
     </div>
-    <p class="note">Los precios de tienda llevan el IVA incluido. <b>No están incluidos</b> los dos presupuestos que faltan: la impresión y colocación de las gráficas, y la pared del almacén con la puerta camuflada. Tampoco el canon de 96,80 € si los hace una empresa externa en lugar del proveedor oficial vía CONTURSA.</p>
+    <p class="note">Marca o desmarca cada línea y el total se recalcula. Mobiliario, olivo, expositor, pantalla y nevera son vuestros y no suman; si hubiera que alquilar la pantalla o la nevera, marca «Alquilar». Cuando tengáis los presupuestos de las gráficas y de la pared del almacén, escribidlos en su casilla. Los precios de tienda llevan el IVA incluido.</p>
+    <p class="muted" id="b-missing"></p>
   </section>
   </div>
 
@@ -1509,6 +1524,45 @@ Gracias.</pre>
   var start = location.hash === '#diseno' || location.hash === '#contrato' ? location.hash.slice(1) : null;
   if (!start) { try { start = localStorage.getItem('sicab-tab'); } catch (e) {} }
   show(start === 'diseno' ? 'diseno' : 'contrato');
+})();
+</script>
+
+<script>
+// Presupuesto: suma lo marcado y los presupuestos escritos, y lo recuerda en este navegador
+(function () {
+  var boxes = [].slice.call(document.querySelectorAll('input.bud'));
+  var quotes = [].slice.call(document.querySelectorAll('input.bud-q'));
+  if (!boxes.length) return;
+  var KEY = 'sicab-presupuesto';
+  function eur(n) { return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.') + ' €'; }
+  function range(a, b) { return Math.round(a) === Math.round(b) ? '≈ ' + eur(a) : '≈ ' + eur(a).replace(' €', '') + '–' + eur(b); }
+  try {
+    var saved = JSON.parse(localStorage.getItem(KEY) || 'null');
+    if (saved) {
+      boxes.forEach(function (b) { if (b.id in saved.c) b.checked = saved.c[b.id]; });
+      quotes.forEach(function (q) { if (saved.q[q.id]) q.value = saved.q[q.id]; });
+    }
+  } catch (e) {}
+  function update() {
+    var mn = 0, mx = 0, qs = 0, missing = [];
+    boxes.forEach(function (b) { if (b.checked) { mn += +b.dataset.min; mx += +b.dataset.max; } });
+    quotes.forEach(function (q) { var v = parseFloat(q.value); if (v > 0) qs += v; else missing.push(q.dataset.name); });
+    document.getElementById('b-mat').textContent = range(mn, mx);
+    document.getElementById('b-quotes').textContent = eur(qs);
+    document.getElementById('b-total').textContent = range(3165 + mn + qs, 3175 + mx + qs);
+    [].forEach.call(document.querySelectorAll('.b-mat-mirror'), function (el) { el.textContent = range(mn + qs, mx + qs); });
+    document.getElementById('b-missing').textContent = missing.length
+      ? 'Faltan por sumar los presupuestos de: ' + missing.join(' y ') + '.' : 'Ya están sumados todos los presupuestos.';
+    try {
+      var c = {}, q = {};
+      boxes.forEach(function (b) { c[b.id] = b.checked; });
+      quotes.forEach(function (x) { q[x.id] = x.value; });
+      localStorage.setItem(KEY, JSON.stringify({ c: c, q: q }));
+    } catch (e) {}
+  }
+  boxes.forEach(function (b) { b.addEventListener('change', update); });
+  quotes.forEach(function (q) { q.addEventListener('input', update); });
+  update();
 })();
 </script>
 
