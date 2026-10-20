@@ -190,7 +190,8 @@ tr.total td { font-weight: 600; background: var(--accent-soft); }
 .mail-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; max-width: 75ch; margin-top: 16px; }
 .mail-head p { margin: 0; }
 #copy { font: 500 14px var(--body); color: var(--accent-ink); background: transparent; border: 1px solid var(--accent); border-radius: 4px; padding: 7px 14px; cursor: pointer; }
-#copy:hover { background: var(--accent-soft); }
+#copy:hover, .btn-dl:hover { background: var(--accent-soft); }
+.btn-dl { display: inline-block; font: 500 14px var(--body); color: var(--accent-ink); text-decoration: none; border: 1px solid var(--accent); border-radius: 4px; padding: 8px 16px; }
 #mail { max-width: 75ch; margin-top: 12px; padding: 20px 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow-wrap: anywhere; }
 #mail p { margin: 0 0 12px; } #mail ul { margin: 0 0 12px; padding-left: 20px; } #mail > :last-child { margin-bottom: 0; }
 ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
@@ -360,11 +361,11 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <li><b>Almacén de 2 × 1 m con puerta</b> (68 € + IVA), con los 2 m a lo largo de la pared del fondo, a la derecha. <span class="done">Decidido</span></li>
       <li><b>2 placas de 4 enchufes</b> (11,50 € + IVA cada una): una en el fondo, detrás de la pantalla, y otra dentro del almacén. <span class="done">Decidido</span></li>
       <li><b>Gráficas en vinilo por paneles</b> con el proveedor oficial: 11 paneles a 66 € + IVA (hay que confirmar si incluye la colocación). <span class="done">Decidido</span></li>
+      <li><b>Platabanda personalizada</b> con el logotipo impreso (52 € + IVA). <span class="done">Decidido</span></li>
       <li><b>1 rollo de cinta de doble cara</b> (12 € + IVA, 50 m). <span class="done">Decidido</span></li>
       <li><b>Toma de agua con fregadero pequeño</b> dentro del almacén (código 08004, 70 € + IVA). <span class="done">Decidido</span></li>
       <li><b>Enviar el correo a CONTURSA</b> con todo lo anterior y la planilla rellena, respondiendo al hilo de producción y con copia a sicab@sevillacityoffice.es. <a href="#correo">Ver el correo</a></li>
-      <li><b>Enviar los diseños de los 11 paneles</b> en PDF y en vectores. Es lo único que falta.</li>
-      <li><b>Pagar el 50 % restante</b> antes del 31 de octubre.</li>
+      <li><b>Enviar los diseños de los 11 paneles y la platabanda</b> en PDF y en vectores. Es lo único que falta.</li>
     </ol>
     <p class="muted small">Recargos por pedir tarde: <b>+20 %</b> del 29 de octubre al 9 de noviembre y <b>+30 %</b> del 10 al 13 de noviembre. Se puede cancelar hasta 15 días antes del montaje (1 de noviembre); después se cobra el 100 %.</p>
   </section>
@@ -374,6 +375,8 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <span class="eyebrow">Correo a CONTURSA</span>
       <h2>El correo con el pedido</h2>
       <p>Respondedlo en el mismo hilo de producción de CONTURSA, con copia a sicab@sevillacityoffice.es, y adjuntad la planilla rellena.</p>
+      <p>En este botón podéis descargar la planilla que debéis adjuntar al correo. Está dibujada, pero falta completar los datos de la empresa que piden abajo en el PDF. Se puede hacer en Vista Previa en Mac o en Adobe Acrobat Reader.</p>
+      <p><a class="btn-dl" href="planilla-rellena-stand-2030.pdf" target="_blank" rel="noopener">Descargar la planilla (PDF)</a></p>
     </div>
     <div class="mail-head"><p class="muted small"><b>Asunto:</b> SICAB 2026 · Juncosa Alta · Stand 2030 (Pabellón 2) · Pedido y planilla</p><button type="button" id="copy">Copiar texto</button></div>
     <div id="mail">
@@ -385,12 +388,11 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <ul><li>Una en la pared del fondo, columna 4 de la fila 1, detrás de la pantalla.</li><li>Otra dentro del almacén, columna 11 de la fila 1, para la nevera y el microondas.</li></ul>
       <p><b>4. Toma de agua con fregadero pequeño</b> (código 08004), dentro del almacén, en la columna 16 de la fila 1. En la planilla va como AG.</p>
       <p><b>5. Un rollo de cinta de doble cara</b> (12 € + IVA).</p>
-      <p><b>6. Gráficas en vinilo para 11 paneles</b> (0,95 × 2,56 m, código 50101006), con vuestro proveedor oficial. Queríamos preguntaros:</p>
+      <p><b>6. Gráficas en vinilo para 11 paneles</b> (0,95 × 2,56 m, código 50101006), con vuestro proveedor oficial. El único panel que no lleva vinilo es el de la puerta del almacén. Queríamos preguntaros:</p>
       <ul><li>¿El precio de 66 € + IVA por panel incluye la impresión y la colocación, o el montaje se cobra aparte?</li><li>¿Nos podéis mandar la plantilla con medidas, sangrado y margen de los perfiles?</li><li>¿Hasta qué fecha podemos enviar los artes finales? Entendemos que es el 28 de octubre.</li></ul>
-      <p><b>7. Tira LED en el zócalo.</b> Nos gustaría poner una tira LED cálida a 0,40 m del suelo, dentro de un perfil de aluminio ligero (unos 100 g por metro). Iría pegada con cinta Tesa sobre el vinilo, sin taladrar, y enchufada a la placa de la pared del fondo con su fuente homologada. ¿Nos dais permiso por escrito para ponerla?</p>
-      <p><b>8. Pantalla:</b> irá en un pie de suelo, sin colgarla de los paneles. Nos confirmáis que no hace falta nada más por vuestra parte, ¿verdad?</p>
+      <p><b>7. Platabanda personalizada</b> (3,95 × 0,52 m, código 50101002, 52 € + IVA), impresa en vinilo con nuestro diseño en lugar de las letras de serie. La enviaremos junto con los diseños de los paneles.</p>
       <p>Si os falta algún dato, decídnoslo. Muchas gracias.</p>
-      <p>Un saludo,<br>María<br>Juncosa Alta · Stand 2030 · Pabellón 2</p>
+      <p>Un saludo,<br>Antonio<br>Juncosa Alta · Stand 2030 · Pabellón 2</p>
     </div>
   </section>
 
