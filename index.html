@@ -187,6 +187,12 @@ tr.total td { font-weight: 600; background: var(--accent-soft); }
 .tag.acc { background: var(--accent-soft); color: var(--accent-ink); }
 .note { margin: 0; max-width: 75ch; padding: 14px 18px; border-left: 3px solid var(--accent); background: var(--accent-soft); border-radius: 0 4px 4px 0; }
 .note.warn { border-color: var(--warn); background: var(--warn-soft); }
+.mail-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; max-width: 75ch; margin-top: 16px; }
+.mail-head p { margin: 0; }
+#copy { font: 500 14px var(--body); color: var(--accent-ink); background: transparent; border: 1px solid var(--accent); border-radius: 4px; padding: 7px 14px; cursor: pointer; }
+#copy:hover { background: var(--accent-soft); }
+#mail { max-width: 75ch; margin-top: 12px; padding: 20px 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow-wrap: anywhere; }
+#mail p { margin: 0 0 12px; } #mail ul { margin: 0 0 12px; padding-left: 20px; } #mail > :last-child { margin-bottom: 0; }
 ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .tl-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
 .tl-legend span { display: inline-flex; align-items: center; gap: 6px; }
@@ -314,6 +320,14 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .inv-final video, .inv-final img { width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; display: block; border-radius: 10px; background: #0a0a0a; box-shadow: 0 14px 34px rgba(27,23,20,.22), 0 2px 6px rgba(27,23,20,.12); }
 .inv-final figcaption { display: grid; gap: 2px; }
 .inv-final figcaption span { font-size: .85rem; color: var(--muted); }
+.planilla .gridl { stroke: #e7a3a3; stroke-width: .8; }
+.planilla .gnum { font: 500 9px var(--body); fill: var(--muted); }
+.planilla .afill { fill: var(--accent-soft); }
+.planilla .gwall { stroke: var(--ink); stroke-width: 5; }
+.planilla .gwall2 { stroke: var(--ink); stroke-width: 3; }
+.planilla .gtxt { font: 500 11px var(--body); fill: var(--ink); }
+.todo .done { font: 600 .68rem var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--ok); background: var(--ok-soft); padding: 2px 7px; border-radius: 99px; margin-left: 6px; white-space: nowrap; }
+.plan .agmark circle { fill: #2f6f9f; } .plan .agmark text { font-size: 10px; }
 </style>
 </head>
 <body>
@@ -342,16 +356,42 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     </div>
     <div class="urgent-count"><b id="dl-days">8</b><span id="dl-lab">días</span></div>
     <ol class="todo">
-      <li><b>Elegir el color de la moqueta.</b> Viene en gris perla si no decís nada. Recomendamos 0303 Coñac (ver más abajo).</li>
-      <li><b>Pedir el almacén de 1 × 1 m con puerta</b> (52 € + IVA).</li>
-      <li><b>Pedir 2 placas de 4 enchufes</b> (11,50 € + IVA cada una). El cuadro solo trae un enchufe.</li>
-      <li><b>Decidir las gráficas:</b> vinilo por paneles (recomendado) o foam a pared completa, y si la platabanda va personalizada.</li>
-      <li><b>Enviar los diseños finales</b> en PDF y en vectores, con las medidas de CONTURSA.</li>
-      <li><b>Pedir la cinta de doble cara</b> (12 € + IVA el rollo de 50 m). Es la única permitida para pegar cosas en los paneles.</li>
-      <li><b>Rellenar la planilla</b> con la planta del stand, marcando el almacén (A) y los enchufes (E). Más abajo está cómo.</li>
+      <li><b>Moqueta:</b> 0303 Coñac. <span class="done">Decidido</span></li>
+      <li><b>Almacén de 2 × 1 m con puerta</b> (68 € + IVA), con los 2 m a lo largo de la pared del fondo, a la derecha. <span class="done">Decidido</span></li>
+      <li><b>2 placas de 4 enchufes</b> (11,50 € + IVA cada una): una en el fondo, detrás de la pantalla, y otra dentro del almacén. <span class="done">Decidido</span></li>
+      <li><b>Gráficas en vinilo por paneles</b> con el proveedor oficial: 11 paneles a 66 € + IVA (hay que confirmar si incluye la colocación). <span class="done">Decidido</span></li>
+      <li><b>1 rollo de cinta de doble cara</b> (12 € + IVA, 50 m). <span class="done">Decidido</span></li>
+      <li><b>Toma de agua con fregadero pequeño</b> dentro del almacén (código 08004, 70 € + IVA). <span class="done">Decidido</span></li>
+      <li><b>Enviar el correo a CONTURSA</b> con todo lo anterior y la planilla rellena, respondiendo al hilo de producción y con copia a sicab@sevillacityoffice.es. <a href="#correo">Ver el correo</a></li>
+      <li><b>Enviar los diseños de los 11 paneles</b> en PDF y en vectores. Es lo único que falta.</li>
       <li><b>Pagar el 50 % restante</b> antes del 31 de octubre.</li>
     </ol>
     <p class="muted small">Recargos por pedir tarde: <b>+20 %</b> del 29 de octubre al 9 de noviembre y <b>+30 %</b> del 10 al 13 de noviembre. Se puede cancelar hasta 15 días antes del montaje (1 de noviembre); después se cobra el 100 %.</p>
+  </section>
+
+  <section id="correo">
+    <div class="prose">
+      <span class="eyebrow">Correo a CONTURSA</span>
+      <h2>El correo con el pedido</h2>
+      <p>Respondedlo en el mismo hilo de producción de CONTURSA, con copia a sicab@sevillacityoffice.es, y adjuntad la planilla rellena.</p>
+    </div>
+    <div class="mail-head"><p class="muted small"><b>Asunto:</b> SICAB 2026 · Juncosa Alta · Stand 2030 (Pabellón 2) · Pedido y planilla</p><button type="button" id="copy">Copiar texto</button></div>
+    <div id="mail">
+      <p>Buenos días:</p>
+      <p>Os escribimos desde Juncosa Alta, stand 2030 del Pabellón 2, para confirmar el pedido del stand modular de 16 m² y la situación de los elementos. Os adjuntamos la planilla rellena.</p>
+      <p><b>1. Moqueta:</b> color 0303 Coñac.</p>
+      <p><b>2. Almacén de 2 × 1 m con puerta,</b> al fondo a la derecha: 2 m a lo largo de la pared del fondo y 1 m de profundidad. En la planilla va marcado como A.</p>
+      <p><b>3. Dos placas de 4 enchufes</b> (11,50 € + IVA cada una):</p>
+      <ul><li>Una en la pared del fondo, columna 4 de la fila 1, detrás de la pantalla.</li><li>Otra dentro del almacén, columna 11 de la fila 1, para la nevera y el microondas.</li></ul>
+      <p><b>4. Toma de agua con fregadero pequeño</b> (código 08004), dentro del almacén, en la columna 16 de la fila 1. En la planilla va como AG.</p>
+      <p><b>5. Un rollo de cinta de doble cara</b> (12 € + IVA).</p>
+      <p><b>6. Gráficas en vinilo para 11 paneles</b> (0,95 × 2,56 m, código 50101006), con vuestro proveedor oficial. Queríamos preguntaros:</p>
+      <ul><li>¿El precio de 66 € + IVA por panel incluye la impresión y la colocación, o el montaje se cobra aparte?</li><li>¿Nos podéis mandar la plantilla con medidas, sangrado y margen de los perfiles?</li><li>¿Hasta qué fecha podemos enviar los artes finales? Entendemos que es el 28 de octubre.</li><li>¿Adaptar nuestros diseños a la plantilla tiene algún coste?</li></ul>
+      <p><b>7. Tira LED en el zócalo.</b> Nos gustaría poner una tira LED cálida a 0,40 m del suelo, dentro de un perfil de aluminio ligero (unos 100 g por metro). Iría pegada con cinta Tesa sobre el vinilo, sin taladrar, y enchufada a la placa de la pared del fondo con su fuente homologada. ¿Nos dais permiso por escrito para ponerla?</p>
+      <p><b>8. Pantalla:</b> irá en un pie de suelo, sin colgarla de los paneles. Nos confirmáis que no hace falta nada más por vuestra parte, ¿verdad?</p>
+      <p>Si os falta algún dato, decídnoslo. Muchas gracias.</p>
+      <p>Un saludo,<br>María<br>Juncosa Alta · Stand 2030 · Pabellón 2</p>
+    </div>
   </section>
 
   <section>
@@ -493,7 +533,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <p>Hay que decirlo antes del 28 de octubre; si no, viene gris perla. Estos son los que mejor van con la marca:</p>
     </div>
     <div class="swatches">
-      <div class="swatch"><div class="chip" style="background:#7a4a2c"></div><div class="lab"><b>0303 Coñac · recomendado</b><span>Cálido, va con el terracota y la madera. Si elegís este, no hace falta el vinilo de suelo.</span></div></div>
+      <div class="swatch"><div class="chip" style="background:#7a4a2c"></div><div class="lab"><b>0303 Coñac · elegido</b><span>Cálido, va con el terracota y la madera. Si elegís este, no hace falta el vinilo de suelo.</span></div></div>
       <div class="swatch"><div class="chip" style="background:#2b2e33"></div><div class="lab"><b>0917 Antracita</b><span>Elegante y discreto. Buena base si ponéis el vinilo de parquet encima.</span></div></div>
       <div class="swatch"><div class="chip" style="background:#111"></div><div class="lab"><b>0955 Negro</b><span>Muy elegante, pero se ve todo el polvo.</span></div></div>
     </div>
@@ -504,50 +544,34 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     <div class="prose">
       <span class="eyebrow">Planilla</span>
       <h2>Cómo rellenar la planilla de elementos</h2>
-      <p>CONTURSA pide dibujar la planta del stand en su cuadrícula y marcar dónde van las cosas. Copiad esta disposición:</p>
+      <p>CONTURSA pide dibujar la planta en su cuadrícula y marcar dónde van las cosas. Al lado está ya rellena: copiadla tal cual. Cada cuadro son 25 cm, así que el stand ocupa 16 × 16 cuadros, con el pasillo abajo.</p>
       <ul class="plain">
-        <li><b>A · Almacén 1 × 1 m:</b> esquina del fondo a la derecha, con la puerta mirando hacia dentro del stand (hacia la izquierda).</li>
-        <li><b>E · Placa de enchufes 1:</b> pared del fondo, a la izquierda del centro, detrás de la pantalla.</li>
-        <li><b>E · Placa de enchufes 2:</b> dentro del almacén, para la nevera y el microondas.</li>
-        <li><b>Frente abierto</b> al pasillo, con la platabanda.</li>
+        <li><b>A · Almacén 2 × 1 m:</b> arriba a la derecha. Columnas 9 a 16 y filas 1 a 4 (8 cuadros de ancho por 4 de alto). Los 2 m van pegados a la pared del fondo.</li>
+        <li><b>Puerta del almacén:</b> en el lado de abajo, en la mitad derecha (columnas 13 a 16), abriendo hacia el stand.</li>
+        <li><b>E · Placa de enchufes 1:</b> pegada a la pared del fondo, en la columna 4 de la fila 1, justo detrás de la pantalla, para que no se vea. Es para la pantalla y la tira LED.</li>
+        <li><b>E · Placa de enchufes 2:</b> dentro del almacén, en la columna 11 de la fila 1, junto a la nevera y el microondas, que van en el extremo izquierdo del almacén.</li>
+        <li><b>AG · Toma de agua con fregadero:</b> dentro del almacén, en la columna 16 de la fila 1, en el extremo derecho, junto a la puerta. Así el agua queda lejos de los enchufes y el fregadero, que es más pequeño, no estorba al entrar.</li>
+        <li>Abajo, escribid <b>«Pasillo · frente abierto»</b>.</li>
       </ul>
-      <p class="muted">Es la disposición del diseño 2, mirando el stand desde el pasillo (el pasillo queda abajo). Si al final elegís el diseño 1, el almacén va en la esquina contraria. En la cuadrícula, cada cuadro puede ser 25 cm: el stand ocupa 16 × 16 cuadros.</p>
+      <p class="muted">Completad también los datos del pie (empresa, CIF, dirección, email, persona que contrata, teléfono, fecha y firma), y enviadla en el mismo correo de los pedidos.</p>
     </div>
     <div>
-      <svg class="plan" viewBox="-70 -60 540 540" role="img" aria-label="Planta para la planilla: almacén a la derecha y enchufes">
+      <svg class="plan planilla" viewBox="-40 -40 480 500" role="img" aria-label="Planilla rellena: cuadrícula de 16 × 16 con el almacén y los enchufes">
         <rect class="floor" x="0" y="0" width="400" height="400"/>
-        <rect class="wall" x="0" y="0" width="400" height="6"/>
-        <rect class="wall" x="0" y="0" width="6" height="400"/>
-        <rect class="wall" x="394" y="0" width="6" height="400"/>
-        <rect class="item" x="300" y="6" width="94" height="94"/>
-        <rect class="wall" x="300" y="97" width="94" height="4"/>
-        <rect class="floor" x="297" y="6" width="5" height="88"/>
-        <path class="dim" d="M300,95 A90,90 0 0 1 210,5" stroke-dasharray="4 4"/>
-        <line class="dim" x1="300" y1="5" x2="210" y2="5" stroke-dasharray="4 4"/>
-        <text x="345" y="60" text-anchor="middle" class="big">A</text>
-        <rect class="acc" x="67" y="30" width="146" height="14"/>
-        <rect class="item" x="117" y="44" width="46" height="6"/>
-        <rect class="wall" x="77.5" y="237.5" width="75" height="75"/>
-        <rect class="item" x="98" y="308" width="34" height="34"/><rect class="item" x="98" y="208" width="34" height="34"/><rect class="item" x="48" y="258" width="34" height="34"/><rect class="item" x="148" y="258" width="34" height="34"/>
-        <rect class="wall" x="237.5" y="177.5" width="75" height="75"/>
-        <rect class="item" x="258" y="248" width="34" height="34"/><rect class="item" x="258" y="148" width="34" height="34"/><rect class="item" x="208" y="198" width="34" height="34"/><rect class="item" x="308" y="198" width="34" height="34"/>
-        
-        <g transform="rotate(26 355 360)"><rect class="item" x="339" y="344" width="32" height="32"/><rect class="acc" x="341" y="346" width="28" height="5"/></g>
-        <g class="emark"><circle cx="140" cy="17" r="11"/><text x="140" y="21" text-anchor="middle">E</text></g>
-        <g class="emark"><circle cx="372" cy="28" r="11"/><text x="372" y="32" text-anchor="middle">E</text></g>
-        
-        <line x1="0" y1="403" x2="400" y2="403" class="pb"/>
-        <text x="200" y="428" text-anchor="middle" class="lbl">PASILLO · PLATABANDA CON EL LOGOTIPO</text>
-        <g>
-          <circle class="numbg" cx="320" cy="80" r="11"/><text class="num" x="320" y="84" text-anchor="middle">1</text>
-          <circle class="numbg" cx="140" cy="66" r="11"/><text class="num" x="140" y="70" text-anchor="middle">2</text>
-          <circle class="numbg" cx="115" cy="275" r="11"/><text class="num" x="115" y="279" text-anchor="middle">3</text>
-          <circle class="numbg" cx="275" cy="215" r="11"/><text class="num" x="275" y="219" text-anchor="middle">3</text>
-          <circle class="numbg" cx="115" cy="325" r="11"/><text class="num" x="115" y="329" text-anchor="middle">4</text>
-          
-          <circle class="numbg" cx="318" cy="372" r="11"/><text class="num" x="318" y="376" text-anchor="middle">5</text>
-        </g>
-        <text class="lbl" x="200" y="465" text-anchor="middle">ESCALA 1:50 APROX. · A = ALMACÉN · E = ENCHUFES</text>
+        <rect class="afill" x="200" y="0" width="200" height="100"/>
+        <line x1="0" y1="0" x2="0" y2="400" class="gridl"/><line x1="0" y1="0" x2="400" y2="0" class="gridl"/><line x1="25" y1="0" x2="25" y2="400" class="gridl"/><line x1="0" y1="25" x2="400" y2="25" class="gridl"/><line x1="50" y1="0" x2="50" y2="400" class="gridl"/><line x1="0" y1="50" x2="400" y2="50" class="gridl"/><line x1="75" y1="0" x2="75" y2="400" class="gridl"/><line x1="0" y1="75" x2="400" y2="75" class="gridl"/><line x1="100" y1="0" x2="100" y2="400" class="gridl"/><line x1="0" y1="100" x2="400" y2="100" class="gridl"/><line x1="125" y1="0" x2="125" y2="400" class="gridl"/><line x1="0" y1="125" x2="400" y2="125" class="gridl"/><line x1="150" y1="0" x2="150" y2="400" class="gridl"/><line x1="0" y1="150" x2="400" y2="150" class="gridl"/><line x1="175" y1="0" x2="175" y2="400" class="gridl"/><line x1="0" y1="175" x2="400" y2="175" class="gridl"/><line x1="200" y1="0" x2="200" y2="400" class="gridl"/><line x1="0" y1="200" x2="400" y2="200" class="gridl"/><line x1="225" y1="0" x2="225" y2="400" class="gridl"/><line x1="0" y1="225" x2="400" y2="225" class="gridl"/><line x1="250" y1="0" x2="250" y2="400" class="gridl"/><line x1="0" y1="250" x2="400" y2="250" class="gridl"/><line x1="275" y1="0" x2="275" y2="400" class="gridl"/><line x1="0" y1="275" x2="400" y2="275" class="gridl"/><line x1="300" y1="0" x2="300" y2="400" class="gridl"/><line x1="0" y1="300" x2="400" y2="300" class="gridl"/><line x1="325" y1="0" x2="325" y2="400" class="gridl"/><line x1="0" y1="325" x2="400" y2="325" class="gridl"/><line x1="350" y1="0" x2="350" y2="400" class="gridl"/><line x1="0" y1="350" x2="400" y2="350" class="gridl"/><line x1="375" y1="0" x2="375" y2="400" class="gridl"/><line x1="0" y1="375" x2="400" y2="375" class="gridl"/><line x1="400" y1="0" x2="400" y2="400" class="gridl"/><line x1="0" y1="400" x2="400" y2="400" class="gridl"/>
+        <text x="12.5" y="-8" text-anchor="middle" class="gnum">1</text><text x="-8" y="16.5" text-anchor="end" class="gnum">1</text><text x="37.5" y="-8" text-anchor="middle" class="gnum">2</text><text x="-8" y="41.5" text-anchor="end" class="gnum">2</text><text x="62.5" y="-8" text-anchor="middle" class="gnum">3</text><text x="-8" y="66.5" text-anchor="end" class="gnum">3</text><text x="87.5" y="-8" text-anchor="middle" class="gnum">4</text><text x="-8" y="91.5" text-anchor="end" class="gnum">4</text><text x="112.5" y="-8" text-anchor="middle" class="gnum">5</text><text x="-8" y="116.5" text-anchor="end" class="gnum">5</text><text x="137.5" y="-8" text-anchor="middle" class="gnum">6</text><text x="-8" y="141.5" text-anchor="end" class="gnum">6</text><text x="162.5" y="-8" text-anchor="middle" class="gnum">7</text><text x="-8" y="166.5" text-anchor="end" class="gnum">7</text><text x="187.5" y="-8" text-anchor="middle" class="gnum">8</text><text x="-8" y="191.5" text-anchor="end" class="gnum">8</text><text x="212.5" y="-8" text-anchor="middle" class="gnum">9</text><text x="-8" y="216.5" text-anchor="end" class="gnum">9</text><text x="237.5" y="-8" text-anchor="middle" class="gnum">10</text><text x="-8" y="241.5" text-anchor="end" class="gnum">10</text><text x="262.5" y="-8" text-anchor="middle" class="gnum">11</text><text x="-8" y="266.5" text-anchor="end" class="gnum">11</text><text x="287.5" y="-8" text-anchor="middle" class="gnum">12</text><text x="-8" y="291.5" text-anchor="end" class="gnum">12</text><text x="312.5" y="-8" text-anchor="middle" class="gnum">13</text><text x="-8" y="316.5" text-anchor="end" class="gnum">13</text><text x="337.5" y="-8" text-anchor="middle" class="gnum">14</text><text x="-8" y="341.5" text-anchor="end" class="gnum">14</text><text x="362.5" y="-8" text-anchor="middle" class="gnum">15</text><text x="-8" y="366.5" text-anchor="end" class="gnum">15</text><text x="387.5" y="-8" text-anchor="middle" class="gnum">16</text><text x="-8" y="391.5" text-anchor="end" class="gnum">16</text>
+        <line x1="0" y1="0" x2="400" y2="0" class="gwall"/><line x1="0" y1="0" x2="0" y2="400" class="gwall"/><line x1="400" y1="0" x2="400" y2="400" class="gwall"/>
+        <line x1="200" y1="0" x2="200" y2="100" class="gwall2"/><line x1="200" y1="100" x2="300" y2="100" class="gwall2"/>
+        <path class="dim" d="M300,100 A100,100 0 0 0 400,200" stroke-dasharray="4 4"/><line class="dim" x1="400" y1="100" x2="400" y2="200" stroke-dasharray="4 4"/>
+        <text x="300" y="48" text-anchor="middle" class="big">A</text>
+        <text x="300" y="72" text-anchor="middle" class="gtxt">almacén 2 × 1 m</text>
+        <text x="350" y="118" text-anchor="middle" class="gtxt">puerta</text>
+        <g class="emark"><circle cx="87.5" cy="12.5" r="10"/><text x="87.5" y="16.5" text-anchor="middle">E</text></g>
+        <g class="emark"><circle cx="262.5" cy="12.5" r="10"/><text x="262.5" y="16.5" text-anchor="middle">E</text></g>
+        <g class="emark agmark"><circle cx="387.5" cy="12.5" r="11"/><text x="387.5" y="16.5" text-anchor="middle">AG</text></g>
+        <text x="200" y="428" text-anchor="middle" class="lbl">PASILLO · FRENTE ABIERTO</text>
+        <text x="200" y="452" text-anchor="middle" class="lbl">CADA CUADRO = 25 CM · 16 × 16 CUADROS = 4 × 4 M</text>
       </svg>
 
     </div>
@@ -559,10 +583,9 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <h2>Lo que queda pendiente</h2>
     </div>
     <ul class="check">
-      <li><span>Elegir gráficas: vinilo por paneles (≈ 880 € con IVA) o foam (≈ 2.605 € con IVA).</span></li>
+      <li><span>Confirmar con CONTURSA que los 66 € por panel incluyen impresión y colocación, y si se puede forrar la puerta del almacén.</span></li>
+      <li><span>Confirmar la fecha límite de los diseños (28 de octubre) y pedir la plantilla con medidas, sangrado y margen de los perfiles.</span></li>
       <li><span>Elegir el logotipo: corpóreo pegado con cinta o impreso en el vinilo.</span></li>
-      <li><span>Elegir el suelo: moqueta coñac o vinilo de parquet encima de la moqueta. Si es vinilo, contestar a CONTURSA que lo colocáis vosotros.</span></li>
-      <li><span>Esperar el certificado de reacción al fuego que piden para los vinilos.</span></li>
       <li><span>Confirmar que se puede pegar la tira LED con su cinta de doble cara.</span></li>
       <li><span>Si el logotipo es corpóreo, pedir al rotulista que sea ligero para poder pegarlo con cinta.</span></li>
     </ul>
@@ -589,8 +612,8 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 
   <div class="viewer">
     <div class="options" id="tg-design" role="group" aria-label="Diseño del stand">
-      <button type="button" class="opt" data-v="1" aria-pressed="true"><span class="letter">1</span><b>Pared continua</b><span>Fotos y textos que recorren cada pared, logotipo en la pared del fondo y almacén a la izquierda.</span></button>
-      <button type="button" class="opt" data-v="2" aria-pressed="false"><span class="letter">2</span><b>El viaje</b><span>Cada panel es un cuadro: el viaje del caballo en 4 fotos, fondo negro con la pantalla y un panel terracota con la marca al pasillo.</span></button>
+      <button type="button" class="opt" data-v="1" aria-pressed="false"><span class="letter">1</span><b>Pared continua</b><span>Fotos y textos que recorren cada pared, logotipo en la pared del fondo y almacén a la izquierda.</span></button>
+      <button type="button" class="opt" data-v="2" aria-pressed="true"><span class="letter">2</span><b>El viaje · final</b><span>Cada panel es un cuadro: el viaje del caballo en 4 fotos, fondo negro con la pantalla y un panel terracota con la marca al pasillo.</span></button>
     </div>
     <div class="stage" id="stage">
       <canvas id="c" aria-label="Modelo 3D del stand de Juncosa Alta"></canvas>
@@ -610,7 +633,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <div class="logo-opts" id="tg-light" role="group" aria-label="Iluminación"><span>Luz</span>
         <button type="button" data-v="off" aria-pressed="false">Solo la incluida</button><button type="button" data-v="on" aria-pressed="true">Con LED extra</button></div>
       <div class="logo-opts" id="tg-rollup" role="group" aria-label="Roll-up" hidden><span>Roll-up</span>
-        <button type="button" data-v="off" aria-pressed="false">Sin roll-up</button><button type="button" data-v="on" aria-pressed="true">Con roll-up</button></div>
+        <button type="button" data-v="off" aria-pressed="true">Sin roll-up</button><button type="button" data-v="on" aria-pressed="false">Con roll-up</button></div>
       <div class="logo-opts" id="tg-plants" role="group" aria-label="Plantas"><span>Plantas</span>
         <button type="button" data-v="off" aria-pressed="false">Sin plantas</button><button type="button" data-v="on" aria-pressed="true">Con olivo bajo</button></div>
       <div class="logo-opts" id="tg-floor" role="group" aria-label="Suelo"><span>Suelo</span>
@@ -625,7 +648,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   <div class="facts">
     <div><b>16 m²</b><span>Stand modular de 4 × 4 m</span></div>
     <div><b>2,56 m</b><span>Altura de los paneles</span></div>
-    <div><b>1 × 1 m</b><span>Almacén con puerta</span></div>
+    <div><b>2 × 1 m</b><span>Almacén con puerta</span></div>
     <div><b>5,5 kW</b><span>Potencia incluida</span></div>
   </div>
 
@@ -640,8 +663,8 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       </div>
       <div data-design="2" hidden>
         <p><b>Diseño 2 · El viaje.</b> Aprovecha que cada panel queda enmarcado por los perfiles: cada uno es un cuadro. La pared izquierda cuenta el viaje del caballo en <b>4 fotos numeradas</b>: 01 Recogida, 02 En ruta, 03 A bordo y 04 Llegada. Es lo primero que se lee desde el pasillo.</p>
-        <p>El fondo es negro: la frase de la marca, la pantalla enmarcada en negro y un panel terracota con las cifras. A la derecha, una foto de la flota, otra del <b>equipo de conductores</b> con su uniforme de Juncosa Alta y, junto al pasillo, un <b>panel terracota con el logotipo</b>, además del logotipo en la platabanda. Solo se usan los colores de la web: negro, crema y terracota, más las fotos y la madera del zócalo.</p>
-        <p><b>Roll-up opcional (botón «Roll-up»):</b> 85 × 200 cm en la esquina del pasillo, mirando a la gente que pasa. Negro, con el logotipo, «Transporte de caballos por España y Europa» y un QR grande para reservar plaza. No lleva fechas ni número de stand, así que sirve para concursos y otras ferias. No toca los paneles, así que lo puede imprimir cualquier imprenta. Si se pone, el olivo bajo pasa a la esquina del fondo.</p>
+        <p>El fondo es negro: la frase de la marca, la pantalla enmarcada en negro y un panel terracota con las cifras. A la derecha, una foto de la flota, otra del <b>equipo de conductores</b> con su uniforme de Juncosa Alta y, junto al pasillo, un <b>panel terracota con el logotipo</b>, además del logotipo en la platabanda. El <b>almacén de 2 × 1 m</b> ocupa la mitad derecha del fondo: su cara al pasillo lleva las cifras y la puerta, y su lado, el número de stand. Solo se usan los colores de la web: negro, crema y terracota, más las fotos y la madera del zócalo.</p>
+        <p><b>Roll-up opcional (botón «Roll-up»):</b> 85 × 200 cm en la esquina del pasillo, mirando a la gente que pasa. Negro, con el logotipo, «Transporte de caballos por España y Europa» y un QR grande para reservar plaza. No lleva fechas ni número de stand, así que sirve para concursos y otras ferias. No toca los paneles, así que lo puede imprimir cualquier imprenta. Si se pone, el olivo bajo pasa a la pared derecha, junto al panel de la marca.</p>
       </div>
     </div>
     <div>
@@ -690,41 +713,44 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 
       </div>
       <div data-design="2" hidden>
-      <svg class="plan" viewBox="-70 -60 540 540" role="img" aria-label="Planta del diseño 2 con almacén a la derecha y enchufes">
+      <svg class="plan" viewBox="-70 -60 540 540" role="img" aria-label="Planta del diseño 2 con almacén de 2 × 1 m al fondo y enchufes">
         <rect class="floor" x="0" y="0" width="400" height="400"/>
         <rect class="wall" x="0" y="0" width="400" height="6"/>
         <rect class="wall" x="0" y="0" width="6" height="400"/>
         <rect class="wall" x="394" y="0" width="6" height="400"/>
-        <rect class="item" x="300" y="6" width="94" height="94"/>
-        <rect class="wall" x="300" y="97" width="94" height="4"/>
-        <rect class="floor" x="297" y="6" width="5" height="88"/>
-        <path class="dim" d="M300,95 A90,90 0 0 1 210,5" stroke-dasharray="4 4"/>
-        <line class="dim" x1="300" y1="5" x2="210" y2="5" stroke-dasharray="4 4"/>
-        <text x="345" y="60" text-anchor="middle" class="big">A</text>
-        <rect class="acc" x="67" y="30" width="146" height="14"/>
-        <rect class="item" x="117" y="44" width="46" height="6"/>
-        <rect class="wall" x="77.5" y="237.5" width="75" height="75"/>
-        <rect class="item" x="98" y="308" width="34" height="34"/><rect class="item" x="98" y="208" width="34" height="34"/><rect class="item" x="48" y="258" width="34" height="34"/><rect class="item" x="148" y="258" width="34" height="34"/>
-        <rect class="wall" x="237.5" y="177.5" width="75" height="75"/>
-        <rect class="item" x="258" y="248" width="34" height="34"/><rect class="item" x="258" y="148" width="34" height="34"/><rect class="item" x="208" y="198" width="34" height="34"/><rect class="item" x="308" y="198" width="34" height="34"/>
-        
+        <rect class="item" x="200" y="6" width="194" height="94"/>
+        <rect class="wall" x="197" y="6" width="4" height="96"/>
+        <rect class="wall" x="200" y="97" width="104" height="4"/>
+        <path class="dim" d="M304,100 A90,90 0 0 0 394,190" stroke-dasharray="4 4"/>
+        <line class="dim" x1="394" y1="100" x2="394" y2="190" stroke-dasharray="4 4"/>
+        <text x="300" y="62" text-anchor="middle" class="big">A</text>
+        <rect class="acc" x="27" y="30" width="146" height="14"/>
+        <rect class="item" x="77" y="44" width="46" height="6"/>
+        <rect class="wall" x="57.5" y="137.5" width="75" height="75"/>
+        <rect class="item" x="78" y="208" width="34" height="34"/><rect class="item" x="78" y="108" width="34" height="34"/><rect class="item" x="28" y="158" width="34" height="34"/><rect class="item" x="128" y="158" width="34" height="34"/>
+        <rect class="wall" x="202.5" y="242.5" width="75" height="75"/>
+        <rect class="item" x="223" y="313" width="34" height="34"/><rect class="item" x="223" y="213" width="34" height="34"/><rect class="item" x="173" y="263" width="34" height="34"/><rect class="item" x="273" y="263" width="34" height="34"/>
         <g transform="rotate(26 355 360)"><rect class="item" x="339" y="344" width="32" height="32"/><rect class="acc" x="341" y="346" width="28" height="5"/></g>
-        <g class="emark"><circle cx="140" cy="17" r="11"/><text x="140" y="21" text-anchor="middle">E</text></g>
-        <g class="emark"><circle cx="372" cy="28" r="11"/><text x="372" y="32" text-anchor="middle">E</text></g>
+        <g transform="rotate(-26 55 362)"><rect x="12" y="352" width="85" height="20" class="accs" stroke-dasharray="5 3"/></g><text x="60" y="345" text-anchor="middle" class="lbl" style="letter-spacing:.06em">ROLL-UP</text>
+        <g class="emark"><circle cx="88" cy="17" r="11"/><text x="88" y="21" text-anchor="middle">E</text></g>
+        <rect class="item" x="205" y="8" width="49" height="49"/><text x="229.5" y="37" text-anchor="middle" class="lbl" style="letter-spacing:0">nev.</text>
+        <g class="emark"><circle cx="268" cy="22" r="11"/><text x="268" y="26" text-anchor="middle">E</text></g>
+        <rect class="item" x="340" y="8" width="50" height="45"/><circle class="item" cx="365" cy="30" r="12"/>
+        <g class="emark agmark"><circle cx="326" cy="22" r="12"/><text x="326" y="26" text-anchor="middle">AG</text></g>
         <g class="plabel">
           <text x="-8" y="355" text-anchor="end">01 foto</text><text x="-8" y="255" text-anchor="end">02 foto</text><text x="-8" y="155" text-anchor="end">03 foto</text><text x="-8" y="55" text-anchor="end">04 foto</text>
-          <text x="50" y="-10" text-anchor="middle">frase</text><text x="150" y="-10" text-anchor="middle">pantalla</text><text x="250" y="-10" text-anchor="middle">cifras</text>
-          <g transform="rotate(-26 55 362)"><rect x="12" y="352" width="85" height="20" class="accs" stroke-dasharray="5 3"/></g><text x="60" y="345" text-anchor="middle" class="lbl" style="letter-spacing:.06em">ROLL-UP</text><text x="408" y="155">flota</text><text x="408" y="255">equipo</text><text x="408" y="355">marca</text>
+          <text x="50" y="-10" text-anchor="middle">frase</text><text x="150" y="-10" text-anchor="middle">negro</text><text x="300" y="-10" text-anchor="middle">almacén 2 × 1 m</text>
+          <text x="250" y="118" text-anchor="middle">cifras</text><text x="192" y="60" text-anchor="end">2030</text>
+          <text x="408" y="155">flota</text><text x="408" y="255">equipo</text><text x="408" y="355">marca</text>
         </g>
         <line x1="0" y1="403" x2="400" y2="403" class="pb"/>
         <text x="200" y="428" text-anchor="middle" class="lbl">PASILLO · PLATABANDA CON EL LOGOTIPO</text>
         <g>
-          <circle class="numbg" cx="320" cy="80" r="11"/><text class="num" x="320" y="84" text-anchor="middle">1</text>
-          <circle class="numbg" cx="140" cy="66" r="11"/><text class="num" x="140" y="70" text-anchor="middle">2</text>
-          <circle class="numbg" cx="115" cy="275" r="11"/><text class="num" x="115" y="279" text-anchor="middle">3</text>
-          <circle class="numbg" cx="275" cy="215" r="11"/><text class="num" x="275" y="219" text-anchor="middle">3</text>
-          <circle class="numbg" cx="115" cy="325" r="11"/><text class="num" x="115" y="329" text-anchor="middle">4</text>
-          
+          <circle class="numbg" cx="250" cy="70" r="11"/><text class="num" x="250" y="74" text-anchor="middle">1</text>
+          <circle class="numbg" cx="100" cy="66" r="11"/><text class="num" x="100" y="70" text-anchor="middle">2</text>
+          <circle class="numbg" cx="95" cy="175" r="11"/><text class="num" x="95" y="179" text-anchor="middle">3</text>
+          <circle class="numbg" cx="240" cy="280" r="11"/><text class="num" x="240" y="284" text-anchor="middle">3</text>
+          <circle class="numbg" cx="240" cy="330" r="11"/><text class="num" x="240" y="334" text-anchor="middle">4</text>
           <circle class="numbg" cx="318" cy="372" r="11"/><text class="num" x="318" y="376" text-anchor="middle">5</text>
         </g>
         <text class="lbl" x="200" y="465" text-anchor="middle">ESCALA 1:50 APROX. · A = ALMACÉN · E = ENCHUFES</text>
@@ -749,9 +775,9 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <li><span class="k">5</span><span>Expositor de folletos y tarjetas<small>El vuestro, girado hacia el pasillo.</small></span></li>
     </ol>
     <ol class="legend" data-design="2" hidden>
-      <li><span class="k">1</span><span>Almacén de 1 × 1 m con puerta (A)<small>Esquina del fondo a la derecha. Su cara, en negro, lleva el número de stand 2030. Dentro, la nevera con el microondas encima y una placa de enchufes (E).</small></span></li>
-      <li><span class="k">2</span><span>Pantalla de 65" en pie con ruedas<small>Delante del panel negro central, que la enmarca; no tapa ninguna foto. Detrás, la otra placa de enchufes (E).</small></span></li>
-      <li><span class="k">3</span><span>Dos mesas altas IKEA RÖNNINGE negras<small>Una cerca del pasillo y otra a la derecha, dejando libre la puerta del almacén.</small></span></li>
+      <li><span class="k">1</span><span>Almacén de 2 × 1 m con puerta (A)<small>Los 2 m a lo largo del fondo, a la derecha, con 1 m de fondo. Su cara al pasillo lleva las cifras en terracota y la puerta; el lado que mira al stand, el número 2030. Dentro, la nevera, el microondas, un fregadero pequeño con toma de agua (AG), las cajas y una placa de enchufes (E).</small></span></li>
+      <li><span class="k">2</span><span>Pantalla de 65" en pie con ruedas<small>Centrada entre los dos paneles negros del fondo, tapando el perfil que los separa. Va alta, con el borde inferior a 1,60 m y el superior a unos 2,43 m (el panel mide 2,56 m), para que se vea por encima de la gente desde el pasillo. Los textos de esos paneles van por debajo. Detrás, la otra placa de enchufes (E).</small></span></li>
+      <li><span class="k">3</span><span>Dos mesas altas IKEA RÖNNINGE negras<small>Escalonadas: la de la izquierda más al fondo, frente a la pantalla, y la de la derecha más cerca del pasillo y hacia el centro. Así hay paso entre ellas y delante de la puerta del almacén queda más de 1 m libre.</small></span></li>
       <li><span class="k">4</span><span>Ocho taburetes negros cuadrados<small>Cuatro por mesa.</small></span></li>
       <li><span class="k">5</span><span>Expositor de folletos y tarjetas<small>Girado hacia el pasillo.</small></span></li>
       <li><span class="k">6</span><span>Roll-up (opcional)<small>85 × 200 cm en la esquina del pasillo, con QR para reservar plaza. Reutilizable.</small></span></li>
@@ -775,7 +801,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
         <p>El friso de arriba (3,95 × 0,52 m) puede ir con el logotipo impreso en lugar de las letras negras de serie.</p>
         <p><b>52 € + IVA (≈ 63 €).</b> Si no, va incluido «JUNCOSA ALTA» en letras negras.</p></div>
     </div>
-    <p class="note" data-design="2" hidden><b>En el diseño 2 hay que diseñar 11 piezas de 0,95 × 2,56 m</b>, una por panel, más la platabanda: 4 fotos del viaje, la foto de la flota, la del equipo, la frase, el panel de la pantalla, el de las cifras, el de la marca y la cara del almacén. Dejad unos 3 cm de margen a cada lado, porque el perfil de aluminio tapa el borde.</p>
+    <p class="note" data-design="2" hidden><b>En el diseño 2 hay que diseñar 11 piezas de 0,95 × 2,56 m</b>, una por panel, más la platabanda: 4 fotos del viaje, la frase y el panel de la pantalla en el fondo, la foto de la flota, la del equipo y la marca en la derecha, y las dos caras del almacén (cifras y número de stand). Dejad unos 3 cm de margen a cada lado, porque el perfil de aluminio tapa el borde.</p>
     <p class="note"><b>El zócalo de lamas va impreso en el propio vinilo.</b> El vinilo 3D de Leroy Merlin no se puede pegar en los paneles, porque solo el proveedor oficial puede decorarlos y los paneles tienen que quedar limpios.</p>
   </section>
 
@@ -832,15 +858,16 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
           <tr><td class="ck"><input type="checkbox" id="b-g1" class="bud" data-kind="off" data-min="878.46" data-max="878.46" data-group="graf" checked aria-label="Incluir Vinilo por paneles"></td><td>Vinilo por paneles</td><td>11 paneles de 0,95 × 2,56 m a 66 € + IVA</td><td class="n r">878,46 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-g2" class="bud" data-kind="off" data-min="2606.34" data-max="2606.34" data-group="graf" aria-label="Incluir Foam a pared completa"></td><td>Foam a pared completa</td><td>En lugar del vinilo: 3 paredes de 4 × 2,7 m a 718 € + IVA</td><td class="n r">2.606,34 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-g3" class="bud" data-kind="off" data-min="62.92" data-max="62.92" checked aria-label="Incluir Platabanda personalizada"></td><td>Platabanda personalizada</td><td>3,95 × 0,52 m impresa, 52 € + IVA. Si no, letras negras incluidas</td><td class="n r">62,92 €</td></tr>
-          <tr><td class="ck"><input type="checkbox" id="b-g4" class="bud" data-kind="off" data-min="62.92" data-max="62.92" checked aria-label="Incluir Almacén 1 × 1 m con puerta"></td><td>Almacén 1 × 1 m con puerta</td><td>52 € + IVA</td><td class="n r">62,92 €</td></tr>
+          <tr><td class="ck"><input type="checkbox" id="b-g4" class="bud" data-kind="off" data-min="82.28" data-max="82.28" checked aria-label="Incluir Almacén 2 × 1 m con puerta"></td><td>Almacén 2 × 1 m con puerta</td><td>68 € + IVA</td><td class="n r">82,28 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-g5" class="bud" data-kind="off" data-min="27.83" data-max="27.83" checked aria-label="Incluir 2 placas de 4 enchufes"></td><td>2 placas de 4 enchufes</td><td>11,50 € + IVA cada una. Obligatorias: no se permiten regletas</td><td class="n r">27,83 €</td></tr>
-          <tr><td class="ck"><input type="checkbox" id="b-g6" class="bud" data-kind="off" data-min="29.04" data-max="29.04" checked aria-label="Incluir 2 rollos de cinta de doble cara"></td><td>2 rollos de cinta de doble cara</td><td>12 € + IVA cada uno (50 m). Única permitida en los paneles</td><td class="n r">29,04 €</td></tr>
+          <tr><td class="ck"><input type="checkbox" id="b-g6" class="bud" data-kind="off" data-min="14.52" data-max="14.52" checked aria-label="Incluir 1 rollo de cinta de doble cara"></td><td>1 rollo de cinta de doble cara</td><td>12 € + IVA (50 m). Única permitida en los paneles</td><td class="n r">14,52 €</td></tr>
+          <tr><td class="ck"><input type="checkbox" id="b-g10" class="bud" data-kind="off" data-min="84.7" data-max="84.7" checked aria-label="Incluir toma de agua con fregadero"></td><td>Toma de agua con fregadero</td><td>Instalación, suministro y fregadero (código 08004), 70 € + IVA</td><td class="n r">84,70 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-g7" class="bud" data-kind="off" data-min="66.55" data-max="66.55" aria-label="Incluir Minibar de alquiler"></td><td>Minibar de alquiler</td><td>49 × 49 × 85 cm, 55 € + IVA. Solo si no lleváis nevera</td><td class="n r">66,55 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-g8" class="bud" data-kind="off" data-min="469.04" data-max="469.04" aria-label="Incluir Pantalla de 65" con pie, de alquiler"></td><td>Pantalla de 65" con pie, de alquiler</td><td>387,64 € + IVA por 4 días; precio de 6 días a consultar. Solo si no lleváis la vuestra</td><td class="n r">469,04 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-g9" class="bud" data-kind="off" data-min="96.8" data-max="96.8" aria-label="Incluir Canon por instalador externo"></td><td>Canon por instalador externo</td><td>80 € + IVA. Solo si alguien externo instala algo</td><td class="n r">96,80 €</td></tr>
           <tr class="grp"><td colspan="4">Compras vuestras (precios de tienda, IVA incluido)</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-o1" class="bud" data-kind="own" data-min="155" data-max="185" checked aria-label="Incluir Tira LED cálida para el zócalo"></td><td>Tira LED cálida para el zócalo</td><td>3 rollos de 5 m a 3000 K, fuente y regulador, pegada con cinta</td><td class="n r">155–185 €</td></tr>
-          <tr><td class="ck"><input type="checkbox" id="b-o2" class="bud" data-kind="own" data-min="60" data-max="120" checked aria-label="Incluir Soporte de pie para la pantalla"></td><td>Soporte de pie para la pantalla</td><td>Con ruedas, para 65". No se puede colgar de los paneles</td><td class="n r">60–120 €</td></tr>
+          <tr><td class="ck"><input type="checkbox" id="b-o2" class="bud" data-kind="own" data-min="90" data-max="180" checked aria-label="Incluir Soporte de pie para la pantalla"></td><td>Soporte de pie alto para la pantalla</td><td>Para 65" (unos 30 kg), con el centro de la pantalla a unos 2 m. No se puede colgar de los paneles</td><td class="n r">90–180 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-o3" class="bud" data-kind="own" data-min="15" data-max="30" checked aria-label="Incluir Ganchos y organización del almacén"></td><td>Ganchos y organización del almacén</td><td>Para abrigos, bolsos y cajas</td><td class="n r">15–30 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-o4" class="bud" data-kind="own" data-min="25" data-max="50" checked aria-label="Incluir Folletos"></td><td>Folletos</td><td>Unos 150, contenido por definir</td><td class="n r">25–50 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-o5" class="bud" data-kind="own" data-min="10" data-max="15" checked aria-label="Incluir Tarjetas de visita"></td><td>Tarjetas de visita</td><td>Unas 200</td><td class="n r">10–15 €</td></tr>
@@ -1355,14 +1382,15 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   }
   function pQuote() {
     const s = pSheet(NEGRO);
-    txt(s, "CUIDAMOS CADA DETALLE", 0.1, 2.3, 0.032, "500 {s} " + BODY, TERRA, "left", 0.22);
-    ["Profesionalidad", "y excelencia", "en el cuidado", "y transporte", "de tu caballo"].forEach((l, i) => txt(s, l, 0.1, 2.16 - i * 0.1, 0.09, "{s} " + DISP, CREMA));
-    s.g.fillStyle = TERRA; s.g.fillRect(s.U(0.1), s.Y(1.68), s.U(0.16), 3);
+    // la pantalla ocupa de 1,60 a 2,45 m: el texto va por debajo, a la altura de la vista de quien está en el stand
+    txt(s, "CUIDAMOS CADA DETALLE", 0.1, 1.48, 0.032, "500 {s} " + BODY, TERRA, "left", 0.22);
+    ["Profesionalidad", "y excelencia", "en el cuidado", "y transporte", "de tu caballo"].forEach((l, i) => txt(s, l, 0.1, 1.35 - i * 0.1, 0.09, "{s} " + DISP, CREMA));
+    s.g.fillStyle = TERRA; s.g.fillRect(s.U(0.1), s.Y(0.86), s.U(0.16), 3);
     zocalo(s); return s.c;
   }
   function pTVback() {
     const s = pSheet(NEGRO);
-    txt(s, "EN DIRECTO DESDE LA CARRETERA", PW / 2, 2.3, 0.028, "500 {s} " + BODY, TERRA, "center", 0.2);
+    txt(s, "EN DIRECTO DESDE LA CARRETERA", PW / 2, 1.45, 0.028, "500 {s} " + BODY, TERRA, "center", 0.2);
     txt(s, "JUNCOSAALTA.COM", PW / 2, 0.58, 0.032, "500 {s} " + BODY, CREMA, "center", 0.22);
     zocalo(s); return s.c;
   }
@@ -1405,7 +1433,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   // Fondo: frase, pantalla y cifras (el último panel queda dentro del almacén)
   panel(pQuote(), V3(-1.5, -1.99), 0, CUR);
   panel(pTVback(), V3(-0.5, -1.99), 0, CUR);
-  panel(pFigures(), V3(0.5, -1.99), 0, CUR);
+  panel(null, V3(0.5, -1.99), 0, CUR);
   panel(null, V3(1.5, -1.99), 0, CUR);
   // Derecha, del fondo hacia delante (el primer panel queda dentro del almacén)
   panel(null, V3(1.99, -1.5), -Math.PI / 2, CUR);
@@ -1415,26 +1443,35 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   for (let k = 0; k <= 4; k++) { post(-2, -2 + k); post(2, -2 + k); post(-2 + k, -2); }
   [-2, 2].forEach(x => box(0.045, 0.045, 4, M.alu, x, T + H, 0));
   box(4, 0.045, 0.045, M.alu, 0, T + H, -2);
-  // Almacén 1 × 1 m en la esquina del fondo derecha
-  panel(pStore(), V3(1.5, -1), 0, CUR);
-  const door2 = box(0.9, 2.1, 0.03, std(0xe9e8e6, { roughness: 0.6 }), 1, T + 1.05, -1.5); door2.rotation.y = Math.PI / 2;
-  box(0.03, 0.46, 0.95, M_panel, 1, T + 2.35, -1.5);
-  box(0.02, 0.12, 0.02, M.metal, 0.975, T + 1.0, -1.15);
-  post(1, -1); post(2, -1);
-  box(1, 0.045, 0.045, M.alu, 1.5, T + H, -1); box(0.045, 0.045, 1, M.alu, 1, T + H, -1.5);
-  box(0.49, 0.85, 0.49, std(0xe6e6e6, { roughness: 0.4 }), 1.7, T + 0.425, -1.7);
-  box(0.45, 0.27, 0.35, std(0x2b2b2b), 1.7, T + 0.99, -1.72);
-  ledRun(4, -1.975, 0, true, Math.PI / 2); ledRun(3, -0.5, -1.975, false, 0); ledRun(3, 1.975, 0.5, true, -Math.PI / 2);
+  // Almacén 2 × 1 m en la esquina del fondo derecha: 2 m a lo largo del fondo (x 0 a 2) y 1 m de fondo (z −2 a −1)
+  panel(pFigures(), V3(0.5, -1), 0, CUR);            // cara al pasillo, panel izquierdo: cifras
+  panel(pStore(), V3(0, -1.5), -Math.PI / 2, CUR);   // cara lateral hacia el interior: número de stand
+  box(0.9, 2.1, 0.03, std(0xe9e8e6, { roughness: 0.6 }), 1.5, T + 1.05, -1);   // puerta en la cara al pasillo, a la derecha
+  box(0.95, 0.46, 0.03, M_panel, 1.5, T + 2.35, -1);
+  box(0.02, 0.12, 0.02, M.metal, 1.15, T + 1.0, -0.975);
+  post(0, -1); post(1, -1); post(2, -1);
+  box(2, 0.045, 0.045, M.alu, 1, T + H, -1); box(0.045, 0.045, 1, M.alu, 0, T + H, -1.5);
+  // nevera con el microondas encima, en el extremo izquierdo del almacén, junto a su placa de enchufes
+  box(0.49, 0.85, 0.49, std(0xe6e6e6, { roughness: 0.4 }), 0.3, T + 0.425, -1.7);
+  box(0.45, 0.27, 0.35, std(0x2b2b2b), 0.3, T + 0.99, -1.72);
+  // fregadero pequeño con toma de agua (servicio de CONTURSA, código 08004), junto a la puerta: ocupa menos fondo y no estorba al entrar
+  box(0.5, 0.85, 0.45, std(0xf0efed, { roughness: 0.5 }), 1.7, T + 0.425, -1.72);
+  box(0.36, 0.02, 0.3, std(0x9aa0a4, { metalness: 0.7, roughness: 0.3 }), 1.7, T + 0.855, -1.7);
+  cyl(0.012, 0.012, 0.22, M.alu, 1.7, T + 0.96, -1.88, CUR, 10);
+  ledRun(4, -1.975, 0, true, Math.PI / 2); ledRun(2, -1, -1.975, false, 0); ledRun(3, 1.975, 0.5, true, -Math.PI / 2);
+  ledRun(1, 0.5, -0.99, false, 0); ledRun(1, -0.01, -1.5, true, -Math.PI / 2); // caras exteriores del almacén (la puerta queda sin LED)
   // Pantalla en pie delante del panel negro central: el negro la enmarca
-  const TV2X = -0.6;
-  box(0.7, 0.04, 0.5, M.metal, TV2X, T + 0.08, TVZ);
-  box(0.06, 1.3, 0.06, M.metal, TV2X, T + 0.7, TVZ - 0.08);
-  box(1.46, 0.83, 0.05, M.black, TV2X, TVY, TVZ);
+  const TV2X = -1.0; // centrada entre los dos paneles negros del fondo: tapa el perfil que los separa
+  const TVY2 = T + 2.015; // pantalla por encima de las cabezas: borde inferior a 1,60 m y superior a 2,43 m
+  box(0.8, 0.04, 0.55, M.metal, TV2X, T + 0.08, TVZ);
+  box(0.07, 2.0, 0.07, M.metal, TV2X, T + 1.05, TVZ - 0.08);
+  box(1.46, 0.83, 0.05, M.black, TV2X, TVY2, TVZ);
   const scr2 = new THREE.Mesh(new THREE.PlaneGeometry(1.42, 0.8), new THREE.MeshBasicMaterial({ map: tex(videoScreen()), toneMapped: false }));
-  scr2.position.set(TV2X, TVY, TVZ + 0.027); CUR.add(scr2);
-  highTable(-0.85, 0.75, CUR);
-  highTable(0.75, 0.15, CUR);
-  box(0.21, 0.004, 0.297, std(0xf2eee9), -0.8, T + 1.052, 0.72, CUR).rotation.y = -0.3;
+  scr2.position.set(TV2X, TVY2, TVZ + 0.027); CUR.add(scr2);
+  // mesas separadas de la puerta del almacén (que abre hacia el stand por la derecha): queda un paso libre de más de 1 m
+  highTable(-1.05, -0.25, CUR);
+  highTable(0.4, 0.8, CUR);
+  box(0.21, 0.004, 0.297, std(0xf2eee9), -1.0, T + 1.052, -0.28, CUR).rotation.y = -0.3;
 
   const plants1 = smallOlive(1.62, -0.95, G1), plants2 = smallOlive(-1.68, 1.7, G2);
   // Roll-up de 85 × 200 cm (solo diseño 2): reutilizable, sin fechas, con QR para reservar plaza
@@ -1482,13 +1519,13 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     const tr = document.getElementById("tg-rollup"); if (tr) tr.hidden = v !== "2";
     const lb = document.querySelector('.views [data-view="logo"]'); if (lb) { lb.hidden = v !== "1"; if (v !== "1" && lb.getAttribute("aria-pressed") === "true" && typeof go === "function") go("persp"); }
     document.querySelectorAll("[data-design]").forEach(el => el.toggleAttribute("hidden", el.getAttribute("data-design") !== v));
-  }, location.hash === "#diseno-2" ? "2" : "1");
+  }, location.hash === "#diseno-1" ? "1" : "2");
   setFloor = bindToggle("#tg-floor", v => { floorVinyl.visible = v === "vinyl"; floorCarpet.visible = v === "carpet"; floorDark.visible = v === "dark"; }, "carpet");
   bindToggle("#tg-light", v => ledGroups.forEach(g => { g.visible = v === "on"; }), "on");
   let plantsOn = false, rollupOn = false;
-  function placePlant2() { if (rollupOn) plants2.position.set(-1.62, T, -1.62); else plants2.position.set(-1.68, T, 1.7); }
+  function placePlant2() { if (rollupOn) plants2.position.set(1.75, T, 0.95); else plants2.position.set(-1.68, T, 1.7); }
   bindToggle("#tg-plants", v => { plantsOn = v === "on"; plants1.visible = plants2.visible = plantsOn; }, "on");
-  bindToggle("#tg-rollup", v => { rollupOn = v === "on"; rollup.visible = rollupOn; placePlant2(); }, "on");
+  bindToggle("#tg-rollup", v => { rollupOn = v === "on"; rollup.visible = rollupOn; placePlant2(); }, "off");
   bindToggle("#tg-pb", v => { pbCustom.visible = v === "custom"; pbStd.visible = v === "std"; }, "custom");
 
   // ---------- tema ----------
