@@ -386,7 +386,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <p><b>4. Toma de agua con fregadero pequeño</b> (código 08004), dentro del almacén, en la columna 16 de la fila 1. En la planilla va como AG.</p>
       <p><b>5. Un rollo de cinta de doble cara</b> (12 € + IVA).</p>
       <p><b>6. Gráficas en vinilo para 11 paneles</b> (0,95 × 2,56 m, código 50101006), con vuestro proveedor oficial. Queríamos preguntaros:</p>
-      <ul><li>¿El precio de 66 € + IVA por panel incluye la impresión y la colocación, o el montaje se cobra aparte?</li><li>¿Nos podéis mandar la plantilla con medidas, sangrado y margen de los perfiles?</li><li>¿Hasta qué fecha podemos enviar los artes finales? Entendemos que es el 28 de octubre.</li><li>¿Adaptar nuestros diseños a la plantilla tiene algún coste?</li></ul>
+      <ul><li>¿El precio de 66 € + IVA por panel incluye la impresión y la colocación, o el montaje se cobra aparte?</li><li>¿Nos podéis mandar la plantilla con medidas, sangrado y margen de los perfiles?</li><li>¿Hasta qué fecha podemos enviar los artes finales? Entendemos que es el 28 de octubre.</li></ul>
       <p><b>7. Tira LED en el zócalo.</b> Nos gustaría poner una tira LED cálida a 0,40 m del suelo, dentro de un perfil de aluminio ligero (unos 100 g por metro). Iría pegada con cinta Tesa sobre el vinilo, sin taladrar, y enchufada a la placa de la pared del fondo con su fuente homologada. ¿Nos dais permiso por escrito para ponerla?</p>
       <p><b>8. Pantalla:</b> irá en un pie de suelo, sin colgarla de los paneles. Nos confirmáis que no hace falta nada más por vuestra parte, ¿verdad?</p>
       <p>Si os falta algún dato, decídnoslo. Muchas gracias.</p>
@@ -632,6 +632,8 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     <div class="toggles">
       <div class="logo-opts" id="tg-light" role="group" aria-label="Iluminación"><span>Luz</span>
         <button type="button" data-v="off" aria-pressed="false">Solo la incluida</button><button type="button" data-v="on" aria-pressed="true">Con LED extra</button></div>
+      <div class="logo-opts" id="tg-ledprof" role="group" aria-label="Montaje de la tira LED"><span>Tira LED</span>
+        <button type="button" data-v="prof" aria-pressed="true">Con perfil de aluminio</button><button type="button" data-v="bare" aria-pressed="false">Sin perfil (tira COB)</button></div>
       <div class="logo-opts" id="tg-rollup" role="group" aria-label="Roll-up" hidden><span>Roll-up</span>
         <button type="button" data-v="off" aria-pressed="true">Sin roll-up</button><button type="button" data-v="on" aria-pressed="false">Con roll-up</button></div>
       <div class="logo-opts" id="tg-plants" role="group" aria-label="Plantas"><span>Plantas</span>
@@ -1311,9 +1313,15 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   box(0.45, 0.27, 0.35, std(0x2b2b2b), -1.7, T + 0.99, -1.72, st);
 
   // Tira LED cálida a 0,40 m, en el canto entre la gráfica y el zócalo de madera impreso.
-  // Va en un perfil de aluminio pegado con la cinta Tesa sobre el vinilo (no se taladra) y se puede encender o apagar en el visor.
+  // Va en un perfil de aluminio pegado con la cinta Tesa sobre el vinilo (no se taladra) o, sin perfil, una tira COB pegada directamente.
+  // Se puede encender o apagar y elegir el montaje en el visor.
   const ledMat = new THREE.MeshBasicMaterial({ color: 0xffd2a0, toneMapped: false });
-  const ledGroups = [];
+  const ledGroups = [], ledProf = [], ledBare = [];
+  const haloTex = (() => {
+    const c = document.createElement("canvas"); c.width = 8; c.height = 256; const g = c.getContext("2d");
+    const grd = g.createLinearGradient(0, 0, 0, 256); grd.addColorStop(0, "rgba(255,255,255,0)"); grd.addColorStop(0.5, "rgba(255,255,255,1)"); grd.addColorStop(1, "rgba(255,255,255,0)");
+    g.fillStyle = grd; g.fillRect(0, 0, 8, 256); return new THREE.CanvasTexture(c);
+  })();
   const washTex = (() => {
     const c = document.createElement("canvas"); c.width = 8; c.height = 256; const g = c.getContext("2d");
     const grd = g.createLinearGradient(0, 0, 0, 256); grd.addColorStop(0, "rgba(255,255,255,1)"); grd.addColorStop(0.35, "rgba(255,255,255,.45)"); grd.addColorStop(1, "rgba(255,255,255,0)");
@@ -1321,10 +1329,16 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   })();
   function ledRun(len, x, z, alongZ, rotY) {
     const grp = new THREE.Group(); CUR.add(grp); ledGroups.push(grp);
-    const prof = new THREE.Mesh(new THREE.BoxGeometry(len, 0.02, 0.025), M.alu); prof.position.set(x, T + 0.43, z); prof.rotation.y = rotY; prof.translateZ(0.022); grp.add(prof);
-    const strip = new THREE.Mesh(new THREE.BoxGeometry(len, 0.006, 0.02), ledMat); strip.position.set(x, T + 0.418, z); strip.rotation.y = rotY; strip.translateZ(0.022); grp.add(strip);
+    const pg = new THREE.Group(), bg = new THREE.Group(); grp.add(pg, bg); ledProf.push(pg); ledBare.push(bg);
+    // con perfil: barra de aluminio con difusor y luz bañando el zócalo hacia abajo
+    const prof = new THREE.Mesh(new THREE.BoxGeometry(len, 0.02, 0.025), M.alu); prof.position.set(x, T + 0.43, z); prof.rotation.y = rotY; prof.translateZ(0.022); pg.add(prof);
+    const strip = new THREE.Mesh(new THREE.BoxGeometry(len, 0.006, 0.02), ledMat); strip.position.set(x, T + 0.418, z); strip.rotation.y = rotY; strip.translateZ(0.022); pg.add(strip);
     const wash = new THREE.Mesh(new THREE.PlaneGeometry(len, 0.42), new THREE.MeshBasicMaterial({ map: washTex, color: 0xffa860, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
-    wash.position.set(x, T + 0.02 + 0.2, z); wash.rotation.y = rotY; wash.translateZ(0.014); grp.add(wash);
+    wash.position.set(x, T + 0.02 + 0.2, z); wash.rotation.y = rotY; wash.translateZ(0.014); pg.add(wash);
+    // sin perfil: tira COB fina pegada al vinilo, línea vista con un halo corto arriba y abajo
+    const cob = new THREE.Mesh(new THREE.BoxGeometry(len, 0.01, 0.004), ledMat); cob.position.set(x, T + 0.4, z); cob.rotation.y = rotY; cob.translateZ(0.013); bg.add(cob);
+    const halo = new THREE.Mesh(new THREE.PlaneGeometry(len, 0.16), new THREE.MeshBasicMaterial({ map: haloTex, color: 0xffa860, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending, depthWrite: false, toneMapped: false }));
+    halo.position.set(x, T + 0.4, z); halo.rotation.y = rotY; halo.translateZ(0.012); bg.add(halo);
     const n = Math.max(2, Math.round(len / 1.4));
     for (let i = 0; i < n; i++) {
       const t = (i + 0.5) / n - 0.5, p = new THREE.PointLight(0xffb070, 0.22, 1.1, 2);
@@ -1521,7 +1535,8 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     document.querySelectorAll("[data-design]").forEach(el => el.toggleAttribute("hidden", el.getAttribute("data-design") !== v));
   }, location.hash === "#diseno-1" ? "1" : "2");
   setFloor = bindToggle("#tg-floor", v => { floorVinyl.visible = v === "vinyl"; floorCarpet.visible = v === "carpet"; floorDark.visible = v === "dark"; }, "carpet");
-  bindToggle("#tg-light", v => ledGroups.forEach(g => { g.visible = v === "on"; }), "on");
+  bindToggle("#tg-light", v => { ledGroups.forEach(g => { g.visible = v === "on"; }); document.getElementById("tg-ledprof").hidden = v !== "on"; }, "on");
+  bindToggle("#tg-ledprof", v => { ledProf.forEach(g => { g.visible = v === "prof"; }); ledBare.forEach(g => { g.visible = v === "bare"; }); }, "prof");
   let plantsOn = false, rollupOn = false;
   function placePlant2() { if (rollupOn) plants2.position.set(1.75, T, 0.95); else plants2.position.set(-1.68, T, 1.7); }
   bindToggle("#tg-plants", v => { plantsOn = v === "on"; plants1.visible = plants2.visible = plantsOn; }, "on");
