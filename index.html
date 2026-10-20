@@ -191,6 +191,7 @@ tr.total td { font-weight: 600; background: var(--accent-soft); }
 .mail-head p { margin: 0; }
 #copy { font: 500 14px var(--body); color: var(--accent-ink); background: transparent; border: 1px solid var(--accent); border-radius: 4px; padding: 7px 14px; cursor: pointer; }
 #copy:hover, .btn-dl:hover { background: var(--accent-soft); }
+.dl-row { display: flex; flex-wrap: wrap; gap: 10px; }
 .btn-dl { display: inline-block; font: 500 14px var(--body); color: var(--accent-ink); text-decoration: none; border: 1px solid var(--accent); border-radius: 4px; padding: 8px 16px; }
 #mail { max-width: 75ch; margin-top: 12px; padding: 20px 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow-wrap: anywhere; }
 #mail p { margin: 0 0 12px; } #mail ul { margin: 0 0 12px; padding-left: 20px; } #mail > :last-child { margin-bottom: 0; }
@@ -376,13 +377,13 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <h2>El correo con el pedido</h2>
       <p>Os sugiero contestar al <b>correo de bienvenida de CONTURSA</b> con el botón «Responder» y sin cambiar el asunto, para que lo tengan todo en el mismo hilo. Basta con pegar el texto de abajo y adjuntar la planilla rellena.</p>
       <p>También puede ser buena idea poner en copia a <b>sicab@sevillacityoffice.es</b>, si no está ya. Es el correo general de la organización de SICAB, así que el pedido quedaría registrado también allí aunque la persona que os escribió no esté, y quedaría constancia de que se envió antes del 28 de octubre, a partir del cual hay recargo.</p>
-      <p>En este botón podéis descargar la planilla que debéis adjuntar al correo. Está dibujada, pero falta completar los datos de la empresa que piden abajo en el PDF. Se puede hacer en Vista Previa en Mac o en Adobe Acrobat Reader.</p>
-      <p><a class="btn-dl" href="planilla-rellena-stand-2030.pdf" target="_blank" rel="noopener">Descargar la planilla (PDF)</a></p>
+      <p>En estos botones podéis descargar la planilla y el tarifario que debéis adjuntar al correo. La planilla está dibujada y el tarifario lleva marcadas las unidades de cada pedido, pero en los dos falta completar los datos de la empresa: abajo en la planilla y arriba, en la primera página, en el tarifario. Se puede hacer en Vista Previa en Mac o en Adobe Acrobat Reader.</p>
+      <p class="dl-row"><a class="btn-dl" href="planilla-rellena-stand-2030.pdf" target="_blank" rel="noopener">Descargar la planilla (PDF)</a> <a class="btn-dl" href="tarifario-pedido-stand-2030.pdf" target="_blank" rel="noopener">Descargar el tarifario (PDF)</a></p>
     </div>
     <div class="mail-head"><button type="button" id="copy">Copiar texto</button></div>
     <div id="mail">
       <p>Buenos días:</p>
-      <p>Os escribimos desde Juncosa Alta, stand 2030 del Pabellón 2, para confirmar el pedido del stand modular de 16 m² y la situación de los elementos. Os adjuntamos la planilla rellena.</p>
+      <p>Os escribimos desde Juncosa Alta, stand 2030 del Pabellón 2, para confirmar el pedido del stand modular de 16 m² y la situación de los elementos. Os adjuntamos la planilla rellena y el tarifario con las unidades marcadas.</p>
       <p><b>1. Moqueta:</b> color 0303 Coñac.</p>
       <p><b>2. Almacén de 2 × 1 m con puerta,</b> al fondo a la derecha: 2 m a lo largo de la pared del fondo y 1 m de profundidad. En la planilla va marcado como A.</p>
       <p><b>3. Dos placas de 4 enchufes</b> (11,50 € + IVA cada una):</p>
@@ -392,6 +393,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <p><b>6. Gráficas en vinilo para 11 paneles</b> (0,95 × 2,56 m, código 50101006), con vuestro proveedor oficial. El único panel que no lleva vinilo es el de la puerta del almacén. Queríamos preguntaros:</p>
       <ul><li>¿El precio de 66 € + IVA por panel incluye la impresión y la colocación, o el montaje se cobra aparte?</li><li>¿Nos podéis mandar la plantilla con medidas, sangrado y margen de los perfiles?</li><li>¿Hasta qué fecha podemos enviar los artes finales? Entendemos que es el 28 de octubre.</li></ul>
       <p><b>7. Platabanda personalizada</b> (3,95 × 0,52 m, código 50101002, 52 € + IVA), impresa en vinilo con nuestro diseño en lugar de las letras de serie. La enviaremos junto con los diseños de los paneles.</p>
+      <p><b>8. Seguro de expositor:</b> entendemos que el seguro obligatorio de expositor ya va incluido en el contrato del stand, por eso no lo hemos marcado en el tarifario. Si no es así, avisadnos y lo añadimos.</p>
       <p>Si os falta algún dato, decídnoslo. Muchas gracias.</p>
       <p>Un saludo,<br>Antonio<br>Juncosa Alta · Stand 2030 · Pabellón 2</p>
     </div>
