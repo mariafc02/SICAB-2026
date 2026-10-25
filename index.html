@@ -564,7 +564,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   <div class="viewer">
     <div class="options" id="tg-design" role="group" aria-label="Diseño del stand">
       <button type="button" class="opt" data-v="1" aria-pressed="false"><span class="letter">1</span><b>Pared continua</b><span>Fotos y textos que recorren cada pared, logotipo en la pared del fondo y almacén a la izquierda.</span></button>
-      <button type="button" class="opt" data-v="2" aria-pressed="true"><span class="letter">2</span><b>El viaje · final</b><span>Cada panel es un cuadro: el viaje del caballo en 4 fotos, fondo negro con la pantalla y un panel terracota con la marca al pasillo.</span></button>
+      <button type="button" class="opt" data-v="2" aria-pressed="true"><span class="letter">2</span><b>El viaje · final</b><span>Las artes finales de cada panel: elige paneles oscuros o claros, el zócalo y la platabanda, y mira cómo queda.</span></button>
     </div>
     <div class="stage" id="stage">
       <canvas id="c" aria-label="Modelo 3D del stand de Juncosa Alta"></canvas>
@@ -593,8 +593,14 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
         <button type="button" data-v="carpet" aria-pressed="true">Moqueta coñac</button><button type="button" data-v="dark" aria-pressed="false">Moqueta antracita</button><button type="button" data-v="vinyl" aria-pressed="false">Vinilo parquet</button></div>
       <div class="logo-opts" id="tg-logo" role="group" aria-label="Logotipo en la pared"><span>Logotipo en pared</span>
         <button type="button" data-v="relief" aria-pressed="true">Corpóreo</button><button type="button" data-v="print" aria-pressed="false">Impreso</button></div>
+      <div class="logo-opts" id="tg-art" role="group" aria-label="Versión de los paneles"><span>Paneles</span>
+        <button type="button" data-v="VO" aria-pressed="true">Oscuros</button><button type="button" data-v="VC" aria-pressed="false">Claros</button></div>
+      <div class="logo-opts" id="tg-zoc" role="group" aria-label="Zócalo"><span>Zócalo</span>
+        <button type="button" data-v="PF" aria-pressed="true">Lamas finas</button><button type="button" data-v="PG" aria-pressed="false">Lamas gruesas</button></div>
       <div class="logo-opts" id="tg-pb" role="group" aria-label="Platabanda"><span>Platabanda</span>
-        <button type="button" data-v="custom" aria-pressed="true">Personalizada</button><button type="button" data-v="std" aria-pressed="false">Estándar</button></div>
+        <button type="button" data-v="1" aria-pressed="false">Opción 1</button><button type="button" data-v="2" aria-pressed="true">Opción 2</button><button type="button" data-v="std" aria-pressed="false">Estándar</button></div>
+      <div class="logo-opts" id="tg-pbcol" role="group" aria-label="Color de la platabanda"><span>Color</span>
+        <button type="button" data-v="negra" aria-pressed="true">Negra</button><button type="button" data-v="blanca" aria-pressed="false">Blanca</button></div>
     </div>
   </div>
 
@@ -615,8 +621,8 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
         <p>La pantalla va en un pie con ruedas delante de la pared del fondo, bajo el logotipo. Ojo: con vinilo por paneles, lo que pase de un panel a otro queda cortado por el perfil de aluminio.</p>
       </div>
       <div data-design="2" hidden>
-        <p><b>Diseño 2 · El viaje.</b> Aprovecha que cada panel queda enmarcado por los perfiles: cada uno es un cuadro. La pared izquierda cuenta el viaje del caballo en <b>4 fotos numeradas</b>: 01 Recogida, 02 En ruta, 03 A bordo y 04 Llegada. Es lo primero que se lee desde el pasillo.</p>
-        <p>El fondo es negro: la frase de la marca, la pantalla enmarcada en negro y un panel terracota con las cifras. A la derecha, una foto de la flota, otra del <b>equipo de conductores</b> con su uniforme de Juncosa Alta y, junto al pasillo, un <b>panel terracota con el logotipo</b>, además del logotipo en la platabanda. El <b>almacén de 2 × 1 m</b> ocupa la mitad derecha del fondo: su cara al pasillo lleva las cifras y la puerta, y su lado, el número de stand. Solo se usan los colores de la web: negro, crema y terracota, más las fotos y la madera del zócalo.</p>
+        <p><b>Diseño 2 · El viaje.</b> Son las <b>artes finales</b>: 11 paneles con vinilo, numerados de izquierda a derecha (el 9 es la puerta del almacén, sin vinilo). Con los botones de debajo del visor se elige si los paneles son <b>oscuros o claros</b>, el <b>zócalo de lamas finas o gruesas</b> y la <b>platabanda</b> (opción 1 u opción 2, negra o blanca).</p>
+        <p><b>Pared izquierda (1–4):</b> el viaje del caballo en 4 pasos: 01 Documentación, 02 Recogida, 03 En ruta y 04 Llegada. <b>Fondo (5–6):</b> «Cuidamos cada detalle» y «Por España y toda Europa», con la pantalla delante. <b>Almacén:</b> en el lateral, «Cómo viaja tu caballo» (7), y al pasillo, el panel terracota con las cifras y el QR de presupuesto (8). <b>Pared derecha (10–12):</b> la flota, el equipo y el logotipo.</p>
         <p><b>Roll-up opcional (botón «Roll-up»):</b> 85 × 200 cm en la esquina del pasillo, mirando a la gente que pasa. Negro, con el logotipo, «Transporte de caballos por España y Europa» y un QR grande para reservar plaza. No lleva fechas ni número de stand, así que sirve para concursos y otras ferias. No toca los paneles, así que lo puede imprimir cualquier imprenta. Si se pone, el olivo bajo pasa a la pared derecha, junto al panel de la marca.</p>
       </div>
     </div>
@@ -1390,27 +1396,30 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     const pl = graphic(canvasEl, PW, PH, 0.08); pl.position.copy(pos); pl.rotation.y = rotY; pl.translateZ(0.011); pl.receiveShadow = true; parent.add(pl);
   }
   const V3 = (x, z) => new THREE.Vector3(x, PY, z);
-  // Izquierda, de delante hacia el fondo: el viaje en 4 pasos
-  panel(pStep(imgs.walk, 0.35, "01", "RECOGIDA", "En vuestra cuadra", true), V3(-1.99, 1.5), Math.PI / 2, CUR);
-  panel(pStep(imgs.truck, 0.55, "02", "EN RUTA", "España y toda Europa"), V3(-1.99, 0.5), Math.PI / 2, CUR);
-  panel(pStep(imgs.window, 0.3, "03", "A BORDO", "Climatización y cámaras"), V3(-1.99, -0.5), Math.PI / 2, CUR);
-  panel(pStep(imgs.interior, 0.5, "04", "LLEGADA", "Seguimiento GPS 24/7"), V3(-1.99, -1.5), Math.PI / 2, CUR);
-  // Fondo: frase, pantalla y cifras (el último panel queda dentro del almacén)
-  panel(pQuote(), V3(-1.5, -1.99), 0, CUR);
-  panel(pTVback(), V3(-0.5, -1.99), 0, CUR);
-  panel(null, V3(0.5, -1.99), 0, CUR);
-  panel(null, V3(1.5, -1.99), 0, CUR);
-  // Derecha, del fondo hacia delante (el primer panel queda dentro del almacén)
+  // Artes finales (carpeta ARTES STAND): paneles numerados del 1 al 12 de izquierda a derecha; el 9 es la puerta, sin vinilo.
+  // Las texturas se cargan desde artes/ según la versión (oscura o clara) y el zócalo (lamas finas o gruesas) elegidos en el visor.
+  const artMats = {};
+  function artPanel(n, pos, rotY) {
+    panel(null, pos, rotY, CUR);
+    const m = new THREE.MeshStandardMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 0.024, roughness: 0.85, envMapIntensity: 0.35 });
+    const pl = new THREE.Mesh(new THREE.PlaneGeometry(PW, PH), m); pl.position.copy(pos); pl.rotation.y = rotY; pl.translateZ(0.011); pl.receiveShadow = true; CUR.add(pl);
+    artMats[n] = m;
+  }
+  // Izquierda, de delante hacia el fondo: 01 Documentación, 02 Recogida, 03 En ruta, 04 Llegada
+  artPanel(1, V3(-1.99, 1.5), Math.PI / 2); artPanel(2, V3(-1.99, 0.5), Math.PI / 2);
+  artPanel(3, V3(-1.99, -0.5), Math.PI / 2); artPanel(4, V3(-1.99, -1.5), Math.PI / 2);
+  // Fondo: los dos paneles de la pantalla (los otros dos quedan dentro del almacén)
+  artPanel(5, V3(-1.5, -1.99), 0); artPanel(6, V3(-0.5, -1.99), 0);
+  panel(null, V3(0.5, -1.99), 0, CUR); panel(null, V3(1.5, -1.99), 0, CUR);
+  // Derecha, del fondo hacia delante (el primer panel queda dentro del almacén): flota, equipo y marca
   panel(null, V3(1.99, -1.5), -Math.PI / 2, CUR);
-  panel(pStep(imgs.flota, 0.5, "", "FLOTA PROPIA", "Camión STX, Renault Master y remolques"), V3(1.99, -0.5), -Math.PI / 2, CUR);
-  panel(pStep(imgs.team, 0.3, "", "NUESTRO EQUIPO", "Conductores experimentados"), V3(1.99, 0.5), -Math.PI / 2, CUR);
-  panel(pBrand(), V3(1.99, 1.5), -Math.PI / 2, CUR);
+  artPanel(10, V3(1.99, -0.5), -Math.PI / 2); artPanel(11, V3(1.99, 0.5), -Math.PI / 2); artPanel(12, V3(1.99, 1.5), -Math.PI / 2);
   for (let k = 0; k <= 4; k++) { post(-2, -2 + k); post(2, -2 + k); post(-2 + k, -2); }
   [-2, 2].forEach(x => box(0.045, 0.045, 4, M.alu, x, T + H, 0));
   box(4, 0.045, 0.045, M.alu, 0, T + H, -2);
   // Almacén 2 × 1 m en la esquina del fondo derecha: 2 m a lo largo del fondo (x 0 a 2) y 1 m de fondo (z −2 a −1)
-  panel(pFigures(), V3(0.5, -1), 0, CUR);            // cara al pasillo, panel izquierdo: cifras
-  panel(pStore(), V3(0, -1.5), -Math.PI / 2, CUR);   // cara lateral hacia el interior: número de stand
+  artPanel(8, V3(0.5, -1), 0);              // cara al pasillo, panel izquierdo: cifras y QR
+  artPanel(7, V3(0, -1.5), -Math.PI / 2);   // cara lateral hacia el interior: cómo viaja tu caballo
   box(0.9, 2.1, 0.03, std(0xe9e8e6, { roughness: 0.6 }), 1.5, T + 1.05, -1);   // puerta en la cara al pasillo, a la derecha
   box(0.95, 0.46, 0.03, M_panel, 1.5, T + 2.35, -1);
   box(0.02, 0.12, 0.02, M.metal, 1.15, T + 1.0, -0.975);
@@ -1482,6 +1491,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     G1.visible = v === "1"; G2.visible = v === "2";
     document.getElementById("tg-logo").hidden = v !== "1";
     const tr = document.getElementById("tg-rollup"); if (tr) tr.hidden = v !== "2";
+    ["tg-art", "tg-zoc"].forEach(id => { const el = document.getElementById(id); if (el) el.hidden = v !== "2"; });
     const lb = document.querySelector('.views [data-view="logo"]'); if (lb) { lb.hidden = v !== "1"; if (v !== "1" && lb.getAttribute("aria-pressed") === "true" && typeof go === "function") go("persp"); }
     document.querySelectorAll("[data-design]").forEach(el => el.toggleAttribute("hidden", el.getAttribute("data-design") !== v));
   }, location.hash === "#diseno-1" ? "1" : "2");
@@ -1492,7 +1502,29 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   function placePlant2() { if (rollupOn) plants2.position.set(1.75, T, 0.95); else plants2.position.set(-1.68, T, 1.7); }
   bindToggle("#tg-plants", v => { plantsOn = v === "on"; plants1.visible = plants2.visible = plantsOn; }, "on");
   bindToggle("#tg-rollup", v => { rollupOn = v === "on"; rollup.visible = rollupOn; placePlant2(); }, "off");
-  bindToggle("#tg-pb", v => { pbCustom.visible = v === "custom"; pbStd.visible = v === "std"; }, "custom");
+  // Artes finales: texturas desde artes/, cargadas solo cuando hacen falta
+  const texLoader = new THREE.TextureLoader(), texCache = {};
+  function artTex(file) {
+    if (!texCache[file]) texCache[file] = new Promise(res => texLoader.load("artes/" + file, t => { t.encoding = THREE.sRGBEncoding; t.anisotropy = maxAniso; res(t); }, undefined, () => res(null)));
+    return texCache[file];
+  }
+  function setMap(m, t) { m.map = t; m.emissiveMap = t; m.needsUpdate = true; }
+  let artStyle = "VO", artZoc = "PF", pbOpt = "2", pbCol = "negra";
+  function applyArt() {
+    const key = artStyle + "-" + artZoc;
+    Object.keys(artMats).forEach(n => artTex(key + "-" + n + ".jpg").then(t => { if (t && key === artStyle + "-" + artZoc) setMap(artMats[n], t); }));
+  }
+  function applyPb() {
+    pbCustom.visible = pbOpt !== "std"; pbStd.visible = pbOpt === "std";
+    document.getElementById("tg-pbcol").hidden = pbOpt === "std";
+    if (pbOpt === "std") return;
+    const key = pbOpt + "-" + pbCol;
+    artTex("plat-" + key + ".jpg").then(t => { if (t && key === pbOpt + "-" + pbCol) setMap(pbCustom.material, t); });
+  }
+  bindToggle("#tg-art", v => { artStyle = v; applyArt(); }, "VO");
+  bindToggle("#tg-zoc", v => { artZoc = v; applyArt(); }, "PF");
+  bindToggle("#tg-pb", v => { pbOpt = v; applyPb(); }, "2");
+  bindToggle("#tg-pbcol", v => { pbCol = v; applyPb(); }, "negra");
 
   // ---------- tema ----------
   function isDark() {
