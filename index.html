@@ -189,12 +189,14 @@ tr.total td { font-weight: 600; background: var(--accent-soft); }
 .note.warn { border-color: var(--warn); background: var(--warn-soft); }
 .mail-head { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: baseline; justify-content: space-between; max-width: 75ch; margin-top: 16px; }
 .mail-head p { margin: 0; }
-#copy { font: 500 14px var(--body); color: var(--accent-ink); background: transparent; border: 1px solid var(--accent); border-radius: 4px; padding: 7px 14px; cursor: pointer; }
-#copy:hover, .btn-dl:hover { background: var(--accent-soft); }
+.copy-btn { font: 500 14px var(--body); color: var(--accent-ink); background: transparent; border: 1px solid var(--accent); border-radius: 4px; padding: 7px 14px; cursor: pointer; }
+.copy-btn:hover, .btn-dl:hover { background: var(--accent-soft); }
 .dl-row { display: flex; flex-wrap: wrap; gap: 10px; }
 .btn-dl { display: inline-block; font: 500 14px var(--body); color: var(--accent-ink); text-decoration: none; border: 1px solid var(--accent); border-radius: 4px; padding: 8px 16px; }
-#mail { max-width: 75ch; margin-top: 12px; padding: 20px 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow-wrap: anywhere; }
-#mail p { margin: 0 0 12px; } #mail ul { margin: 0 0 12px; padding-left: 20px; } #mail > :last-child { margin-bottom: 0; }
+.mail { max-width: 75ch; margin-top: 12px; padding: 20px 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 6px; overflow-wrap: anywhere; }
+.mail p { margin: 0 0 12px; } .mail ul { margin: 0 0 12px; padding-left: 20px; } .mail > :last-child { margin-bottom: 0; }
+#correo-artes { margin-bottom: 48px; }
+.btn-dl.is-pending { opacity: .55; cursor: not-allowed; border-style: dashed; }
 ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .tl-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13px; color: var(--muted); }
 .tl-legend span { display: inline-flex; align-items: center; gap: 6px; }
@@ -339,7 +341,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   <header>
     <span class="eyebrow">Juncosa Alta · SICAB 2026 · FIBES Sevilla · 17–22 nov</span>
     <h1>Vuestro stand en SICAB 2026</h1>
-    <p class="lede">Todo sobre el stand en tres pestañas. En <b>Contrato</b>: lo que hay que hacer antes del 28 de octubre, lo que incluye, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: dos propuestas de stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva.</p>
+    <p class="lede">Todo sobre el stand en tres pestañas. En <b>Contrato</b>: lo que hay que hacer antes del 28 de octubre, lo que incluye, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: el stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva.</p>
     <p class="meta">Pabellón <b>2</b> · Stand <b>2030</b> · Stand <b>modular de 16 m², sin esquina</b> · Organiza <b>CONTURSA</b> · <b>sicab@sevillacityoffice.es · 954 478 746</b></p>
   </header>
 
@@ -349,6 +351,28 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     <button type="button" role="tab" id="t-invitacion" aria-controls="p-invitacion" aria-selected="false" data-tab="invitacion" tabindex="-1">Invitación</button>
   </div>
   <div class="panel" id="p-contrato" role="tabpanel" aria-labelledby="t-contrato">
+
+  <section>
+    <div class="prose">
+      <span class="eyebrow">Calendario</span>
+      <h2>Fechas que no os podéis saltar</h2>
+      <p class="muted">Pulsa un hito para ver qué hay que hacer y cuántos días quedan.</p>
+    </div>
+    <div class="tl-legend">
+      <span><i class="c-tram"></i>Trámites</span>
+      <span><i class="c-comp"></i>Pedidos</span>
+      <span><i class="c-pago"></i>Pagos</span>
+      <span><i class="c-mont"></i>Montaje</span>
+      <span><i class="c-feria"></i>Feria</span>
+      <span><i class="c-desm"></i>Desmontaje</span>
+    </div>
+    <div class="tl-scroll" id="tl-scroll"><div class="tl" id="tl"></div></div>
+    <div class="tl-detail" id="tl-detail" aria-live="polite">
+      <div class="d-body"><div class="d-when" id="d-when"></div><h3 id="d-title"></h3><p id="d-text"></p></div>
+      <div class="d-count"><b id="d-days"></b><small id="d-days-lab"></small></div>
+      <div class="tl-nav"><button type="button" id="tl-prev">← Anterior</button><button type="button" id="tl-next">Siguiente →</button></div>
+    </div>
+  </section>
 
   <section class="urgent">
     <div class="urgent-head">
@@ -365,36 +389,31 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <li><b>Platabanda personalizada</b> con el logotipo impreso (52 € + IVA). <span class="done">Decidido</span></li>
       <li><b>1 rollo de cinta de doble cara</b> (12 € + IVA, 50 m). <span class="done">Decidido</span></li>
       <li><b>Toma de agua con fregadero pequeño</b> dentro del almacén (código 08004, 70 € + IVA). <span class="done">Decidido</span></li>
-      <li><b>Enviar el correo a CONTURSA</b> con todo lo anterior y la planilla rellena, contestando al correo de bienvenida de CONTURSA y con copia a sicab@sevillacityoffice.es. <a href="#correo">Ver el correo</a></li>
-      <li><b>Enviar los diseños de los 11 paneles y la platabanda</b> en PDF y en vectores. Es lo único que falta.</li>
+      <li><b>Correo a CONTURSA</b> con el pedido, la planilla y el tarifario. <span class="done">Enviado el 20 de octubre</span></li>
+      <li><b>Enviar los artes finales de los 11 paneles y la platabanda</b> y pedir que confirmen la configuración de los archivos. <a href="#correo-artes">Ver el correo</a></li>
     </ol>
     <p class="muted small">Recargos por pedir tarde: <b>+20 %</b> del 29 de octubre al 9 de noviembre y <b>+30 %</b> del 10 al 13 de noviembre. Se puede cancelar hasta 15 días antes del montaje (1 de noviembre); después se cobra el 100 %.</p>
   </section>
 
-  <section id="correo">
+  <section id="correo-artes">
     <div class="prose">
-      <span class="eyebrow">Correo a CONTURSA</span>
-      <h2>El correo con el pedido</h2>
-      <p>Os sugiero contestar al <b>correo de bienvenida de CONTURSA</b> con el botón «Responder» y sin cambiar el asunto, para que lo tengan todo en el mismo hilo. Basta con pegar el texto de abajo y adjuntar la planilla rellena.</p>
-      <p>También puede ser buena idea poner en copia a <b>sicab@sevillacityoffice.es</b>, si no está ya. Es el correo general de la organización de SICAB, así que el pedido quedaría registrado también allí aunque la persona que os escribió no esté, y quedaría constancia de que se envió antes del 28 de octubre, a partir del cual hay recargo.</p>
-      <p>En estos botones podéis descargar la planilla y el tarifario que debéis adjuntar al correo. La planilla está dibujada y el tarifario lleva marcadas las unidades de cada pedido, pero en los dos falta completar los datos de la empresa: abajo en la planilla y arriba, en la primera página, en el tarifario. Se puede hacer en Vista Previa en Mac o en Adobe Acrobat Reader.</p>
-      <p class="dl-row"><a class="btn-dl" href="planilla-rellena-stand-2030.pdf" target="_blank" rel="noopener">Descargar la planilla (PDF)</a> <a class="btn-dl" href="tarifario-pedido-stand-2030.pdf" target="_blank" rel="noopener">Descargar el tarifario (PDF)</a></p>
+      <span class="eyebrow">Correo a SICAB · artes finales</span>
+      <h2>El correo con los artes de los paneles y la platabanda</h2>
+      <p>En estos botones están los dos PDF para imprimir. El de los paneles pesa unos 1,2 GB, así que no se puede adjuntar al correo: lo mejor es mandarlo con un enlace de WeTransfer o Google Drive y pegar el enlace donde lo indica el texto.</p>
+      <p class="dl-row"><a class="btn-dl is-pending" href="#correo-artes" aria-disabled="true" title="Falta el enlace de descarga">Descargar la platabanda (PDF, 22 MB)</a> <a class="btn-dl is-pending" href="#correo-artes" aria-disabled="true" title="Falta el enlace de descarga">Descargar los paneles (PDF, 1,2 GB)</a></p>
     </div>
-    <div class="mail-head"><button type="button" id="copy">Copiar texto</button></div>
-    <div id="mail">
+    <div class="mail-head"><button type="button" class="copy-btn" data-copy="mail-artes">Copiar texto</button></div>
+    <div class="mail" id="mail-artes">
       <p>Buenos días:</p>
-      <p>Os escribimos desde Juncosa Alta, stand 2030 del Pabellón 2, para confirmar el pedido del stand modular de 16 m² y la situación de los elementos. Os adjuntamos la planilla rellena y el tarifario con las unidades marcadas.</p>
-      <p><b>1. Moqueta:</b> color 0303 Coñac.</p>
-      <p><b>2. Almacén de 2 × 1 m con puerta,</b> al fondo a la derecha: 2 m a lo largo de la pared del fondo y 1 m de profundidad. En la planilla va marcado como A.</p>
-      <p><b>3. Dos placas de 4 enchufes</b> (11,50 € + IVA cada una):</p>
-      <ul><li>Una en la pared del fondo, columna 4 de la fila 1, detrás de la pantalla.</li><li>Otra dentro del almacén, columna 11 de la fila 1, para la nevera y el microondas.</li></ul>
-      <p><b>4. Toma de agua con fregadero pequeño</b> (código 08004), dentro del almacén, en la columna 16 de la fila 1. En la planilla va como AG.</p>
-      <p><b>5. Un rollo de cinta de doble cara</b> (12 € + IVA).</p>
-      <p><b>6. Gráficas en vinilo para 11 paneles</b> (0,95 × 2,56 m, código 50101006), con vuestro proveedor oficial. El único panel que no lleva vinilo es el de la puerta del almacén. Queríamos preguntaros:</p>
-      <ul><li>¿El precio de 66 € + IVA por panel incluye la impresión y la colocación, o el montaje se cobra aparte?</li><li>¿Nos podéis mandar la plantilla con medidas, sangrado y margen de los perfiles? En el dossier el panel mide 0,95 × 2,56 m y en el tarifario 1 × 2,7 m, así que nos ayudaría saber cuál es la medida exacta del arte final.</li><li>¿Hasta qué fecha podemos enviar los artes finales? Entendemos que es el 28 de octubre.</li></ul>
-      <p><b>7. Platabanda personalizada</b> (3,95 × 0,52 m, código 50101002, 52 € + IVA), impresa en vinilo con nuestro diseño en lugar de las letras de serie. La enviaremos junto con los diseños de los paneles.</p>
-      <p><b>8. Seguro de expositor:</b> entendemos que el seguro obligatorio de expositor ya va incluido en el contrato del stand, por eso no lo hemos marcado en el tarifario. Si no es así, avisadnos y lo añadimos.</p>
-      <p>Si os falta algún dato, decídnoslo. Muchas gracias.</p>
+      <p>Os envío los artes finales del stand 2030 (Pabellón 2) de Juncosa Alta para que los reviséis antes de imprimirlos:</p>
+      <ul><li><b>Paneles:</b> 11 paneles en vinilo de 0,95 × 2,56 m, en un PDF con una página por panel. Van numerados del 1 al 12 de izquierda a derecha; el 9 es la puerta del almacén, que va sin vinilo.</li><li><b>Platabanda personalizada:</b> 3,95 × 0,52 m, en un PDF.</li></ul>
+      <p>He preparado los archivos así:</p>
+      <ul><li>PDF a tamaño real (escala 1:1).</li><li>Modo de color RGB/16 bits, con el perfil sRGB IEC61966-2.1.</li><li>Sin márgenes de sangrado ni marcas de corte.</li></ul>
+      <p>¿Me podéis confirmar si esta configuración es la correcta para la impresión? Si necesitáis otra (por ejemplo, CMYK, sangrado o marcas de corte), decídmelo y os los preparo.</p>
+      <p>Como los archivos pesan mucho, os los envío en este enlace: [pegar aquí el enlace de descarga]</p>
+      <p>Os recuerdo también:</p>
+      <ul><li>La planilla de situación de elementos y el tarifario con el pedido de extras os los envié en mi correo del 20 de octubre.</li><li>La moqueta la quiero en color coñac (0303 Coñac).</li></ul>
+      <p>Muchas gracias.</p>
       <p>Un saludo,<br>Antonio<br>Juncosa Alta · Stand 2030 · Pabellón 2</p>
     </div>
   </section>
@@ -457,28 +476,6 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 
   <section>
     <div class="prose">
-      <span class="eyebrow">Calendario</span>
-      <h2>Fechas que no os podéis saltar</h2>
-      <p class="muted">Pulsa un hito para ver qué hay que hacer y cuántos días quedan.</p>
-    </div>
-    <div class="tl-legend">
-      <span><i class="c-tram"></i>Trámites</span>
-      <span><i class="c-comp"></i>Pedidos</span>
-      <span><i class="c-pago"></i>Pagos</span>
-      <span><i class="c-mont"></i>Montaje</span>
-      <span><i class="c-feria"></i>Feria</span>
-      <span><i class="c-desm"></i>Desmontaje</span>
-    </div>
-    <div class="tl-scroll" id="tl-scroll"><div class="tl" id="tl"></div></div>
-    <div class="tl-detail" id="tl-detail" aria-live="polite">
-      <div class="d-body"><div class="d-when" id="d-when"></div><h3 id="d-title"></h3><p id="d-text"></p></div>
-      <div class="d-count"><b id="d-days"></b><small id="d-days-lab"></small></div>
-      <div class="tl-nav"><button type="button" id="tl-prev">← Anterior</button><button type="button" id="tl-next">Siguiente →</button></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="prose">
       <span class="eyebrow">Respuesta de CONTURSA</span>
       <h2>Lo que nos han contestado, en claro</h2>
     </div>
@@ -513,35 +510,6 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     </div>
   </section>
 
-  <section class="two">
-    <div class="prose">
-      <span class="eyebrow">Rótulo</span>
-      <h2>El nombre de la platabanda</h2>
-      <p>Incluye 12 caracteres y <b>los espacios no cuentan</b>. «JUNCOSA ALTA» son 11, así que entra sin coste. Va en letras de vinilo negro de 12 cm, sin serifa. Cada letra de más cuesta 1 € + IVA.</p>
-      <p class="muted">Si pedís la platabanda personalizada, en lugar de las letras negras va vuestro diseño impreso.</p>
-    </div>
-    <div class="rotulo">
-      <label for="r-input">Prueba el nombre del rótulo</label>
-      <input id="r-input" type="text" maxlength="60" value="JUNCOSA ALTA" autocomplete="off">
-      <div class="friso" id="r-preview" aria-hidden="true"></div>
-      <div class="r-stats" aria-live="polite">
-        <span>Caracteres (sin espacios): <b id="r-nosp">0</b></span>
-        <span>Coste extra: <b id="r-cost">0 €</b></span>
-      </div>
-    </div>
-  </section>
-
-  <section>
-    <div class="prose">
-      <span class="eyebrow">Por cerrar</span>
-      <h2>Lo que queda pendiente</h2>
-    </div>
-    <ul class="check">
-      <li><span>Confirmar con CONTURSA que los 66 € por panel incluyen impresión y colocación, y si se puede forrar la puerta del almacén.</span></li>
-      <li><span>Confirmar la fecha límite de los diseños (28 de octubre) y pedir la plantilla con medidas, sangrado y margen de los perfiles.</span></li>
-    </ul>
-  </section>
-
   <section>
     <div class="prose">
       <span class="eyebrow">Documentos de CONTURSA</span>
@@ -562,10 +530,6 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   <div class="panel" id="p-diseno" role="tabpanel" aria-labelledby="t-diseno" hidden>
 
   <div class="viewer">
-    <div class="options" id="tg-design" role="group" aria-label="Diseño del stand">
-      <button type="button" class="opt" data-v="1" aria-pressed="false"><span class="letter">1</span><b>Pared continua</b><span>Fotos y textos que recorren cada pared, logotipo en la pared del fondo y almacén a la izquierda.</span></button>
-      <button type="button" class="opt" data-v="2" aria-pressed="true"><span class="letter">2</span><b>El viaje · final</b><span>Las artes finales de cada panel: elige paneles oscuros o claros, el zócalo y la platabanda, y mira cómo queda.</span></button>
-    </div>
     <div class="stage" id="stage">
       <canvas id="c" aria-label="Modelo 3D del stand de Juncosa Alta"></canvas>
       <div class="loading" id="loading">Montando el stand…</div>
@@ -578,7 +542,6 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <button type="button" data-view="left" aria-pressed="false">Pared izquierda</button>
       <button type="button" data-view="back" aria-pressed="false">Pared de fondo</button>
       <button type="button" data-view="right" aria-pressed="false">Pared derecha</button>
-      <button type="button" data-view="logo" aria-pressed="false">Logotipo de cerca</button>
     </div>
     <div class="toggles">
       <div class="logo-opts" id="tg-light" role="group" aria-label="Iluminación"><span>Luz</span>
@@ -589,18 +552,6 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
         <button type="button" data-v="off" aria-pressed="true">Sin roll-up</button><button type="button" data-v="on" aria-pressed="false">Con roll-up</button></div>
       <div class="logo-opts" id="tg-plants" role="group" aria-label="Plantas"><span>Plantas</span>
         <button type="button" data-v="off" aria-pressed="false">Sin plantas</button><button type="button" data-v="on" aria-pressed="true">Con olivo bajo</button></div>
-      <div class="logo-opts" id="tg-floor" role="group" aria-label="Suelo"><span>Suelo</span>
-        <button type="button" data-v="carpet" aria-pressed="true">Moqueta coñac</button><button type="button" data-v="dark" aria-pressed="false">Moqueta antracita</button><button type="button" data-v="vinyl" aria-pressed="false">Vinilo parquet</button></div>
-      <div class="logo-opts" id="tg-logo" role="group" aria-label="Logotipo en la pared"><span>Logotipo en pared</span>
-        <button type="button" data-v="relief" aria-pressed="true">Corpóreo</button><button type="button" data-v="print" aria-pressed="false">Impreso</button></div>
-      <div class="logo-opts" id="tg-art" role="group" aria-label="Versión de los paneles"><span>Paneles</span>
-        <button type="button" data-v="VO" aria-pressed="true">Oscuros</button><button type="button" data-v="VC" aria-pressed="false">Claros</button></div>
-      <div class="logo-opts" id="tg-zoc" role="group" aria-label="Zócalo"><span>Zócalo</span>
-        <button type="button" data-v="PF" aria-pressed="true">Lamas finas</button><button type="button" data-v="PG" aria-pressed="false">Lamas gruesas</button></div>
-      <div class="logo-opts" id="tg-pb" role="group" aria-label="Platabanda"><span>Platabanda</span>
-        <button type="button" data-v="1" aria-pressed="false">Opción 1</button><button type="button" data-v="2" aria-pressed="true">Opción 2</button><button type="button" data-v="std" aria-pressed="false">Estándar</button></div>
-      <div class="logo-opts" id="tg-pbcol" role="group" aria-label="Color de la platabanda"><span>Color</span>
-        <button type="button" data-v="negra" aria-pressed="true">Negra</button><button type="button" data-v="blanca" aria-pressed="false">Blanca</button></div>
     </div>
   </div>
 
@@ -616,63 +567,17 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <span class="eyebrow">Cómo es el stand</span>
       <h2>Un stand modular de CONTURSA, vestido con la marca</h2>
       <p>La estructura la pone CONTURSA: tres paredes de paneles blancos de 0,95 × 2,56 m entre perfiles de aluminio, una platabanda arriba con el nombre y el frente abierto al pasillo. No se puede taladrar ni colgar nada, así que todo va impreso, pegado con su cinta o de pie.</p>
-      <div data-design="1">
-        <p><b>Diseño 1 · Pared continua.</b> Las paredes llevan gráfica impresa por el proveedor oficial: crema en los laterales y negra al fondo, con un zócalo de lamas impreso abajo. En la esquina del fondo a la izquierda va el <b>almacén de 1 × 1 m</b>, con la cara que da al pasillo también impresa. La puerta se abre hacia dentro del stand.</p>
-        <p>La pantalla va en un pie con ruedas delante de la pared del fondo, bajo el logotipo. Ojo: con vinilo por paneles, lo que pase de un panel a otro queda cortado por el perfil de aluminio.</p>
-      </div>
-      <div data-design="2" hidden>
-        <p><b>Diseño 2 · El viaje.</b> Son las <b>artes finales</b>: 11 paneles con vinilo, numerados de izquierda a derecha (el 9 es la puerta del almacén, sin vinilo). Con los botones de debajo del visor se elige si los paneles son <b>oscuros o claros</b>, el <b>zócalo de lamas finas o gruesas</b> y la <b>platabanda</b> (opción 1 u opción 2, negra o blanca).</p>
+      
+      <div>
+        <p><b>El viaje.</b> Son las <b>artes finales</b>: 11 paneles con vinilo, numerados de izquierda a derecha (el 9 es la puerta del almacén, sin vinilo). La versión elegida lleva los <b>paneles oscuros</b>, el <b>zócalo de lamas gruesas</b> y la <b>platabanda negra de la opción 2</b>, con los halos terracota a los lados.</p>
         <p><b>Pared izquierda (1–4):</b> el viaje del caballo en 4 pasos: 01 Documentación, 02 Recogida, 03 En ruta y 04 Llegada. <b>Fondo (5–6):</b> «Cuidamos cada detalle» y «Por España y toda Europa», con la pantalla delante. <b>Almacén:</b> en el lateral, «Cómo viaja tu caballo» (7), y al pasillo, el panel terracota con las cifras y el QR de presupuesto (8). <b>Pared derecha (10–12):</b> la flota, el equipo y el logotipo.</p>
         <p><b>Roll-up opcional (botón «Roll-up»):</b> 85 × 200 cm en la esquina del pasillo, mirando a la gente que pasa. Negro, con el logotipo, «Transporte de caballos por España y Europa» y un QR grande para reservar plaza. No lleva fechas ni número de stand, así que sirve para concursos y otras ferias. No toca los paneles, así que lo puede imprimir cualquier imprenta. Si se pone, el olivo bajo pasa a la pared derecha, junto al panel de la marca.</p>
       </div>
     </div>
     <div>
-      <div data-design="1">
-      <svg class="plan" viewBox="-70 -60 540 540" role="img" aria-label="Planta acotada del stand con almacén y enchufes">
-        <rect class="floor" x="0" y="0" width="400" height="400"/>
-        <rect class="wall" x="0" y="0" width="400" height="6"/>
-        <rect class="wall" x="0" y="0" width="6" height="400"/>
-        <rect class="wall" x="394" y="0" width="6" height="400"/>
-        <rect class="item" x="6" y="6" width="94" height="94"/>
-        <rect class="wall" x="6" y="97" width="94" height="4"/>
-        <rect class="floor" x="98" y="6" width="5" height="88"/>
-        <path class="dim" d="M100,95 A90,90 0 0 0 190,5" stroke-dasharray="4 4"/>
-        <line class="dim" x1="100" y1="5" x2="190" y2="5" stroke-dasharray="4 4"/>
-        <text x="55" y="60" text-anchor="middle" class="big">A</text>
-        <rect class="acc" x="202" y="30" width="146" height="14"/>
-        <rect class="item" x="252" y="44" width="46" height="6"/>
-        <rect class="wall" x="252.5" y="247.5" width="75" height="75"/>
-        <rect class="item" x="273" y="318" width="34" height="34"/><rect class="item" x="273" y="218" width="34" height="34"/><rect class="item" x="223" y="268" width="34" height="34"/><rect class="item" x="323" y="268" width="34" height="34"/>
-        <rect class="wall" x="137.5" y="142.5" width="75" height="75"/>
-        <rect class="item" x="158" y="213" width="34" height="34"/><rect class="item" x="158" y="113" width="34" height="34"/><rect class="item" x="108" y="163" width="34" height="34"/><rect class="item" x="208" y="163" width="34" height="34"/>
-        
-        <g transform="rotate(26 355 360)"><rect class="item" x="339" y="344" width="32" height="32"/><rect class="acc" x="341" y="346" width="28" height="5"/></g>
-        <g class="emark"><circle cx="300" cy="17" r="11"/><text x="300" y="21" text-anchor="middle">E</text></g>
-        <g class="emark"><circle cx="28" cy="28" r="11"/><text x="28" y="32" text-anchor="middle">E</text></g>
-        <line x1="0" y1="403" x2="400" y2="403" class="pb"/>
-        <text x="200" y="428" text-anchor="middle" class="lbl">PASILLO · FRENTE ABIERTO CON PLATABANDA</text>
-        <g>
-          <circle class="numbg" cx="80" cy="80" r="11"/><text class="num" x="80" y="84" text-anchor="middle">1</text>
-          <circle class="numbg" cx="275" cy="66" r="11"/><text class="num" x="275" y="70" text-anchor="middle">2</text>
-          <circle class="numbg" cx="290" cy="285" r="11"/><text class="num" x="290" y="289" text-anchor="middle">3</text>
-          <circle class="numbg" cx="175" cy="180" r="11"/><text class="num" x="175" y="184" text-anchor="middle">3</text>
-          <circle class="numbg" cx="290" cy="335" r="11"/><text class="num" x="290" y="339" text-anchor="middle">4</text>
-          
-          <circle class="numbg" cx="318" cy="372" r="11"/><text class="num" x="318" y="376" text-anchor="middle">5</text>
-        </g>
-        <line class="dim" x1="0" y1="-30" x2="400" y2="-30"/>
-        <line class="dim" x1="0" y1="-38" x2="0" y2="-22"/><line class="dim" x1="400" y1="-38" x2="400" y2="-22"/>
-        <text class="dimt" x="200" y="-38" text-anchor="middle">4,00 m</text>
-        <line class="dim" x1="-30" y1="0" x2="-30" y2="400"/>
-        <line class="dim" x1="-38" y1="0" x2="-22" y2="0"/><line class="dim" x1="-38" y1="400" x2="-22" y2="400"/>
-        <text class="dimt" x="-40" y="200" text-anchor="middle" transform="rotate(-90 -40 200)">4,00 m</text>
-        <line class="dim" x1="6" y1="116" x2="100" y2="116"/><text class="dimt" x="53" y="132" text-anchor="middle">1,00</text>
-        <text class="lbl" x="200" y="465" text-anchor="middle">ESCALA 1:50 APROX. · A = ALMACÉN · E = ENCHUFES</text>
-      </svg>
-
-      </div>
-      <div data-design="2" hidden>
-      <svg class="plan" viewBox="-70 -60 540 540" role="img" aria-label="Planta del diseño 2 con almacén de 2 × 1 m al fondo y enchufes">
+      
+      <div>
+      <svg class="plan" viewBox="-70 -60 540 540" role="img" aria-label="Planta del stand con almacén de 2 × 1 m al fondo y enchufes">
         <rect class="floor" x="0" y="0" width="400" height="400"/>
         <rect class="wall" x="0" y="0" width="400" height="6"/>
         <rect class="wall" x="0" y="0" width="6" height="400"/>
@@ -723,17 +628,11 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     <div class="prose">
       <span class="eyebrow">Distribución</span>
       <h2>Qué hay en planta</h2>
-      <p class="muted">En los dos diseños, la puerta del almacén se abre hacia dentro sin chocar con las mesas ni con la pantalla.</p>
-      <p class="muted"><b>Plantas (opcional):</b> con el botón «Plantas» del visor se ve un olivo bajo, de 1 m más o menos. En el diseño 1 va junto a la pared derecha, al fondo; en el diseño 2, en la esquina del pasillo, con el texto del primer panel movido al otro lado para que no lo tape. Al ser bajo, deja ver las gráficas, que era el problema del olivo alto.</p>
+      <p class="muted">La puerta del almacén se abre hacia dentro sin chocar con las mesas ni con la pantalla.</p>
+      <p class="muted"><b>Plantas (opcional):</b> con el botón «Plantas» del visor se ve un olivo bajo, de 1 m más o menos. Va en la esquina del pasillo, junto al primer panel. Al ser bajo, deja ver las gráficas, que era el problema del olivo alto.</p>
     </div>
-    <ol class="legend" data-design="1">
-      <li><span class="k">1</span><span>Almacén de 1 × 1 m con puerta (A)<small>Lo pone CONTURSA (52 € + IVA). Dentro caben la nevera (por ejemplo, el minibar de 49 × 49 × 85 cm) con el microondas encima, las cajas de bebida, los flyers y los abrigos. Lleva una placa de enchufes (E).</small></span></li>
-      <li><span class="k">2</span><span>Pantalla de 65" en pie con ruedas<small>Delante de la pared del fondo, bajo el logotipo. Detrás, la otra placa de enchufes (E).</small></span></li>
-      <li><span class="k">3</span><span>Dos mesas altas IKEA RÖNNINGE negras<small>Las vuestras: 75 × 75 cm y 105 cm de alto, para 4 personas cada una.</small></span></li>
-      <li><span class="k">4</span><span>Ocho taburetes negros cuadrados<small>Los vuestros, cuatro por mesa.</small></span></li>
-      <li><span class="k">5</span><span>Expositor de folletos y tarjetas<small>El vuestro, girado hacia el pasillo.</small></span></li>
-    </ol>
-    <ol class="legend" data-design="2" hidden>
+    
+    <ol class="legend">
       <li><span class="k">1</span><span>Almacén de 2 × 1 m con puerta (A)<small>Los 2 m a lo largo del fondo, a la derecha, con 1 m de fondo. Su cara al pasillo lleva las cifras en terracota y la puerta; el lado que mira al stand, el número 2030. Dentro, la nevera, el microondas, un fregadero pequeño con toma de agua (AG), las cajas y una placa de enchufes (E).</small></span></li>
       <li><span class="k">2</span><span>Pantalla de 65" en pie con ruedas<small>Centrada entre los dos paneles negros del fondo, tapando el perfil que los separa. Va alta, con el borde inferior a 1,60 m y el superior a unos 2,43 m (el panel mide 2,56 m), para que se vea por encima de la gente desde el pasillo. Los textos de esos paneles van por debajo. Detrás, la otra placa de enchufes (E).</small></span></li>
       <li><span class="k">3</span><span>Dos mesas altas IKEA RÖNNINGE negras<small>Escalonadas: la de la izquierda más al fondo, frente a la pantalla, y la de la derecha más cerca del pasillo y hacia el centro. Así hay paso entre ellas y delante de la puerta del almacén queda más de 1 m libre.</small></span></li>
@@ -760,22 +659,8 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
         <p>El friso de arriba (3,95 × 0,52 m) puede ir con el logotipo impreso en lugar de las letras negras de serie.</p>
         <p><b>52 € + IVA (≈ 63 €).</b> Si no, va incluido «JUNCOSA ALTA» en letras negras.</p></div>
     </div>
-    <p class="note" data-design="2" hidden><b>En el diseño 2 hay que diseñar 11 piezas de 0,95 × 2,56 m</b>, una por panel, más la platabanda: 4 fotos del viaje, la frase y el panel de la pantalla en el fondo, la foto de la flota, la del equipo y la marca en la derecha, y las dos caras del almacén (cifras y número de stand). Dejad unos 3 cm de margen a cada lado, porque el perfil de aluminio tapa el borde.</p>
+    <p class="note"><b>Hay que diseñar 11 piezas de 0,95 × 2,56 m</b>, una por panel, más la platabanda: 4 fotos del viaje, la frase y el panel de la pantalla en el fondo, la foto de la flota, la del equipo y la marca en la derecha, y las dos caras del almacén (cifras y número de stand). Dejad unos 3 cm de margen a cada lado, porque el perfil de aluminio tapa el borde.</p>
     <p class="note"><b>El zócalo de lamas va impreso en el propio vinilo.</b> El vinilo 3D de Leroy Merlin no se puede pegar en los paneles, porque solo el proveedor oficial puede decorarlos y los paneles tienen que quedar limpios.</p>
-  </section>
-
-  <section>
-    <div class="prose">
-      <span class="eyebrow">Logotipo y suelo · a elegir</span>
-      <h2>Dos decisiones que se ven en el 3D</h2>
-      <p class="muted">Usa los botones de debajo del visor para comparar.</p>
-    </div>
-    <div class="variants">
-      <div class="variant"><h3>Logotipo corpóreo</h3><p>Letras ligeras de PVC o metacrilato terracota, <b>pegadas con la cinta de CONTURSA</b> (no se puede atornillar). Destacan en relieve. Unos 300–600 € con un rotulista; tienen que ser ligeras. El halo de luz por detrás es difícil sin poder fijar ni enchufar en la pared, así que lo más seguro es sin luz.</p></div>
-      <div class="variant pick"><span class="badge">Más sencillo</span><h3>Logotipo impreso</h3><p>Va en el propio vinilo de la pared del fondo. Sin coste extra y sin riesgo de que se despegue.</p></div>
-      <div class="variant pick"><span class="badge">Recomendado</span><h3>Moqueta coñac (0303)</h3><p>Incluida en el precio. Su tono cálido va con la marca, no necesita certificados extra y no hay que montar nada.</p></div>
-      <div class="variant"><h3>Vinilo de parquet</h3><p>Va encima de la moqueta, fijado con cinta. Unos 85 € más la cinta. Hay que esperar el certificado de reacción al fuego y decir a CONTURSA que lo colocáis vosotros.</p></div>
-    </div>
   </section>
 
   <section class="two">
@@ -830,10 +715,8 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
           <tr><td class="ck"><input type="checkbox" id="b-o3" class="bud" data-kind="own" data-min="15" data-max="30" aria-label="Incluir Ganchos y organización del almacén"></td><td>Ganchos y organización del almacén</td><td>Para abrigos, bolsos y cajas</td><td class="n r">15–30 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-o4" class="bud" data-kind="own" data-min="25" data-max="50" aria-label="Incluir Folletos"></td><td>Folletos</td><td>Unos 150, contenido por definir</td><td class="n r">25–50 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-o5" class="bud" data-kind="own" data-min="10" data-max="15" aria-label="Incluir Tarjetas de visita"></td><td>Tarjetas de visita</td><td>Unas 200</td><td class="n r">10–15 €</td></tr>
-          <tr><td class="ck"><input type="checkbox" id="b-o6" class="bud" data-kind="own" data-min="300" data-max="600" aria-label="Incluir Logotipo corpóreo"></td><td>Logotipo corpóreo</td><td>Letras ligeras para pegar con cinta. Si no, va impreso sin coste</td><td class="n r">300–600 €</td></tr>
-          <tr><td class="ck"><input type="checkbox" id="b-o7" class="bud" data-kind="own" data-min="105" data-max="105" aria-label="Incluir Suelo vinílico y cinta"></td><td>Suelo vinílico y cinta</td><td>8 paquetes de Leroy Merlin y cinta. Solo si no se elige la moqueta coñac</td><td class="n r">105 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-o8" class="bud" data-kind="own" data-min="40" data-max="90" aria-label="Incluir olivo bajo"></td><td>Olivo bajo en maceta (opcional)</td><td>Unos 1 m de alto. Natural o artificial</td><td class="n r">40–90 €</td></tr>
-          <tr><td class="ck"><input type="checkbox" id="b-o9" class="bud" data-kind="own" data-min="50" data-max="90" aria-label="Incluir roll-up"></td><td>Roll-up 85 × 200 cm (diseño 2, opcional)</td><td>Estructura e impresión en cualquier imprenta. Reutilizable</td><td class="n r">50–90 €</td></tr>
+          <tr><td class="ck"><input type="checkbox" id="b-o9" class="bud" data-kind="own" data-min="50" data-max="90" aria-label="Incluir roll-up"></td><td>Roll-up 85 × 200 cm (opcional)</td><td>Estructura e impresión en cualquier imprenta. Reutilizable</td><td class="n r">50–90 €</td></tr>
         </tbody>
       </table>
     </div>
@@ -1485,17 +1368,10 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     set(initial);
     return set;
   }
-  bindToggle("#tg-logo", v => { backLogo.visible = v === "relief"; backPrint.visible = v === "print"; }, "relief");
-  let setFloor = null;
-  bindToggle("#tg-design", v => {
-    G1.visible = v === "1"; G2.visible = v === "2";
-    document.getElementById("tg-logo").hidden = v !== "1";
-    const tr = document.getElementById("tg-rollup"); if (tr) tr.hidden = v !== "2";
-    ["tg-art", "tg-zoc"].forEach(id => { const el = document.getElementById(id); if (el) el.hidden = v !== "2"; });
-    const lb = document.querySelector('.views [data-view="logo"]'); if (lb) { lb.hidden = v !== "1"; if (v !== "1" && lb.getAttribute("aria-pressed") === "true" && typeof go === "function") go("persp"); }
-    document.querySelectorAll("[data-design]").forEach(el => el.toggleAttribute("hidden", el.getAttribute("data-design") !== v));
-  }, location.hash === "#diseno-1" ? "1" : "2");
-  setFloor = bindToggle("#tg-floor", v => { floorVinyl.visible = v === "vinyl"; floorCarpet.visible = v === "carpet"; floorDark.visible = v === "dark"; }, "carpet");
+  // Solo el diseño 2 (el definitivo) y la moqueta coñac
+  G1.visible = false; G2.visible = true;
+  { const tr = document.getElementById("tg-rollup"); if (tr) tr.hidden = false; }
+  floorVinyl.visible = false; floorDark.visible = false; floorCarpet.visible = true;
   bindToggle("#tg-light", v => { ledGroups.forEach(g => { g.visible = v === "on"; }); document.getElementById("tg-ledprof").hidden = v !== "on"; }, "on");
   bindToggle("#tg-ledprof", v => { ledProf.forEach(g => { g.visible = v === "prof"; }); ledBare.forEach(g => { g.visible = v === "bare"; }); }, "prof");
   let plantsOn = false, rollupOn = false;
@@ -1509,22 +1385,19 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     return texCache[file];
   }
   function setMap(m, t) { m.map = t; m.emissiveMap = t; m.needsUpdate = true; }
-  let artStyle = "VO", artZoc = "PF", pbOpt = "2", pbCol = "negra";
+  // Versión elegida: paneles oscuros con zócalo de lamas gruesas y platabanda opción 2 negra
+  const artStyle = "VO", artZoc = "PG", pbOpt = "2", pbCol = "negra";
   function applyArt() {
     const key = artStyle + "-" + artZoc;
     Object.keys(artMats).forEach(n => artTex(key + "-" + n + ".jpg").then(t => { if (t && key === artStyle + "-" + artZoc) setMap(artMats[n], t); }));
   }
   function applyPb() {
     pbCustom.visible = pbOpt !== "std"; pbStd.visible = pbOpt === "std";
-    document.getElementById("tg-pbcol").hidden = pbOpt === "std";
     if (pbOpt === "std") return;
     const key = pbOpt + "-" + pbCol;
     artTex("plat-" + key + ".jpg").then(t => { if (t && key === pbOpt + "-" + pbCol) setMap(pbCustom.material, t); });
   }
-  bindToggle("#tg-art", v => { artStyle = v; applyArt(); }, "VO");
-  bindToggle("#tg-zoc", v => { artZoc = v; applyArt(); }, "PF");
-  bindToggle("#tg-pb", v => { pbOpt = v; applyPb(); }, "2");
-  bindToggle("#tg-pbcol", v => { pbCol = v; applyPb(); }, "negra");
+  applyArt(); applyPb();
 
   // ---------- tema ----------
   function isDark() {
@@ -1696,23 +1569,6 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   select(first);
 })();
 
-// Rótulo de la platabanda: los espacios no cuentan
-(function () {
-  var inp = document.getElementById('r-input'), prev = document.getElementById('r-preview');
-  if (!inp) return;
-  function upd() {
-    var v = inp.value.trim().replace(/\s+/g, ' ');
-    var nosp = v.replace(/ /g, '').length, extra = Math.max(0, nosp - 12);
-    prev.textContent = v || 'Nombre del stand';
-    prev.style.opacity = v ? '1' : '.45';
-    document.getElementById('r-nosp').textContent = nosp + ' / 12';
-    var c = document.getElementById('r-cost');
-    c.textContent = extra ? extra + ' € + IVA' : '0 €';
-    c.className = extra ? 'over' : '';
-  }
-  inp.addEventListener('input', upd); upd();
-})();
-
 // Cuenta atrás hasta el 28 de octubre
 (function () {
   var el = document.getElementById('dl-days'), lab = document.getElementById('dl-lab');
@@ -1724,19 +1580,23 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   else { el.textContent = '+' + (-n); lab.textContent = 'días de retraso'; }
 })();
 
-// Copiar el correo
+// Copiar el texto de cada correo
 (function () {
-  var btn = document.getElementById('copy');
-  if (!btn) return;
-  btn.addEventListener('click', function () {
-    var text = document.getElementById('mail').innerText;
-    function done() { btn.textContent = 'Copiado'; setTimeout(function () { btn.textContent = 'Copiar texto'; }, 2000); }
-    function fallback() {
-      var r = document.createRange(); r.selectNodeContents(document.getElementById('mail'));
-      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-      btn.textContent = 'Texto seleccionado, cópialo';
-    }
-    try { navigator.clipboard.writeText(text).then(done, fallback); } catch (e) { fallback(); }
+  [].slice.call(document.querySelectorAll('.copy-btn')).forEach(function (btn) {
+    var box = document.getElementById(btn.getAttribute('data-copy'));
+    if (!box) return;
+    btn.addEventListener('click', function () {
+      function done() { btn.textContent = 'Copiado'; setTimeout(function () { btn.textContent = 'Copiar texto'; }, 2000); }
+      function fallback() {
+        var r = document.createRange(); r.selectNodeContents(box);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        btn.textContent = 'Texto seleccionado, cópialo';
+      }
+      try { navigator.clipboard.writeText(box.innerText).then(done, fallback); } catch (e) { fallback(); }
+    });
+  });
+  [].slice.call(document.querySelectorAll('.btn-dl.is-pending')).forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); });
   });
 })();
 </script>
