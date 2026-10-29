@@ -1639,26 +1639,26 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   var MONTHS = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   var lanes = [['tram','Trámites'], ['comp','Pedidos'], ['pago','Pagos'], ['mont','Montaje'], ['feria','Feria'], ['desm','Desmontaje']];
   var events = [
-    { lane:'tram', cls:'c-tram', from:[9,20], to:[9,27], label:'Diseñar las gráficas', when:'20–27 oct · hecho',
-      text:'Hecho: los 11 paneles y la platabanda diseñados, la moqueta elegida y la planilla rellena.' },
-    { lane:'comp', cls:'c-comp', from:[9,28], label:'Fecha límite CONTURSA', when:'28 oct',
-      text:'Hecho: los pedidos, el color de la moqueta y los artes finales se enviaron dentro de plazo, así que no hay recargo.' },
-    { lane:'tram', cls:'c-tram', from:[9,29], to:[10,4], label:'Decidir merchandising e impresión', when:'Esta semana',
-      text:'Decidir el merchandising y qué se imprime (revista, tríptico o díptico) y cuántos. Averiguar las pegatinas de las mesas y las bolsitas de las golosinas. Enviar la invitación por WhatsApp.' },
-    { lane:'pago', cls:'c-pago', from:[9,31], label:'Pago 50 %', when:'Antes del 31 oct',
-      text:'Pagar el 50 % restante del stand (unos 1.585 €) por transferencia a Congresos y Turismo de Sevilla, S.A., indicando el nombre fiscal y «SICAB 2026».' },
+    { lane:'tram', cls:'c-tram', from:[9,20], to:[9,27], label:'Diseño de las gráficas', when:'20–27 oct · hecho',
+      text:'Los 11 paneles y la platabanda quedaron diseñados, elegimos la moqueta y rellenamos la planilla. Un gran trabajo de equipo.' },
+    { lane:'comp', cls:'c-comp', from:[9,28], label:'Entrega a CONTURSA', when:'28 oct · hecho',
+      text:'Pedidos, moqueta y artes finales entregados dentro de plazo y sin recargo. El stand ya está en marcha.' },
+    { lane:'tram', cls:'c-tram', from:[9,29], to:[10,4], label:'Merchandising e impresos', when:'Esta semana',
+      text:'Es el momento de elegir el detalle que se llevará cada visitante y qué imprimimos: la revista, el tríptico o el díptico, y cuántos de cada uno. También buscaremos las pegatinas de las mesas y las bolsitas para las golosinas, y enviaremos la invitación por WhatsApp a clientes y amigos.' },
+    { lane:'pago', cls:'c-pago', from:[9,31], label:'Segundo pago del stand', when:'Antes del 31 oct',
+      text:'El 50 % restante del stand, unos 1.585 €, por transferencia a Congresos y Turismo de Sevilla, S.A. En el concepto, el nombre fiscal de la empresa y «SICAB 2026».' },
     { lane:'comp', cls:'c-comp', from:[10,1], label:'Último día para cancelar', when:'1 nov',
-      text:'Se pueden cancelar servicios hasta 15 días antes del montaje. Después se cobran al 100 %.' },
-    { lane:'comp', cls:'c-comp', from:[10,10], to:[10,13], label:'Recargo del 30 %', when:'10–13 nov',
-      text:'Los pedidos que se confirmen en estas fechas llevan un 30 % de recargo y puede que no lleguen.' },
-    { lane:'tram', cls:'c-tram', from:[10,14], label:'Todo listo', when:'Antes del 16 nov',
-      text:'Comprado y preparado: tira LED con su transformador y su perfil de aluminio, pie de la pantalla, impresos, merchandising, pegatinas de las mesas y bolsitas de golosinas. Y también mesas, taburetes, olivo, expositor, nevera y microondas. Cámara para hacer fotos de los paneles antes de montar.' },
+      text:'Hasta hoy se puede anular cualquier servicio sin coste. A partir de mañana, lo pedido se paga entero.' },
+    { lane:'comp', cls:'c-comp', from:[10,10], to:[10,13], label:'Pedidos de última hora', when:'10–13 nov',
+      text:'Si en estos días surge algo que pedir a CONTURSA, tiene un 30 % de recargo y no aseguran que llegue a tiempo. Mejor no llegar hasta aquí.' },
+    { lane:'tram', cls:'c-tram', from:[10,14], label:'Todo preparado', when:'Antes del 16 nov',
+      text:'Que no falte nada: las luces LED con su transformador y su perfil, el pie de la pantalla, los impresos, el merchandising, las pegatinas de las mesas y las bolsitas de golosinas. Y, por supuesto, las mesas, los taburetes, el olivo, el expositor, la nevera y el microondas. Con la cámara a mano para fotografiar los paneles antes de empezar.' },
     { lane:'mont', cls:'c-mont', from:[10,16], label:'Montaje', when:'16 nov · 9:00–20:00',
-      text:'Único día de montaje. Basta con la acreditación de expositor. Hacer fotos de los paneles antes de empezar. No pueden entrar vehículos a los pabellones a descargar.' },
-    { lane:'feria', cls:'c-feria', from:[10,17], to:[10,22], label:'Feria SICAB', when:'17–21 nov 10:00–21:00 · 22 nov 10:00–19:00',
-      text:'Feria abierta. El stand tiene que estar atendido en todo momento.' },
+      text:'El gran día de montar, y solo hay uno. Basta con la acreditación de expositor. Antes de nada, fotos de los paneles tal y como nos los entregan. Los vehículos no pueden entrar a descargar en los pabellones.' },
+    { lane:'feria', cls:'c-feria', from:[10,17], to:[10,22], label:'¡SICAB!', when:'17–21 nov 10:00–21:00 · 22 nov 10:00–19:00',
+      text:'Seis días para enseñar Juncosa Alta. El stand tiene que estar siempre atendido, así que conviene organizar bien los turnos.' },
     { lane:'desm', cls:'c-desm', from:[10,22], to:[10,23], label:'Desmontaje', when:'22 nov 19:00–22:00 · 23 nov 9:00–14:00',
-      text:'Retirar todo y dejar los paneles limpios, sin restos de cinta. Hacer fotos al terminar: cada panel dañado se cobra a 50 € y la platabanda o los perfiles a 150 €.' }
+      text:'Recogemos todo y dejamos los paneles limpios, sin restos de cinta. Fotos al terminar, por si acaso: CONTURSA cobra 50 € por cada panel dañado y 150 € por la platabanda o los perfiles.' }
   ];
   function d(a) { return new Date(2026, a[0], a[1]); }
   function idx(date) { return Math.round((date - START) / 864e5); }
