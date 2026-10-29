@@ -261,6 +261,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .tabs button[aria-selected="true"] { color: var(--ink); border-bottom-color: var(--accent); }
 .tabs button:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
 @media (max-width: 480px) { .tabs button { font-size: 1.05rem; padding: 10px 12px 8px; } }
+@media (max-width: 560px) { .tabs { overflow-x: auto; scrollbar-width: none; } .tabs::-webkit-scrollbar { display: none; } .tabs button { white-space: nowrap; flex: none; } }
 .bom { min-width: 900px; }
 .bom td.ck, .bom th.ck { width: 1%; white-space: nowrap; text-align: center; }
 .ckbox { display: inline-flex; align-items: center; gap: 6px; cursor: pointer; }
@@ -324,6 +325,35 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .inv-final video, .inv-final img { width: 100%; height: auto; aspect-ratio: 9 / 16; object-fit: cover; display: block; border-radius: 10px; background: #0a0a0a; box-shadow: 0 14px 34px rgba(27,23,20,.22), 0 2px 6px rgba(27,23,20,.12); }
 .inv-final figcaption { display: grid; gap: 2px; }
 .inv-final figcaption span { font-size: .85rem; color: var(--muted); }
+/* Revista: visor con paso de página */
+.flip-stage { position: relative; display: grid; justify-items: center; gap: 18px; padding: clamp(20px, 4vw, 48px) clamp(8px, 3vw, 40px) 22px; border-radius: 6px;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,255,255,.35), rgba(255,255,255,0) 70%), var(--stage); overflow: hidden; }
+.flip-book { position: relative; width: 100%; max-width: 1120px; transition: transform .7s cubic-bezier(.3,.7,.3,1); }
+.flip-book.at-cover { transform: translateX(-25%); }
+.flip-book.at-back { transform: translateX(25%); }
+.flip-book .stf__parent { filter: drop-shadow(0 18px 26px rgba(27,23,20,.32)) drop-shadow(0 3px 6px rgba(27,23,20,.18)); }
+.flip-page { background: #fff; overflow: hidden; }
+.flip-page img { width: 100%; height: 100%; object-fit: cover; display: block; user-select: none; -webkit-user-drag: none; pointer-events: none; }
+.flip-spine { position: absolute; top: 0; bottom: 0; left: 50%; width: 9%; transform: translateX(-50%); pointer-events: none; z-index: 3; opacity: 0; transition: opacity .3s;
+  background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.12) 38%, rgba(0,0,0,.26) 50%, rgba(0,0,0,.1) 62%, rgba(0,0,0,0) 100%); }
+.flip-book.is-open .flip-spine { opacity: 1; }
+.flip-book.is-busy .flip-spine { opacity: 0; transition: none; }
+.flip-loading { padding: 120px 0; font: 400 .9rem var(--body); color: var(--muted); letter-spacing: .08em; }
+.flip-bar { display: flex; align-items: center; gap: 14px; }
+.flip-bar button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: 400 1.2rem/1 var(--body); cursor: pointer; }
+.flip-bar button:hover:not(:disabled) { border-color: var(--accent); color: var(--accent-ink); }
+.flip-bar button:disabled { opacity: .35; cursor: default; }
+.flip-bar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.flip-count { min-width: 150px; text-align: center; font: 500 .74rem var(--body); letter-spacing: .18em; text-transform: uppercase; color: var(--muted); font-variant-numeric: tabular-nums; }
+.flip-thumbs { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.flip-thumbs button { padding: 0; border: 0; background: none; cursor: pointer; display: grid; gap: 4px; justify-items: center; font: 500 .66rem var(--body); letter-spacing: .1em; color: var(--muted); }
+.flip-thumbs img { width: 52px; height: auto; display: block; border-radius: 2px; outline: 2px solid transparent; outline-offset: 2px; opacity: .7; transition: opacity .2s, outline-color .2s; box-shadow: 0 2px 6px rgba(27,23,20,.2); }
+.flip-thumbs button:hover img { opacity: 1; }
+.flip-thumbs button[aria-current="true"] img { opacity: 1; outline-color: var(--accent); }
+.flip-thumbs button[aria-current="true"] { color: var(--accent-ink); }
+.flip-thumbs button:focus-visible img { outline-color: var(--ink); }
+@media (max-width: 640px) { .flip-book.at-cover, .flip-book.at-back { transform: none; } .flip-thumbs img { width: 38px; } }
+@media (prefers-reduced-motion: reduce) { .flip-book { transition: none; } }
 .planilla .gridl { stroke: #e7a3a3; stroke-width: .8; }
 .planilla .gnum { font: 500 9px var(--body); fill: var(--muted); }
 .planilla .afill { fill: var(--accent-soft); }
@@ -341,7 +371,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   <header>
     <span class="eyebrow">Juncosa Alta · SICAB 2026 · FIBES Sevilla · 17–22 nov</span>
     <h1>Vuestro stand en SICAB 2026</h1>
-    <p class="lede">Todo sobre el stand en tres pestañas. En <b>Contrato</b>: lo que hay que hacer antes del 28 de octubre, lo que incluye, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: el stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva.</p>
+    <p class="lede">Todo sobre el stand en cuatro pestañas. En <b>Contrato</b>: lo que hay que hacer antes del 28 de octubre, lo que incluye, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: el stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva. En <b>Revista</b>: la revista de la yeguada para hojear.</p>
     <p class="meta">Pabellón <b>2</b> · Stand <b>2030</b> · Stand <b>modular de 16 m², sin esquina</b> · Organiza <b>CONTURSA</b> · <b>sicab@sevillacityoffice.es · 954 478 746</b></p>
   </header>
 
@@ -349,6 +379,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     <button type="button" role="tab" id="t-contrato" aria-controls="p-contrato" aria-selected="true" data-tab="contrato">Contrato</button>
     <button type="button" role="tab" id="t-diseno" aria-controls="p-diseno" aria-selected="false" data-tab="diseno" tabindex="-1">Diseño del stand</button>
     <button type="button" role="tab" id="t-invitacion" aria-controls="p-invitacion" aria-selected="false" data-tab="invitacion" tabindex="-1">Invitación</button>
+    <button type="button" role="tab" id="t-revista" aria-controls="p-revista" aria-selected="false" data-tab="revista" tabindex="-1">Revista</button>
   </div>
   <div class="panel" id="p-contrato" role="tabpanel" aria-labelledby="t-contrato">
 
@@ -750,6 +781,28 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
         <img src="invitacion-sicab-story.jpg" alt="Invitación: Juncosa Alta, ven a vernos. SICAB 26, del 17 al 22 de noviembre en FIBES Sevilla, Pabellón 2, stand 2030.">
         <figcaption><b>Imagen fija</b><span>Para WhatsApp y correo</span></figcaption>
       </figure>
+    </div>
+  </section>
+  </div>
+
+  <div class="panel" id="p-revista" role="tabpanel" aria-labelledby="t-revista" hidden>
+  <section>
+    <div class="prose">
+      <span class="eyebrow">Revista · Yeguada Juncosa Alta</span>
+      <h2>La revista de la yeguada</h2>
+      <p class="muted">Ocho páginas en A5. Pasa las páginas arrastrando una esquina, pulsando sobre la página, con las flechas o con el teclado.</p>
+    </div>
+    <div class="flip-stage">
+      <div class="flip-book at-cover" id="flip-book">
+        <div id="flip-pages"><p class="flip-loading">Abriendo la revista…</p></div>
+        <div class="flip-spine"></div>
+      </div>
+      <div class="flip-bar">
+        <button type="button" id="flip-prev" aria-label="Página anterior">←</button>
+        <span class="flip-count" id="flip-count" aria-live="polite">Portada</span>
+        <button type="button" id="flip-next" aria-label="Página siguiente">→</button>
+      </div>
+      <div class="flip-thumbs" id="flip-thumbs" role="group" aria-label="Ir a una página"></div>
     </div>
   </section>
   </div>
@@ -1604,6 +1657,85 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 })();
 </script>
 
+<script src="https://cdn.jsdelivr.net/npm/page-flip@2.0.7/dist/js/page-flip.browser.js"></script>
+<script>
+// Revista: libro con paso de página (StPageFlip). Se monta la primera vez que se abre la pestaña.
+(function () {
+  var N = 8, pages = [], i;
+  for (i = 1; i <= N; i++) pages.push('revista-visor/pag-' + i + '.jpg');
+  var book = document.getElementById('flip-book'), holder = document.getElementById('flip-pages');
+  var prev = document.getElementById('flip-prev'), next = document.getElementById('flip-next');
+  var count = document.getElementById('flip-count'), thumbs = document.getElementById('flip-thumbs');
+  var pf = null;
+
+  pages.forEach(function (src, n) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.innerHTML = '<img src="' + src + '" alt="" loading="lazy"><span>' + (n === 0 ? 'Portada' : n === N - 1 ? 'Contra' : n + 1) + '</span>';
+    b.setAttribute('aria-label', n === 0 ? 'Portada' : n === N - 1 ? 'Contraportada' : 'Página ' + (n + 1));
+    b.addEventListener('click', function () { if (pf) pf.flip(n); });
+    thumbs.appendChild(b);
+  });
+
+  function update() {
+    var p = pf.getCurrentPageIndex(), land = pf.getOrientation() === 'landscape';
+    var label, shown = [p];
+    if (p === 0) label = 'Portada';
+    else if (p >= N - 1) label = 'Contraportada';
+    else if (land) { var l = p % 2 ? p : p - 1; shown = [l, l + 1]; label = 'Páginas ' + (l + 1) + '–' + (l + 2); }
+    else label = 'Página ' + (p + 1) + ' de ' + N;
+    count.textContent = label;
+    prev.disabled = p === 0;
+    next.disabled = p >= N - 1 || (land && p >= N - 2 && p !== 0 && p % 2 === 0);
+    book.classList.toggle('at-cover', land && p === 0);
+    book.classList.toggle('at-back', land && p >= N - 1);
+    book.classList.toggle('is-open', land && p > 0 && p < N - 1);
+    [].forEach.call(thumbs.children, function (b, n) { b.setAttribute('aria-current', String(shown.indexOf(n) >= 0)); });
+  }
+
+  // ancho máximo del libro abierto según la altura de la ventana (página A5 = 1 : 1,414)
+  function fit() { book.style.maxWidth = Math.round(2 * Math.min(780, window.innerHeight * 0.74) / 1.414) + 'px'; }
+
+  function mount() {
+    if (pf || !window.St) return;
+    fit();
+    holder.innerHTML = '';
+    var els = pages.map(function (src) {
+      var d = document.createElement('div');
+      d.className = 'flip-page';
+      d.innerHTML = '<img src="' + src + '" alt="" draggable="false">';
+      holder.appendChild(d);
+      return d;
+    });
+    pf = new St.PageFlip(holder, {
+      width: 554, height: 785, size: 'stretch',
+      minWidth: 260, maxWidth: 560, minHeight: 368, maxHeight: 794,
+      showCover: true, usePortrait: true, drawShadow: true, maxShadowOpacity: 0.45,
+      flippingTime: 850, mobileScrollSupport: true, autoSize: true
+    });
+    pf.loadFromHTML(els);
+    pf.on('flip', update);
+    pf.on('changeOrientation', update);
+    pf.on('changeState', function (e) { book.classList.toggle('is-busy', e.data !== 'read'); });
+    update();
+  }
+
+  window.addEventListener('resize', function () { if (pf) fit(); });
+  prev.addEventListener('click', function () { if (pf) pf.flipPrev(); });
+  next.addEventListener('click', function () { if (pf) pf.flipNext(); });
+  document.addEventListener('keydown', function (e) {
+    if (!pf || document.getElementById('p-revista').hidden) return;
+    var a = document.activeElement;
+    if (a && (a.getAttribute('role') === 'tab' || /INPUT|TEXTAREA|SELECT/.test(a.tagName))) return;
+    if (e.key === 'ArrowRight') { pf.flipNext(); e.preventDefault(); }
+    if (e.key === 'ArrowLeft') { pf.flipPrev(); e.preventDefault(); }
+  });
+  document.addEventListener('sicab-tab', function (e) {
+    if (e.detail === 'revista') setTimeout(mount, 0);
+  });
+})();
+</script>
+
 <script>
 // Pestañas: Contrato / Diseño del stand
 (function () {
@@ -1617,6 +1749,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     });
     try { history.replaceState(null, '', '#' + name); } catch (e) {}
     try { localStorage.setItem('sicab-tab', name); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('sicab-tab', { detail: name }));
   }
   tabs.forEach(function (t, i) {
     t.addEventListener('click', function () { show(t.dataset.tab); });
