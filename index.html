@@ -397,6 +397,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .steps .det ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
 .steps .det a { color: var(--accent-ink); font-weight: 500; }
 .steps .group { grid-column: 1 / -1; font: 500 .72rem var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin-top: 6px; }
+.wait { display: inline-block; font: 600 .68rem var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--accent-ink); background: var(--bg); border: 1px solid var(--accent); padding: 2px 8px; border-radius: 99px; margin-left: 6px; white-space: nowrap; vertical-align: 1px; }
 .done-list { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 12px; }
 .done-list summary { cursor: pointer; font-weight: 500; }
 .done-list ul { margin: 10px 0 0; padding-left: 20px; display: grid; gap: 6px; }
@@ -456,8 +457,8 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     <div class="urgent-count"><b id="dl-days">18</b><span id="dl-lab">días para el montaje</span></div>
     <ol class="steps" id="pasos">
       <li class="group">Para decidir</li>
-      <li><input type="checkbox" id="paso-merch"><label for="paso-merch"><b>El merchandising</b><span class="det">Qué detalle se lleva cada visitante y cuántos preparamos. Las bolsas de tela con frase son una buena opción. Mejor decidirlo pronto, porque la serigrafía suele tardar una o dos semanas.</span></label></li>
-      <li><input type="checkbox" id="paso-impresion"><label for="paso-impresion"><b>Qué imprimimos</b><span class="det">Tenemos tres modelos y los tres se pueden hojear aquí mismo: la <a href="#revista" data-goto="revista">revista de la yeguada</a>, el <a href="#triptico" data-goto="triptico">tríptico</a> y el <a href="#diptico" data-goto="diptico">díptico</a> de transportes. Solo queda elegir cuáles van a imprenta y cuántos de cada uno.</span></label></li>
+      <li><input type="checkbox" id="paso-merch"><label for="paso-merch"><b>El merchandising</b> <span class="wait">A la espera del presupuesto</span><span class="det">Ya lo tenemos elegido: <b>300 bolígrafos</b>, <b>100 bolsas de tela</b> y <b>100 llaveros</b>, todos con el logotipo. Hemos pedido presupuesto a <a href="#presupuesto-carlota">Gráficas La Carlota</a>, y en cuanto nos manden los modelos de bolsas y de llaveros, elegimos los que más nos gusten.</span></label></li>
+      <li><input type="checkbox" id="paso-impresion"><label for="paso-impresion"><b>Qué imprimimos</b> <span class="wait">A la espera del presupuesto</span><span class="det">Decidido: <b>100 revistas de la yeguada</b> y <b>250 trípticos</b> de transportes. Puedes hojear la <a href="#revista" data-goto="revista">revista</a> y el <a href="#triptico" data-goto="triptico">tríptico</a> aquí mismo. El presupuesto también se ha pedido a <a href="#presupuesto-carlota">Gráficas La Carlota</a>.</span></label></li>
       <li class="group">Para comprar</li>
       <li><input type="checkbox" id="paso-led"><label for="paso-led"><b>Las luces LED</b><span class="det">Una tira de luz cálida (<b>3000 K</b>) que recorre el stand a ras del zócalo y le da ese brillo acogedor. Hacen falta unos <b>11 metros</b>, así que con <b>3 rollos de 5 m</b> vamos sobrados.<br>Las tiras LED no se enchufan directamente: llevan un <b>transformador</b>, una cajita parecida al cargador de un portátil que va de la tira al enchufe. Muchas tiras ya lo traen en la caja; si no, hay que comprarlo aparte. Se conecta a una de las placas de enchufes que ya pedimos, así que no hace falta pedir nada más a CONTURSA.</span></label></li>
       <li><input type="checkbox" id="paso-canal"><label for="paso-canal"><b>El canal para las luces</b><span class="det">Un perfil de aluminio donde va metida la tira: la protege, la deja recta y hace que la luz se vea suave y uniforme. Para los mismos <b>11 metros</b>, por ejemplo <b>6 perfiles de 2 m</b> con su tapa difusora. Se pegan con la cinta de doble cara, sin un solo agujero.</span></label></li>
@@ -480,6 +481,26 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
         <li><b>Gráficas en vinilo por paneles</b> y <b>platabanda personalizada</b> con el logotipo.</li>
       </ul>
     </details>
+  </section>
+
+  <section id="presupuesto-carlota">
+    <div class="prose">
+      <span class="eyebrow">Impresos y merchandising · <span class="wait" style="margin-left:0">A la espera</span></span>
+      <h2>El presupuesto que hemos pedido a Gráficas La Carlota</h2>
+      <p>Después de hablarlo por teléfono, les escribimos para pedir precio de todo lo que llevaremos al stand. Estamos esperando su respuesta, junto con los modelos de bolsas y de llaveros que tienen para elegir.</p>
+    </div>
+    <div class="tablewrap">
+      <table style="min-width:560px">
+        <thead><tr><th>Qué</th><th class="r">Unidades</th><th>Cómo</th></tr></thead>
+        <tbody>
+          <tr><td>Bolígrafos blancos</td><td class="n r">300</td><td>Como los que nos hicieron para SIMA, blancos con el pulsador de bambú y el logotipo impreso. Referencia 22433.</td></tr>
+          <tr><td>Bolsas de tela</td><td class="n r">100</td><td>De unos 33 × 33 cm, con el logotipo impreso. Pendiente de ver sus modelos.</td></tr>
+          <tr><td>Revista de la yeguada</td><td class="n r">100</td><td>A5, 8 páginas a todo color. Portada en cartulina mate offset de 180 g, interior en papel mate offset de 140 g, grapada.</td></tr>
+          <tr><td>Tríptico de transportes</td><td class="n r">250</td><td>A4 plegado en tres.</td></tr>
+          <tr><td>Llaveros de metacrilato</td><td class="n r">100</td><td>Con el logotipo. Pendiente de ver sus modelos.</td></tr>
+        </tbody>
+      </table>
+    </div>
   </section>
 
   <section id="correo-artes">
@@ -1644,7 +1665,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     { lane:'comp', cls:'c-comp', from:[9,28], label:'Entrega a CONTURSA', when:'28 oct · hecho',
       text:'Pedidos, moqueta y artes finales entregados dentro de plazo y sin recargo. El stand ya está en marcha.' },
     { lane:'tram', cls:'c-tram', from:[9,29], to:[10,4], label:'Merchandising e impresos', when:'Esta semana',
-      text:'Es el momento de elegir el detalle que se llevará cada visitante y qué imprimimos: la revista, el tríptico o el díptico, y cuántos de cada uno. También buscaremos las pegatinas de las mesas y las bolsitas para las golosinas, y enviaremos la invitación por WhatsApp a clientes y amigos.' },
+      text:'Ya sabemos lo que queremos: 300 bolígrafos, 100 bolsas de tela, 100 llaveros, 100 revistas y 250 trípticos. Hemos pedido el presupuesto a Gráficas La Carlota y estamos esperando su respuesta y sus modelos de bolsas y llaveros. Mientras tanto, buscaremos las pegatinas de las mesas y las bolsitas para las golosinas, y enviaremos la invitación por WhatsApp a clientes y amigos.' },
     { lane:'pago', cls:'c-pago', from:[9,31], label:'Segundo pago del stand', when:'Antes del 31 oct',
       text:'El 50 % restante del stand, unos 1.585 €, por transferencia a Congresos y Turismo de Sevilla, S.A. En el concepto, el nombre fiscal de la empresa y «SICAB 2026».' },
     { lane:'comp', cls:'c-comp', from:[10,1], label:'Último día para cancelar', when:'1 nov',
