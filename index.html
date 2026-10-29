@@ -398,7 +398,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   <header>
     <span class="eyebrow">Juncosa Alta · SICAB 2026 · FIBES Sevilla · 17–22 nov</span>
     <h1>Vuestro stand en SICAB 2026</h1>
-    <p class="lede">Todo sobre el stand en cinco pestañas. En <b>Contrato</b>: lo que hay que hacer antes del 28 de octubre, lo que incluye, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: el stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva. En <b>Revista</b>: la revista de la yeguada para hojear. En <b>Tríptico</b>: el folleto de transportes, para abrirlo como el de papel.</p>
+    <p class="lede">Todo sobre el stand en seis pestañas. En <b>Contrato</b>: lo que hay que hacer antes del 28 de octubre, lo que incluye, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: el stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva. En <b>Revista</b>: la revista de la yeguada para hojear. En <b>Tríptico</b> y <b>Díptico</b>: las dos versiones del folleto de transportes, para abrirlas como las de papel.</p>
     <p class="meta">Pabellón <b>2</b> · Stand <b>2030</b> · Stand <b>modular de 16 m², sin esquina</b> · Organiza <b>CONTURSA</b> · <b>sicab@sevillacityoffice.es · 954 478 746</b></p>
   </header>
 
@@ -408,6 +408,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     <button type="button" role="tab" id="t-invitacion" aria-controls="p-invitacion" aria-selected="false" data-tab="invitacion" tabindex="-1">Invitación</button>
     <button type="button" role="tab" id="t-revista" aria-controls="p-revista" aria-selected="false" data-tab="revista" tabindex="-1">Revista</button>
     <button type="button" role="tab" id="t-triptico" aria-controls="p-triptico" aria-selected="false" data-tab="triptico" tabindex="-1">Tríptico</button>
+    <button type="button" role="tab" id="t-diptico" aria-controls="p-diptico" aria-selected="false" data-tab="diptico" tabindex="-1">Díptico</button>
   </div>
   <div class="panel" id="p-contrato" role="tabpanel" aria-labelledby="t-contrato">
 
@@ -861,6 +862,36 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <div class="tri-big">
         <a class="btn-dl" href="triptico-visor/cara-interior.jpg" target="_blank" rel="noopener">Ver el interior en grande</a>
         <a class="btn-dl" href="triptico-visor/cara-exterior.jpg" target="_blank" rel="noopener">Ver el exterior en grande</a>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <div class="panel" id="p-diptico" role="tabpanel" aria-labelledby="t-diptico" hidden>
+  <section>
+    <div class="prose">
+      <span class="eyebrow">Díptico · Transportes Juncosa Alta</span>
+      <h2>El díptico de transportes</h2>
+      <p class="muted">Un A4 doblado por la mitad. Pulsa sobre el díptico o usa los botones para abrirlo y darle la vuelta.</p>
+    </div>
+    <div class="tri-stage">
+      <div class="tri-scene" id="dip-scene">
+        <div class="tri-floor" id="dip-floor"></div>
+        <div class="tri-rig" id="dip-rig" role="button" tabindex="0" aria-label="Abrir o cerrar el díptico">
+          <div class="tri-p tri-mid"><div class="tri-face front" style="background-image:url(diptico-visor/int-2.jpg)"></div><div class="tri-face back" style="background-image:url(diptico-visor/ext-1.jpg)"></div></div>
+          <div class="tri-hinge tri-hl" id="dip-hl"><div class="tri-p"><div class="tri-face front" style="background-image:url(diptico-visor/int-1.jpg)"></div><div class="tri-face back" style="background-image:url(diptico-visor/ext-2.jpg)"></div></div></div>
+        </div>
+      </div>
+      <div class="tri-steps" id="dip-steps" role="group" aria-label="Pasos del díptico">
+        <button type="button" data-step="0" aria-pressed="true">Portada</button>
+        <button type="button" data-step="1" aria-pressed="false">Interior</button>
+        <button type="button" data-step="2" aria-pressed="false">Exterior</button>
+        <button type="button" data-step="3" aria-pressed="false">Contraportada</button>
+      </div>
+      <p class="tri-cap" id="dip-cap" aria-live="polite"></p>
+      <div class="tri-big">
+        <a class="btn-dl" href="diptico-visor/cara-interior.jpg" target="_blank" rel="noopener">Ver el interior en grande</a>
+        <a class="btn-dl" href="diptico-visor/cara-exterior.jpg" target="_blank" rel="noopener">Ver el exterior en grande</a>
       </div>
     </div>
   </section>
@@ -1850,6 +1881,56 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   rig.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { go((step + 1) % 4); e.preventDefault(); } });
   window.addEventListener('resize', function () { if (ready) go(step); });
   document.addEventListener('sicab-tab', function (e) { if (e.detail === 'triptico') setTimeout(mount, 0); });
+})();
+</script>
+
+<script>
+// Díptico en 3D: la mitad izquierda del interior se cierra sobre la derecha y deja la portada fuera.
+// Paso 0 portada · 1 interior · 2 exterior (abierto y del revés) · 3 contraportada (cerrado y del revés)
+(function () {
+  var scene = document.getElementById('dip-scene'), rig = document.getElementById('dip-rig');
+  var hl = document.getElementById('dip-hl'), floor = document.getElementById('dip-floor'), cap = document.getElementById('dip-cap');
+  var btns = [].slice.call(document.querySelectorAll('#dip-steps button'));
+  var RATIO = 210 / 148.5, step = 0, pw = 0, ready = false;
+  var CAPS = ['Cerrado: la portada.', 'Abierto: el interior.', 'Abierto y del revés: la cara exterior completa.', 'Cerrado y del revés: la contraportada.'];
+  var PANELS = [1, 2, 2, 1], SHIFT = [0, .5, -.5, 0];
+
+  function size() {
+    var W = scene.clientWidth;
+    var H = Math.min(window.innerHeight * 0.62, 560, W * 0.68);
+    pw = Math.round(H / RATIO);
+    scene.style.height = Math.round(H * 1.1) + 'px';
+    rig.style.setProperty('--pw', pw + 'px'); rig.style.width = pw + 'px'; rig.style.height = Math.round(H) + 'px'; rig.style.marginLeft = -pw / 2 + 'px';
+    rig.style.top = Math.round(H * 0.05) + 'px';
+    return W;
+  }
+
+  function go(n) {
+    var W = size();
+    step = n;
+    var s = Math.min(1, (W * 0.94) / (PANELS[n] * pw));
+    var flip = n >= 2 ? 180 : 0;
+    rig.style.transform = 'translateX(' + SHIFT[n] * pw * s + 'px) scale(' + s + ') rotateY(' + flip + 'deg)';
+    hl.style.transform = n === 0 || n === 3 ? 'translateZ(2px) rotateY(180deg)' : n === 2 ? 'rotateY(-12deg)' : 'rotateY(14deg)';
+    floor.style.width = PANELS[n] * pw * s * 1.05 + 'px';
+    floor.style.bottom = Math.round(pw * RATIO * (0.55 - s / 2) - 14) + 'px';
+    cap.textContent = CAPS[n];
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.step === n)); });
+  }
+
+  // la primera vez se coloca cerrado sin animación
+  function mount() {
+    if (ready) return; ready = true;
+    var els = [rig, hl, floor];
+    els.forEach(function (e) { e.style.transition = 'none'; });
+    go(0); rig.offsetWidth;
+    els.forEach(function (e) { e.style.transition = ''; });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { go(+b.dataset.step); }); });
+  rig.addEventListener('click', function () { go((step + 1) % 4); });
+  rig.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { go((step + 1) % 4); e.preventDefault(); } });
+  window.addEventListener('resize', function () { if (ready) go(step); });
+  document.addEventListener('sicab-tab', function (e) { if (e.detail === 'diptico') setTimeout(mount, 0); });
 })();
 </script>
 
