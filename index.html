@@ -354,6 +354,33 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .flip-thumbs button:focus-visible img { outline-color: var(--ink); }
 @media (max-width: 640px) { .flip-book.at-cover, .flip-book.at-back { transform: none; } .flip-thumbs img { width: 38px; } }
 @media (prefers-reduced-motion: reduce) { .flip-book { transition: none; } }
+/* Tríptico: se abre y se cierra en 3D como el de papel */
+.tri-stage { position: relative; display: grid; justify-items: center; gap: 18px; padding: clamp(20px, 4vw, 44px) 12px 22px; border-radius: 6px; overflow: hidden;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255,255,255,.35), rgba(255,255,255,0) 70%), var(--stage); }
+.tri-scene { position: relative; width: 100%; perspective: 2400px; perspective-origin: 50% 35%; }
+.tri-rig { position: absolute; left: 50%; top: 0; transform-style: preserve-3d; cursor: pointer; transition: transform .9s cubic-bezier(.45,.05,.25,1); }
+.tri-hinge { position: absolute; top: 0; width: 0; height: 100%; transform-style: preserve-3d; transition: transform .9s cubic-bezier(.45,.05,.25,1); }
+.tri-hl { left: 0; } .tri-hr { left: 100%; }
+.tri-p { position: absolute; top: 0; height: 100%; transform-style: preserve-3d; }
+.tri-mid { left: 0; width: 100%; }
+.tri-hinge .tri-p { width: var(--pw, 260px); }
+.tri-hl .tri-p { right: 0; } .tri-hr .tri-p { left: 0; }
+.tri-face { position: absolute; inset: 0; background: #fff center / 100% 100% no-repeat; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.tri-face.back { transform: rotateY(180deg); }
+.tri-face::after { content: ""; position: absolute; inset: 0; pointer-events: none; transition: opacity .9s; }
+.tri-hl .tri-face.front::after { background: linear-gradient(90deg, rgba(0,0,0,.02), rgba(0,0,0,.12)); }
+.tri-hr .tri-face.front::after { background: linear-gradient(270deg, rgba(0,0,0,.02), rgba(0,0,0,.12)); }
+.tri-hl .tri-face.back::after { background: linear-gradient(270deg, rgba(0,0,0,.02), rgba(0,0,0,.12)); }
+.tri-hr .tri-face.back::after { background: linear-gradient(90deg, rgba(0,0,0,.02), rgba(0,0,0,.12)); }
+.tri-floor { position: absolute; left: 50%; bottom: -14px; height: 34px; border-radius: 50%; background: rgba(40,25,15,.4); filter: blur(16px); transform: translateX(-50%); transition: width .9s, bottom .9s; pointer-events: none; }
+.tri-steps { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+.tri-steps button { font: 500 .8rem var(--body); letter-spacing: .04em; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 2px; padding: 8px 14px; cursor: pointer; }
+.tri-steps button:hover { border-color: var(--accent); }
+.tri-steps button[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.tri-steps button:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.tri-cap { font-size: .9rem; color: var(--muted); text-align: center; min-height: 1.6em; }
+.tri-big { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; }
+@media (prefers-reduced-motion: reduce) { .tri-rig, .tri-hinge, .tri-floor { transition: none; } }
 .planilla .gridl { stroke: #e7a3a3; stroke-width: .8; }
 .planilla .gnum { font: 500 9px var(--body); fill: var(--muted); }
 .planilla .afill { fill: var(--accent-soft); }
@@ -371,7 +398,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   <header>
     <span class="eyebrow">Juncosa Alta · SICAB 2026 · FIBES Sevilla · 17–22 nov</span>
     <h1>Vuestro stand en SICAB 2026</h1>
-    <p class="lede">Todo sobre el stand en cuatro pestañas. En <b>Contrato</b>: lo que hay que hacer antes del 28 de octubre, lo que incluye, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: el stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva. En <b>Revista</b>: la revista de la yeguada para hojear.</p>
+    <p class="lede">Todo sobre el stand en cinco pestañas. En <b>Contrato</b>: lo que hay que hacer antes del 28 de octubre, lo que incluye, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: el stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva. En <b>Revista</b>: la revista de la yeguada para hojear. En <b>Tríptico</b>: el folleto de transportes, para abrirlo como el de papel.</p>
     <p class="meta">Pabellón <b>2</b> · Stand <b>2030</b> · Stand <b>modular de 16 m², sin esquina</b> · Organiza <b>CONTURSA</b> · <b>sicab@sevillacityoffice.es · 954 478 746</b></p>
   </header>
 
@@ -380,6 +407,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     <button type="button" role="tab" id="t-diseno" aria-controls="p-diseno" aria-selected="false" data-tab="diseno" tabindex="-1">Diseño del stand</button>
     <button type="button" role="tab" id="t-invitacion" aria-controls="p-invitacion" aria-selected="false" data-tab="invitacion" tabindex="-1">Invitación</button>
     <button type="button" role="tab" id="t-revista" aria-controls="p-revista" aria-selected="false" data-tab="revista" tabindex="-1">Revista</button>
+    <button type="button" role="tab" id="t-triptico" aria-controls="p-triptico" aria-selected="false" data-tab="triptico" tabindex="-1">Tríptico</button>
   </div>
   <div class="panel" id="p-contrato" role="tabpanel" aria-labelledby="t-contrato">
 
@@ -803,6 +831,37 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
         <button type="button" id="flip-next" aria-label="Página siguiente">→</button>
       </div>
       <div class="flip-thumbs" id="flip-thumbs" role="group" aria-label="Ir a una página"></div>
+    </div>
+  </section>
+  </div>
+
+  <div class="panel" id="p-triptico" role="tabpanel" aria-labelledby="t-triptico" hidden>
+  <section>
+    <div class="prose">
+      <span class="eyebrow">Tríptico · Transportes Juncosa Alta</span>
+      <h2>El tríptico de transportes</h2>
+      <p class="muted">Un A4 plegado en tres. Pulsa sobre el tríptico o usa los botones para abrirlo paso a paso y darle la vuelta.</p>
+    </div>
+    <div class="tri-stage">
+      <div class="tri-scene" id="tri-scene">
+        <div class="tri-floor" id="tri-floor"></div>
+        <div class="tri-rig" id="tri-rig" role="button" tabindex="0" aria-label="Abrir o cerrar el tríptico">
+          <div class="tri-p tri-mid"><div class="tri-face front" style="background-image:url(triptico-visor/int-2.jpg)"></div><div class="tri-face back" style="background-image:url(triptico-visor/ext-2.jpg)"></div></div>
+          <div class="tri-hinge tri-hl" id="tri-hl"><div class="tri-p"><div class="tri-face front" style="background-image:url(triptico-visor/int-1.jpg)"></div><div class="tri-face back" style="background-image:url(triptico-visor/ext-3.jpg)"></div></div></div>
+          <div class="tri-hinge tri-hr" id="tri-hr"><div class="tri-p"><div class="tri-face front" style="background-image:url(triptico-visor/int-3.jpg)"></div><div class="tri-face back" style="background-image:url(triptico-visor/ext-1.jpg)"></div></div></div>
+        </div>
+      </div>
+      <div class="tri-steps" id="tri-steps" role="group" aria-label="Pasos del tríptico">
+        <button type="button" data-step="0" aria-pressed="true">Cerrado</button>
+        <button type="button" data-step="1" aria-pressed="false">Primera hoja</button>
+        <button type="button" data-step="2" aria-pressed="false">Interior</button>
+        <button type="button" data-step="3" aria-pressed="false">Exterior</button>
+      </div>
+      <p class="tri-cap" id="tri-cap" aria-live="polite"></p>
+      <div class="tri-big">
+        <a class="btn-dl" href="triptico-visor/cara-interior.jpg" target="_blank" rel="noopener">Ver el interior en grande</a>
+        <a class="btn-dl" href="triptico-visor/cara-exterior.jpg" target="_blank" rel="noopener">Ver el exterior en grande</a>
+      </div>
     </div>
   </section>
   </div>
@@ -1733,6 +1792,64 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   document.addEventListener('sicab-tab', function (e) {
     if (e.detail === 'revista') setTimeout(mount, 0);
   });
+})();
+</script>
+
+<script>
+// Tríptico en 3D. Pliegue enrollado: la portada cierra por encima de la solapa de preguntas.
+// Paso 0 cerrado · 1 abierta la portada · 2 interior · 3 vuelto del revés (exterior completo)
+(function () {
+  var scene = document.getElementById('tri-scene'), rig = document.getElementById('tri-rig');
+  var hl = document.getElementById('tri-hl'), hr = document.getElementById('tri-hr');
+  var floor = document.getElementById('tri-floor'), cap = document.getElementById('tri-cap');
+  var btns = [].slice.call(document.querySelectorAll('#tri-steps button'));
+  var RATIO = 210 / 98.6, step = 0, pw = 0, ready = false;
+  var CAPS = ['Cerrado: la portada.', 'Al abrir la portada aparece la solapa con las preguntas frecuentes.', 'Abierto del todo: el interior.', 'Por detrás: la cara exterior completa.'];
+  var PANELS = [1, 2, 3, 3];
+
+  function size() {
+    var W = scene.clientWidth;
+    var H = Math.min(window.innerHeight * 0.66, 620, W * 1.15);
+    pw = Math.round(H / RATIO);
+    scene.style.height = Math.round(H * 1.1) + 'px';
+    rig.style.setProperty('--pw', pw + 'px'); rig.style.width = pw + 'px'; rig.style.height = Math.round(H) + 'px'; rig.style.marginLeft = -pw / 2 + 'px';
+    rig.style.top = Math.round(H * 0.05) + 'px';
+    return W;
+  }
+
+  function go(n, from) {
+    var W = size(), n0 = from == null ? step : from;
+    step = n;
+    var s = Math.min(1, (W * 0.94) / (PANELS[n] * pw));
+    var shift = n === 1 ? pw / 2 : 0, flip = n === 3 ? 180 : 0;
+    rig.style.transform = 'translateX(' + shift * s + 'px) scale(' + s + ') rotateY(' + flip + 'deg)';
+    // al cerrar, primero la solapa y luego la portada; al abrir, al revés
+    var closing = n === 0 && n0 !== 0;
+    hl.style.transitionDelay = closing && n0 >= 2 ? '.45s' : '0s';
+    hr.style.transitionDelay = '0s';
+    hl.style.transform = n === 0 ? 'translateZ(4px) rotateY(180deg)' : n === 3 ? 'rotateY(-12deg)' : 'rotateY(14deg)';
+    hr.style.transform = n <= 1 ? 'translateZ(2px) rotateY(-180deg)' : n === 3 ? 'rotateY(12deg)' : 'rotateY(-14deg)';
+    floor.style.width = PANELS[n] * pw * s * 1.05 + 'px';
+    // la sombra sigue al borde inferior del tríptico (se escala desde su centro)
+    var H = pw * RATIO;
+    floor.style.bottom = Math.round(H * (0.55 - s / 2) - 14) + 'px';
+    cap.textContent = CAPS[n];
+    btns.forEach(function (b) { b.setAttribute('aria-pressed', String(+b.dataset.step === n)); });
+  }
+
+  // la primera vez se coloca cerrado sin animación
+  function mount() {
+    if (ready) return; ready = true;
+    var els = [rig, hl, hr, floor];
+    els.forEach(function (e) { e.style.transition = 'none'; });
+    go(0); rig.offsetWidth;
+    els.forEach(function (e) { e.style.transition = ''; });
+  }
+  btns.forEach(function (b) { b.addEventListener('click', function () { go(+b.dataset.step); }); });
+  rig.addEventListener('click', function () { go((step + 1) % 4); });
+  rig.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { go((step + 1) % 4); e.preventDefault(); } });
+  window.addEventListener('resize', function () { if (ready) go(step); });
+  document.addEventListener('sicab-tab', function (e) { if (e.detail === 'triptico') setTimeout(mount, 0); });
 })();
 </script>
 
