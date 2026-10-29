@@ -387,6 +387,19 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 .planilla .gwall { stroke: var(--ink); stroke-width: 5; }
 .planilla .gwall2 { stroke: var(--ink); stroke-width: 3; }
 .planilla .gtxt { font: 500 11px var(--body); fill: var(--ink); }
+.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; grid-column: 1 / -1; max-width: 86ch; }
+.steps > li { display: grid; grid-template-columns: 22px minmax(0,1fr); gap: 12px; align-items: start; }
+.steps input { width: 18px; height: 18px; margin: 3px 0 0; accent-color: var(--accent); cursor: pointer; }
+.steps label { cursor: pointer; }
+.steps li:has(input:checked) label > b { text-decoration: line-through; color: var(--muted); }
+.steps .det { display: block; margin-top: 4px; font-size: .92rem; color: var(--muted); }
+.steps .det b { color: var(--ink); font-weight: 500; }
+.steps .det ul { margin: 6px 0 0; padding-left: 18px; display: grid; gap: 4px; }
+.steps .det a { color: var(--accent-ink); font-weight: 500; }
+.steps .group { grid-column: 1 / -1; font: 500 .72rem var(--body); letter-spacing: .16em; text-transform: uppercase; color: var(--accent-ink); margin-top: 6px; }
+.done-list { grid-column: 1 / -1; border-top: 1px solid var(--line); padding-top: 12px; }
+.done-list summary { cursor: pointer; font-weight: 500; }
+.done-list ul { margin: 10px 0 0; padding-left: 20px; display: grid; gap: 6px; }
 .todo .done { font: 600 .68rem var(--body); letter-spacing: .1em; text-transform: uppercase; color: var(--ok); background: var(--ok-soft); padding: 2px 7px; border-radius: 99px; margin-left: 6px; white-space: nowrap; }
 .plan .agmark circle { fill: #2f6f9f; } .plan .agmark text { font-size: 10px; }
 </style>
@@ -398,7 +411,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   <header>
     <span class="eyebrow">Juncosa Alta · SICAB 2026 · FIBES Sevilla · 17–22 nov</span>
     <h1>Vuestro stand en SICAB 2026</h1>
-    <p class="lede">Todo sobre el stand en seis pestañas. En <b>Contrato</b>: lo que hay que hacer antes del 28 de octubre, lo que incluye, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: el stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva. En <b>Revista</b>: la revista de la yeguada para hojear. En <b>Tríptico</b> y <b>Díptico</b>: las dos versiones del folleto de transportes, para abrirlas como las de papel.</p>
+    <p class="lede">Todo sobre el stand en seis pestañas. En <b>Contrato</b>: los próximos pasos, lo que incluye el stand, las respuestas de CONTURSA y las fechas. En <b>Diseño</b>: el stand en 3D, qué hay que pedir y cuánto cuesta. En <b>Invitación</b>: la invitación definitiva. En <b>Revista</b>: la revista de la yeguada para hojear. En <b>Tríptico</b> y <b>Díptico</b>: las dos versiones del folleto de transportes, para abrirlas como las de papel.</p>
     <p class="meta">Pabellón <b>2</b> · Stand <b>2030</b> · Stand <b>modular de 16 m², sin esquina</b> · Organiza <b>CONTURSA</b> · <b>sicab@sevillacityoffice.es · 954 478 746</b></p>
   </header>
 
@@ -436,30 +449,44 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
 
   <section class="urgent">
     <div class="urgent-head">
-      <span class="eyebrow">Lo urgente</span>
-      <h2>Hay que cerrar todo antes del 28 de octubre</h2>
-      <p>CONTURSA necesita ese día los pedidos, el color de la moqueta y los diseños finales de las gráficas. Después no garantiza la entrega y cobra un recargo.</p>
+      <span class="eyebrow">Próximos pasos</span>
+      <h2>Los artes ya están enviados. Ahora toca preparar el resto</h2>
+      <p>Los pedidos, la moqueta y los artes finales llegaron a CONTURSA dentro de plazo, así que no hay recargos. Queda decidir qué se imprime y qué se regala, y comprar lo que va en el stand antes del montaje del 16 de noviembre.</p>
     </div>
-    <div class="urgent-count"><b id="dl-days">8</b><span id="dl-lab">días</span></div>
-    <ol class="todo">
-      <li><b>Moqueta:</b> 0303 Coñac. <span class="done">Decidido</span></li>
-      <li><b>Almacén de 2 × 1 m con puerta</b> (68 € + IVA), con los 2 m a lo largo de la pared del fondo, a la derecha. <span class="done">Decidido</span></li>
-      <li><b>2 placas de 4 enchufes</b> (11,50 € + IVA cada una): una en el fondo, detrás de la pantalla, y otra dentro del almacén. <span class="done">Decidido</span></li>
-      <li><b>Gráficas en vinilo por paneles</b> con el proveedor oficial: 11 paneles a 66 € + IVA (hay que confirmar si incluye la colocación). <span class="done">Decidido</span></li>
-      <li><b>Platabanda personalizada</b> con el logotipo impreso (52 € + IVA). <span class="done">Decidido</span></li>
-      <li><b>1 rollo de cinta de doble cara</b> (12 € + IVA, 50 m). <span class="done">Decidido</span></li>
-      <li><b>Toma de agua con fregadero pequeño</b> dentro del almacén (código 08004, 70 € + IVA). <span class="done">Decidido</span></li>
-      <li><b>Correo a CONTURSA</b> con el pedido, la planilla y el tarifario. <span class="done">Enviado el 20 de octubre</span></li>
-      <li><b>Enviar los artes finales de los 11 paneles y la platabanda</b> y pedir que confirmen la configuración de los archivos. <a href="#correo-artes">Ver el correo</a></li>
+    <div class="urgent-count"><b id="dl-days">18</b><span id="dl-lab">días para el montaje</span></div>
+    <ol class="steps" id="pasos">
+      <li class="group">Decidir</li>
+      <li><input type="checkbox" id="paso-merch"><label for="paso-merch"><b>Decidir el merchandising</b><span class="det">Qué se regala en el stand y cuántas unidades, por ejemplo las bolsas de tela con frase. Conviene cerrarlo cuanto antes: la serigrafía de las bolsas suele tardar una o dos semanas.</span></label></li>
+      <li><input type="checkbox" id="paso-impresion"><label for="paso-impresion"><b>Elegir los modelos de impresión</b><span class="det">Hay tres, y los tres se pueden ver en esta web: la <a href="#revista" data-goto="revista">revista de la yeguada</a>, el <a href="#triptico" data-goto="triptico">tríptico</a> y el <a href="#diptico" data-goto="diptico">díptico</a> de transportes. Decidir cuáles se imprimen y cuántos de cada uno.</span></label></li>
+      <li class="group">Comprar</li>
+      <li><input type="checkbox" id="paso-led"><label for="paso-led"><b>Luces LED</b><span class="det">Tira LED de luz cálida (<b>3000 K</b>) para el zócalo: unos <b>11 m</b> en total (4 m en la pared izquierda, 3 m en la derecha, 2 m en el fondo y 2 m en las caras del almacén que dan al stand; la puerta va sin luz). Con <b>3 rollos de 5 m</b> sobra. Hace falta también la fuente de alimentación y un regulador. Antes de comprar, confirmad que CONTURSA os da permiso por escrito (lo explica la pestaña <a href="#diseno" data-goto="diseno">Diseño</a>).</span></label></li>
+      <li><input type="checkbox" id="paso-canal"><label for="paso-canal"><b>Canal (perfil de aluminio) para las luces LED</b><span class="det">Los mismos <b>11 m</b>: por ejemplo, <b>6 perfiles de 2 m</b> con difusor opal y tapas. Se pegan con la cinta de doble cara de CONTURSA, sin taladrar.</span></label></li>
+      <li><input type="checkbox" id="paso-pie"><label for="paso-pie"><b>Pie para la televisión</b><span class="det">La pantalla de 65" va alta para que se vea desde el pasillo por encima de la gente. <b>Altura óptima: el centro de la pantalla entre 1,95 y 2,05 m</b>, es decir, el borde inferior entre 1,55 y 1,65 m y el superior por debajo de 2,45 m (el panel mide 2,56 m). Al comprar, mirad:
+        <ul><li>que el pie llegue a <b>2,05 m de altura máxima al centro de la pantalla</b> (muchos se quedan en 1,60–1,80 m);</li><li>que sea para 65" y aguante <b>40 kg o más</b>;</li><li>que el anclaje coincida con el VESA de vuestra pantalla (en las de 65" suele ser 400 × 400);</li><li>base ancha y ruedas con freno.</li></ul></span></label></li>
+      <li class="group">Averiguar</li>
+      <li><input type="checkbox" id="paso-pegatinas"><label for="paso-pegatinas"><b>Las 2 pegatinas para las mesas</b><span class="det">Medir el tablero de las mesas altas y pedir presupuesto de vinilo impreso. Mejor laminado mate (no hace brillos con los focos) y de adhesivo removible, para que no deje restos al quitarlo.</span></label></li>
+      <li><input type="checkbox" id="paso-bolsitas"><label for="paso-bolsitas"><b>Las bolsitas para las golosinas de caballos</b><span class="det">Decidir el tamaño, cuántas, el tipo de cierre y si llevan el logotipo (impreso, con sello o con una pegatina), y buscar proveedor.</span></label></li>
+      <li class="group">Enviar</li>
+      <li><input type="checkbox" id="paso-invitacion"><label for="paso-invitacion"><b>Enviar el PDF de la invitación por WhatsApp</b><span class="det">A clientes y contactos. El vídeo y la imagen para stories están en la pestaña <a href="#invitacion" data-goto="invitacion">Invitación</a>.</span></label></li>
     </ol>
-    <p class="muted small">Recargos por pedir tarde: <b>+20 %</b> del 29 de octubre al 9 de noviembre y <b>+30 %</b> del 10 al 13 de noviembre. Se puede cancelar hasta 15 días antes del montaje (1 de noviembre); después se cobra el 100 %.</p>
+    <p class="muted small" style="grid-column:1/-1">Lo que marques se guarda solo en este navegador.</p>
+    <details class="done-list">
+      <summary>Ya hecho</summary>
+      <ul>
+        <li><b>Artes finales</b> de los 11 paneles y la platabanda: enviados dentro de plazo, con el correo, el esquema de colocación y los renders.</li>
+        <li><b>Correo a CONTURSA</b> con el pedido, la planilla y el tarifario (20 de octubre).</li>
+        <li><b>Moqueta</b> 0303 Coñac.</li>
+        <li><b>Almacén de 2 × 1 m</b> con puerta, <b>2 placas de 4 enchufes</b>, <b>toma de agua</b> con fregadero y <b>1 rollo de cinta</b> de doble cara.</li>
+        <li><b>Gráficas en vinilo por paneles</b> y <b>platabanda personalizada</b> con el logotipo.</li>
+      </ul>
+    </details>
   </section>
 
   <section id="correo-artes">
     <div class="prose">
-      <span class="eyebrow">Correo a SICAB · artes finales</span>
+      <span class="eyebrow">Correo a SICAB · artes finales · <span class="tag ok">Enviado</span></span>
       <h2>El correo con los artes de los paneles y la platabanda</h2>
-      <p>Descarga el esquema de colocación y adjúntalo al correo.</p>
+      <p>Se envió dentro de plazo. Lo dejamos aquí como referencia, junto con el esquema de colocación que iba adjunto.</p>
       <p class="dl-row"><a class="btn-dl" href="esquema-colocacion-stand-2030.png" target="_blank" rel="noopener">Descargar el esquema de colocación (PNG)</a></p>
     </div>
     <div class="mail-head"><button type="button" class="copy-btn" data-copy="mail-artes">Copiar texto</button></div>
@@ -709,7 +736,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     <div class="prose">
       <span class="eyebrow">Gráficas · las imprime y coloca CONTURSA</span>
       <h2>Qué hay que diseñar y enviar</h2>
-      <p>Los diseños del 3D son solo una referencia. El diseño final lo hacéis vosotros y lo enviáis en <b>PDF y en vectores</b> antes del <b>28 de octubre</b>. Hay dos formas de vestir las paredes:</p>
+      <p>Los diseños del 3D son solo una referencia. El diseño final lo hicisteis vosotros y ya está enviado a CONTURSA, dentro de plazo. Hay dos formas de vestir las paredes:</p>
     </div>
     <div class="variants">
       <div class="variant pick"><span class="badge">Recomendado</span><h3>Vinilo por paneles</h3>
@@ -761,7 +788,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
       <table class="bom">
         <thead><tr><th class="ck">Incluir</th><th>Concepto</th><th>Detalle</th><th class="r">Con IVA</th></tr></thead>
         <tbody>
-          <tr class="grp"><td colspan="4">Pedidos a CONTURSA (antes del 28 de octubre)</td></tr>
+          <tr class="grp"><td colspan="4">Pedidos a CONTURSA (ya enviados)</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-g1" class="bud" data-kind="off" data-min="878.46" data-max="878.46" data-group="graf" checked aria-label="Incluir Vinilo por paneles"></td><td>Vinilo por paneles</td><td>11 paneles de 0,95 × 2,56 m a 66 € + IVA</td><td class="n r">878,46 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-g2" class="bud" data-kind="off" data-min="2606.34" data-max="2606.34" data-group="graf" aria-label="Incluir Foam a pared completa"></td><td>Foam a pared completa</td><td>En lugar del vinilo: 3 paredes de 4 × 2,7 m a 718 € + IVA</td><td class="n r">2.606,34 €</td></tr>
           <tr><td class="ck"><input type="checkbox" id="b-g3" class="bud" data-kind="off" data-min="62.92" data-max="62.92" checked aria-label="Incluir Platabanda personalizada"></td><td>Platabanda personalizada</td><td>3,95 × 0,52 m impresa, 52 € + IVA. Si no, letras negras incluidas</td><td class="n r">62,92 €</td></tr>
@@ -1612,10 +1639,12 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   var MONTHS = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
   var lanes = [['tram','Trámites'], ['comp','Pedidos'], ['pago','Pagos'], ['mont','Montaje'], ['feria','Feria'], ['desm','Desmontaje']];
   var events = [
-    { lane:'tram', cls:'c-tram', from:[9,20], to:[9,27], label:'Diseñar las gráficas', when:'Esta semana',
-      text:'Diseñar los 11 paneles (o las 3 paredes de foam) y la platabanda, en PDF y vectores, con las medidas de CONTURSA. Elegir el logotipo, el suelo y el color de la moqueta. Rellenar la planilla con la planta.' },
+    { lane:'tram', cls:'c-tram', from:[9,20], to:[9,27], label:'Diseñar las gráficas', when:'20–27 oct · hecho',
+      text:'Hecho: los 11 paneles y la platabanda diseñados, la moqueta elegida y la planilla rellena.' },
     { lane:'comp', cls:'c-comp', from:[9,28], label:'Fecha límite CONTURSA', when:'28 oct',
-      text:'Último día para confirmar pedidos (almacén, placas de enchufes, cinta, gráficas, platabanda), el color de la moqueta y enviar los diseños finales. A partir del 29 de octubre hay recargo del 20 %.' },
+      text:'Hecho: los pedidos, el color de la moqueta y los artes finales se enviaron dentro de plazo, así que no hay recargo.' },
+    { lane:'tram', cls:'c-tram', from:[9,29], to:[10,4], label:'Decidir merchandising e impresión', when:'Esta semana',
+      text:'Decidir el merchandising y qué se imprime (revista, tríptico o díptico) y cuántos. Averiguar las pegatinas de las mesas y las bolsitas de las golosinas. Enviar la invitación por WhatsApp.' },
     { lane:'pago', cls:'c-pago', from:[9,31], label:'Pago 50 %', when:'Antes del 31 oct',
       text:'Pagar el 50 % restante del stand (unos 1.585 €) por transferencia a Congresos y Turismo de Sevilla, S.A., indicando el nombre fiscal y «SICAB 2026».' },
     { lane:'comp', cls:'c-comp', from:[10,1], label:'Último día para cancelar', when:'1 nov',
@@ -1623,7 +1652,7 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
     { lane:'comp', cls:'c-comp', from:[10,10], to:[10,13], label:'Recargo del 30 %', when:'10–13 nov',
       text:'Los pedidos que se confirmen en estas fechas llevan un 30 % de recargo y puede que no lleguen.' },
     { lane:'tram', cls:'c-tram', from:[10,14], label:'Todo listo', when:'Antes del 16 nov',
-      text:'Folletos, tarjetas, tira LED, soporte de la pantalla, mesas, taburetes, olivo, expositor, nevera y microondas preparados. Cámara para hacer fotos de los paneles antes de montar.' },
+      text:'Comprado y preparado: tira LED y su perfil de aluminio, pie de la pantalla, impresos, merchandising, pegatinas de las mesas y bolsitas de golosinas. Y también mesas, taburetes, olivo, expositor, nevera y microondas. Cámara para hacer fotos de los paneles antes de montar.' },
     { lane:'mont', cls:'c-mont', from:[10,16], label:'Montaje', when:'16 nov · 9:00–20:00',
       text:'Único día de montaje. Basta con la acreditación de expositor. Hacer fotos de los paneles antes de empezar. No pueden entrar vehículos a los pabellones a descargar.' },
     { lane:'feria', cls:'c-feria', from:[10,17], to:[10,22], label:'Feria SICAB', when:'17–21 nov 10:00–21:00 · 22 nov 10:00–19:00',
@@ -1715,15 +1744,38 @@ ul.plain { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
   select(first);
 })();
 
-// Cuenta atrás hasta el 28 de octubre
+// Cuenta atrás hasta el montaje (16 de noviembre)
 (function () {
   var el = document.getElementById('dl-days'), lab = document.getElementById('dl-lab');
   if (!el) return;
   var now = new Date(), today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-  var n = Math.round((new Date(2026, 9, 28) - today) / 864e5);
-  if (n > 0) { el.textContent = n; lab.textContent = n === 1 ? 'día' : 'días'; }
-  else if (n === 0) { el.textContent = 'Hoy'; lab.textContent = 'último día'; }
-  else { el.textContent = '+' + (-n); lab.textContent = 'días de retraso'; }
+  var n = Math.round((new Date(2026, 10, 16) - today) / 864e5);
+  if (n > 0) { el.textContent = n; lab.textContent = n === 1 ? 'día para el montaje' : 'días para el montaje'; }
+  else if (n === 0) { el.textContent = 'Hoy'; lab.textContent = 'es el montaje'; }
+  else { el.textContent = '✓'; lab.textContent = 'montado'; }
+})();
+
+// Próximos pasos: lo marcado se guarda en este navegador; los enlaces abren su pestaña
+(function () {
+  var KEY = 'sicab-pasos';
+  var boxes = [].slice.call(document.querySelectorAll('#pasos input[type="checkbox"]'));
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(KEY) || '{}') || {}; } catch (e) {}
+  boxes.forEach(function (b) {
+    b.checked = !!saved[b.id];
+    b.addEventListener('change', function () {
+      saved[b.id] = b.checked;
+      try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (e) {}
+    });
+  });
+  [].forEach.call(document.querySelectorAll('[data-goto]'), function (a) {
+    a.addEventListener('click', function (e) {
+      var t = document.getElementById('t-' + a.dataset.goto);
+      if (!t) return;
+      e.preventDefault(); t.click();
+      document.querySelector('.tabs').scrollIntoView({ block: 'start' });
+    });
+  });
 })();
 
 // Copiar el texto de cada correo
